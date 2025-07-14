@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D45EDD30-846B-49F5-8F6B-166127658DA1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{315C9B73-2E16-486B-B7AF-4F264B0CF00F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mehr.Domain", "src\Core\Mehr.Domain\Mehr.Domain.csproj", "{8958561C-F625-4BA8-B05A-CFF8D5BF3064}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8958561C-F625-4BA8-B05A-CFF8D5BF3064}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8958561C-F625-4BA8-B05A-CFF8D5BF3064}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8958561C-F625-4BA8-B05A-CFF8D5BF3064}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8958561C-F625-4BA8-B05A-CFF8D5BF3064}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{315C9B73-2E16-486B-B7AF-4F264B0CF00F} = {D45EDD30-846B-49F5-8F6B-166127658DA1}
+		{8958561C-F625-4BA8-B05A-CFF8D5BF3064} = {315C9B73-2E16-486B-B7AF-4F264B0CF00F}
+	EndGlobalSection
+EndGlobal
