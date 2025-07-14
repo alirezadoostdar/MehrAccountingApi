@@ -1,4 +1,8 @@
+using Mehr.Application.Intrefaces;
+using Mehr.Application.Services;
+using Mehr.Domain.Interfaces;
 using Mehr.Infarstructure;
+using Mehr.Infarstructure.Repositories.Stocks;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +19,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(option =>
     option.UseSqlServer(builder.Configuration.GetConnectionString("MehrConnectionString"));
 });
 
+builder.Services.AddScoped<IProductCategoryRepository, EfProductCategoryRepository>();
+builder.Services.AddScoped<IProductCategoryService, ProductCategoryService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

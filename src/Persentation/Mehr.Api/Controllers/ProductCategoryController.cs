@@ -21,4 +21,10 @@ public class ProductCategoryController : Controller
         var result = await _service.AddAsync(dto);
         return Ok(result);
     }
+
+    [HttpGet]
+    public async Task<ActionResult> GetAllAsync()
+    {
+        return Ok(await _service.GetAllAsync());
+    }
 }

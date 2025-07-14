@@ -1,6 +1,7 @@
 ﻿using Mehr.Domain.Dtos.ProdcutCategory;
 using Mehr.Domain.Entities.Stocks;
 using Mehr.Domain.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace Mehr.Infarstructure.Repositories.Stocks;
 
@@ -24,9 +25,15 @@ public class EfProductCategoryRepository : IProductCategoryRepository
         throw new NotImplementedException();
     }
 
-    public Task<List<GetProductCategoryDto>> GetAllAsync()
+    public async Task<List<GetProductCategoryDto>> GetAllAsync()
     {
-        throw new NotImplementedException();
+        var list = await _context.ProductCategories.Select(x => new GetProductCategoryDto
+        {
+            Id = x.Id,
+            Title = x.Title,
+
+        }).ToListAsync();
+        return list;
     }
 
     public Task<ProductCategory> GetByIdAsync(int id)

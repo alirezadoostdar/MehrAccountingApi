@@ -28,7 +28,7 @@ public class ProductCategoryService : IProductCategoryService
 
     public Task<List<GetProductCategoryDto>> GetAllAsync()
     {
-        throw new NotImplementedException();
+        return _productCategoryRepository.GetAllAsync();
     }
 
     public Task<GetProductCategoryDto> GetByIdAsync(int id)
