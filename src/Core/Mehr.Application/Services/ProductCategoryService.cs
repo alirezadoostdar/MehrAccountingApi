@@ -1,5 +1,6 @@
 ﻿using Mehr.Application.Intrefaces;
 using Mehr.Domain.Dtos.ProdcutCategory;
+using Mehr.Domain.Entities.Stocks;
 using Mehr.Domain.Interfaces;
 
 namespace Mehr.Application.Services;
@@ -13,9 +14,16 @@ public class ProductCategoryService : IProductCategoryService
         _productCategoryRepository = productCategoryRepository;
     }
 
-    public Task<int> AddAsync(AddProductCategoryDto dto)
+    public async Task<int> AddAsync(AddProductCategoryDto dto)
     {
-        throw new NotImplementedException();
+        var productCategory = new ProductCategory
+        {
+            Title = dto.Title,
+            ParentId = dto.ParentId,
+        };
+
+        await _productCategoryRepository.AddAsync(productCategory);
+        return 0;
     }
 
     public Task<List<GetProductCategoryDto>> GetAllAsync()
