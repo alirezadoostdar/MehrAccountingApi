@@ -7,8 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Dtos\ProductCategory\" />
-    <Folder Include="Services\" />
+    <ProjectReference Include="..\Mehr.Domain\Mehr.Domain.csproj" />
   </ItemGroup>
 
 </Project>

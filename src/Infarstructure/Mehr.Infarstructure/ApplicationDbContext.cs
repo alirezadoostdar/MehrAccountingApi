@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Mehr.Domain.Entities.Stocks;
+using Microsoft.EntityFrameworkCore;
 
 namespace Mehr.Infarstructure;
 
@@ -14,4 +15,6 @@ public class ApplicationDbContext : DbContext
         base.OnModelCreating(modelBuilder);
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
     }
+
+    public DbSet<ProductCategory> ProductCategories { get; set; }
 }
