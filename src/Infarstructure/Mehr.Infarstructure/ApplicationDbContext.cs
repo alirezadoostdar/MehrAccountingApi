@@ -1,4 +1,5 @@
-﻿using Mehr.Domain.Entities.Stocks;
+﻿using Mehr.Domain.Entities.Contacts;
+using Mehr.Domain.Entities.Stocks;
 using Microsoft.EntityFrameworkCore;
 
 namespace Mehr.Infarstructure;
@@ -17,4 +18,5 @@ public class ApplicationDbContext : DbContext
     }
 
     public DbSet<ProductCategory> ProductCategories { get; set; }
+    public DbSet<Zone> Zones { get; set; }
 }

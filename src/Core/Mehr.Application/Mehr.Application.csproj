@@ -10,4 +10,8 @@
     <ProjectReference Include="..\Mehr.Domain\Mehr.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Zons\Contracts\Exceptions\" />
+  </ItemGroup>
+
 </Project>
