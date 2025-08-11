@@ -1,4 +1,4 @@
-﻿namespace Mehr.Domain.Entities.Account;
+﻿namespace Mehr.Domain.Entities.Accounts;
 
 public class DetailedCategoryAccount
 {

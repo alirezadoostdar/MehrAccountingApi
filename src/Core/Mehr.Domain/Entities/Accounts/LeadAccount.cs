@@ -1,4 +1,4 @@
-﻿namespace Mehr.Domain.Entities.Account;
+﻿namespace Mehr.Domain.Entities.Accounts;
 public class LeadAccount
 {
     public int Id { get; set; }
@@ -14,7 +14,6 @@ public class LeadAccount
     public int DetailedId { get; set; }
     public int DetailedCategoryId { get; set; }
     public bool IsTemp { get; set; }
-
 }
 
 public enum LeadAccountType
