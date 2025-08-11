@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Core\Mehr.Application\Mehr.Application.csproj" />
     <ProjectReference Include="..\..\Core\Mehr.Domain\Mehr.Domain.csproj" />
   </ItemGroup>
 
