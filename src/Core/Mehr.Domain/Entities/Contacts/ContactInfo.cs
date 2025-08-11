@@ -22,6 +22,8 @@ public class ContactInfo
     public decimal Latitude { get; set; }
     public decimal Longitude { get; set; }
     public string Location { get; set; }
+
+    public ICollection<ContactNumber> Numbers { get; set; }
 }
 
 
