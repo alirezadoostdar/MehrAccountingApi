@@ -28,4 +28,7 @@ public class ZoneController : Controller
 
         return Ok(zone);
     }
+
+    [HttpGet("GetByCode/{id:int}")]
+    public async Task<>
 }
