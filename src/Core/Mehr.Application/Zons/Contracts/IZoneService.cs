@@ -4,9 +4,8 @@ namespace Mehr.Application.Zons.Contracts;
 
 public interface IZoneService
 {
-    GetZoneDto GetByIdAsync(int id);
-    List<GetZoneDto> GetAllAsync();
-
+    Task<GetZoneDto> GetByIdAsync(int id, CancellationToken cancellationToken);
+    Task<List<GetZoneDto>> GetAllAsync(CancellationToken cancellationToken);
     int AddAsync(AddZoneDto dto);
     void UpdateAsync(UpdateZoneDto dto);
     void DeleteAsync(int id);

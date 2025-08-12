@@ -1,8 +1,13 @@
+using Mehr.Api.Middlewares;
+using Mehr.Application;
 using Mehr.Application.Intrefaces;
 using Mehr.Application.Services;
+using Mehr.Application.Zons;
+using Mehr.Application.Zons.Contracts;
 using Mehr.Domain.Interfaces;
 using Mehr.Infarstructure;
 using Mehr.Infarstructure.Repositories.Stocks;
+using Mehr.Infarstructure.Zones;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,11 +21,20 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<ApplicationDbContext>(option =>
 {
-    option.UseSqlServer(builder.Configuration.GetConnectionString("MehrConnectionString"));
+    option.UseSqlServer(builder.Configuration.GetConnectionString("MehrConnectionString"),
+        x => x.UseNetTopologySuite());
 });
 
+
+
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
 builder.Services.AddScoped<IProductCategoryRepository, EfProductCategoryRepository>();
+builder.Services.AddScoped<IZoneRepository, EfZoneRepository>();
+
 builder.Services.AddScoped<IProductCategoryService, ProductCategoryService>();
+builder.Services.AddScoped<IZoneService, ZoneService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -29,7 +43,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

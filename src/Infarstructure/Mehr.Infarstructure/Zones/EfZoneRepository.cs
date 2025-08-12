@@ -23,14 +23,14 @@ public class EfZoneRepository : IZoneRepository
         _context.Zones.Remove(zone);
     }
 
-    public async Task<List<Zone>> GetAllAsync()
+    public async Task<List<Zone>> GetAllAsync(CancellationToken cancellationToken)
     {
-        return await _context.Zones.ToListAsync();
+        return await _context.Zones.ToListAsync(cancellationToken);
     }
 
-    public async Task<Zone?> GetByIdAsync(int id)
+    public async Task<Zone?> GetByIdAsync(int id, CancellationToken cancellationToken)
     {
-        return await _context.Zones.FindAsync(id);
+        return await _context.Zones.FindAsync(id, cancellationToken);
     }
 
     public void UpdateAsync(Zone zone)

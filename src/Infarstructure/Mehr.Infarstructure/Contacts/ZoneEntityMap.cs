@@ -19,5 +19,14 @@ public class ZoneEntityMap : IEntityTypeConfiguration<Zone>
             .HasColumnName("Zone")
             .HasMaxLength(1000)
             .IsRequired();
+
+        builder.Property(z => z.PolygonStr)
+               .HasColumnName("PolygonStr")
+               .IsRequired(false);
+
+        builder.Property(z => z.Polygon)
+               .HasColumnName("Polygon")
+               .HasColumnType("geometry")
+               .IsRequired(false);
     }
 }

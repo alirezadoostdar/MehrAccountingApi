@@ -1,4 +1,4 @@
-﻿using Mehr.Domain.Entities.Account;
+﻿using Mehr.Domain.Entities.Accounts;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
