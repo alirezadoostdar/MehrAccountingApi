@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Mehr.Infarstructure.Persons;
 
-public class PersonFirstGroupEntityMap : IEntityTypeConfiguration<PersonFirstGroup>
+public class PersonSecondGroupEntityMap : IEntityTypeConfiguration<PersonSecondGroup>
 {
-    public void Configure(EntityTypeBuilder<PersonFirstGroup> builder)
+    public void Configure(EntityTypeBuilder<PersonSecondGroup> builder)
     {
-        builder.ToTable("PersonGroup1Tbl");
+        builder.ToTable("PersonGroup2Tbl");
 
         builder.HasKey(x => x.Id);
 
