@@ -18,7 +18,7 @@ public class ContactInfo
 
     public string ShopName { get; set; }
     public string TelegramId { get; set; }
-    public String TelegramMobileNumber { get; set; }
+    public string TelegramMobileNumber { get; set; }
     public decimal Latitude { get; set; }
     public decimal Longitude { get; set; }
     public string Location { get; set; }

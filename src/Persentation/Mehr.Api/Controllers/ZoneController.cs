@@ -1,6 +1,8 @@
 ﻿using Mehr.Application.Zons.Contracts;
 using Mehr.Application.Zons.Contracts.Dtos;
+using Mehr.SharedKernel;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading;
 
 namespace Mehr.Api.Controllers;
 
@@ -30,5 +32,10 @@ public class ZoneController : Controller
     }
 
     [HttpGet("GetByCode/{id:int}")]
-    public async Task<>
+    public async Task<ActionResult<Result>> GetByCode(int id, CancellationToken cancellationToken)
+    {
+        Result<GetZoneDto> result = await _zoneService.GetByCodeAsync(id, cancellationToken);
+
+        return result;
+    }
 }

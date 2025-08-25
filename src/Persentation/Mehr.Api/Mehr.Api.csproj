@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Core\Mehr.Application\Mehr.Application.csproj" />
+    <ProjectReference Include="..\..\Core\Mehr.SharedKernel\Mehr.SharedKernel.csproj" />
     <ProjectReference Include="..\..\Infarstructure\Mehr.Infarstructure\Mehr.Infarstructure.csproj" />
   </ItemGroup>
 

@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Mehr.Domain\Mehr.Domain.csproj" />
+    <ProjectReference Include="..\Mehr.SharedKernel\Mehr.SharedKernel.csproj" />
   </ItemGroup>
 
   <ItemGroup>

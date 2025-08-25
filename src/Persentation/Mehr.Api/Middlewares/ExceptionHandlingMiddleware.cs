@@ -1,4 +1,6 @@
 ﻿using Mehr.Domain;
+using Mehr.SharedKernel;
+using Microsoft.AspNetCore.Http;
 using System.Net;
 using System.Text.Json;
 
@@ -34,7 +36,15 @@ public class ExceptionHandlingMiddleware
         catch (Exception ex)
         {
             _logger.LogError(ex, "Unhandled exception occurred.");
-            await HandleExceptionAsync(context, ex, HttpStatusCode.InternalServerError);
+            //await HandleExceptionAsync(context, ex, HttpStatusCode.InternalServerError);
+
+            var result = Result.Failure(Error.Problem("500", ex.Message));
+
+            context.Response.ContentType = "application/json";
+            context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+
+            var json = JsonSerializer.Serialize(result);
+            await context.Response.WriteAsync(json);
         }
     }
 
