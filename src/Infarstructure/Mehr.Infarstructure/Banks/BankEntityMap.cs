@@ -9,6 +9,8 @@ public class BankEntityMap : IEntityTypeConfiguration<Bank>
     {
         builder.ToTable("BanksTbl");
 
+        builder.HasKey("Fk_AccountSyscode");
+
         builder.Property(x => x.AccountNumber)
             .HasColumnName("AccountNo")
             .HasMaxLength(200)
