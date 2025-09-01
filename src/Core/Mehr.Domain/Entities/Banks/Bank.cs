@@ -14,3 +14,8 @@ public class Bank : DetailedAccount
     public string ShoppingNumber { get; set; }
     public string TerminalNumber { get; set; }
 }
+
+public class CostSecondGroup
+{
+
+}
