@@ -1,5 +1,6 @@
 ﻿namespace Mehr.Domain.Entities.Accounts;
 
+//tafsil account حساب های تفصیلی
 public class DetailedAccount
 {
     public int Id { get; set; }
