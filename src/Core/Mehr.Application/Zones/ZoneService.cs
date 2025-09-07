@@ -1,11 +1,11 @@
-﻿using Mehr.Application.Zons.Contracts;
-using Mehr.Application.Zons.Contracts.Dtos;
+﻿using Mehr.Application.Zones.Contracts;
+using Mehr.Application.Zones.Contracts.Dtos;
 using Mehr.Domain;
 using Mehr.Domain.Entities.Contacts;
 using Mehr.Domain.Interfaces;
 using Mehr.SharedKernel;
 
-namespace Mehr.Application.Zons;
+namespace Mehr.Application.Zones;
 
 public class ZoneService : IZoneService
 {

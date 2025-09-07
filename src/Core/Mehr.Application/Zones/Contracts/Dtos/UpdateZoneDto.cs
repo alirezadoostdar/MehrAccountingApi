@@ -1,4 +1,4 @@
-﻿namespace Mehr.Application.Zons.Contracts.Dtos;
+﻿namespace Mehr.Application.Zones.Contracts.Dtos;
 
 public class UpdateZoneDto
 {

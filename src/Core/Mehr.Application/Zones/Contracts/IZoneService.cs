@@ -1,7 +1,7 @@
-﻿using Mehr.Application.Zons.Contracts.Dtos;
+﻿using Mehr.Application.Zones.Contracts.Dtos;
 using Mehr.SharedKernel;
 
-namespace Mehr.Application.Zons.Contracts;
+namespace Mehr.Application.Zones.Contracts;
 
 public interface IZoneService
 {

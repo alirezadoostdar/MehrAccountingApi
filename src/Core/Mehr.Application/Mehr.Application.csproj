@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Zons\Contracts\Exceptions\" />
+    <Folder Include="Zones\Contracts\Exceptions\" />
   </ItemGroup>
 
 </Project>

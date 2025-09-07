@@ -1,5 +1,5 @@
-﻿using Mehr.Application.Zons.Contracts;
-using Mehr.Application.Zons.Contracts.Dtos;
+﻿using Mehr.Application.Zones.Contracts;
+using Mehr.Application.Zones.Contracts.Dtos;
 using Mehr.SharedKernel;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading;

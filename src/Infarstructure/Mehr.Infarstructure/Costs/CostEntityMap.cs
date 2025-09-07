@@ -10,13 +10,17 @@ public class CostEntityMap : IEntityTypeConfiguration<Cost>
     {
         builder.ToTable("CostTbl");
 
-        builder.HasKey("Fk_AccountSyscode");
+        builder.HasKey(_ => _.Id);
+
+        builder.Property(_ => _.Id)
+            .HasColumnName("Fk_AccountSyscode")
+            .IsRequired();
 
         builder.Property(x => x.FirstGroupId)
            .HasColumnName("GroupID1");
 
         builder.Property(x => x.SecondGroupId)
-            .HasColumnName("GroupID1");
+            .HasColumnName("GroupID2");
 
         builder.Property(x => x.Comment)
             .HasMaxLength(1000)
