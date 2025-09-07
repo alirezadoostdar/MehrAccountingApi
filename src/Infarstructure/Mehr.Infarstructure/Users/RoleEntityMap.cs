@@ -19,5 +19,9 @@ public class RoleEntityMap : IEntityTypeConfiguration<Role>
             .HasColumnName("Gname")
             .HasMaxLength(1000)
             .IsRequired();
+
+        builder.HasMany(x => x.Users)
+            .WithOne(x => x.Role)
+            .HasForeignKey(x => x.RoleId);
     }
 }
