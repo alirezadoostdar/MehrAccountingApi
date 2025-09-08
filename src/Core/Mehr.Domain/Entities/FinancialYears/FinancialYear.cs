@@ -1,4 +1,6 @@
-﻿namespace Mehr.Domain.Entities.FinancialYears;
+﻿using Mehr.Domain.Entities.Docs;
+
+namespace Mehr.Domain.Entities.FinancialYears;
 
 public class FinancialYear
 {
@@ -10,4 +12,6 @@ public class FinancialYear
     public string EndDateShamsi { get; set; }
     public DateTime RegisterDate { get; set; }
     public bool Active { get; set; }
+
+    public ICollection<Doc> Docs{ get; set; } = new List<Doc>();
 }

@@ -26,4 +26,8 @@
     <ProjectReference Include="..\..\Core\Mehr.Domain\Mehr.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Docs\" />
+  </ItemGroup>
+
 </Project>
