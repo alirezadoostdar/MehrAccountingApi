@@ -93,7 +93,7 @@ public class DocEntityMap : IEntityTypeConfiguration<Doc>
         builder.Property(x => x.Code)
             .HasColumnName("code");
 
-        builder.Property(x => x.ModifiedAd)
+        builder.Property(x => x.ModifiedAt)
             .HasColumnName("ModifiedDate");
 
     }

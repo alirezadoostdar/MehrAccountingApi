@@ -41,7 +41,7 @@ public class Doc
     public FinancialYear FinancialYear { get; set; }
 
     public int Code { get; set; }
-    public DateTime ModifiedAd { get; set; }
+    public DateTime ModifiedAt { get; set; }
     public ICollection<DocItem> Items { get; set; } = new List<DocItem>();
 }
 
