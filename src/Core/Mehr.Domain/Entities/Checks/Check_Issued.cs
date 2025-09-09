@@ -6,7 +6,6 @@ namespace Mehr.Domain.Entities.Checks;
 
 public class Check_Issued : DocItem
 {
-    public int Id { get; set; }
     public long SerialNumber { get; set; }
     public string Comment { get; set; }
     public int BankId { get; set; }
