@@ -22,6 +22,14 @@ public class Check_Received : DetailedAccount
     public DateTime DepositDate { get; set; }
     public string SayadiCode { get; set; }
     public bool IsTransferred { get; set; }
-
     public int MyProperty { get; set; }
+}
+
+public enum SayadiStatus
+{
+    White = 1,
+    Yellow = 2,
+    Orange = 3,
+    Brown = 4,
+    Red = 5
 }
