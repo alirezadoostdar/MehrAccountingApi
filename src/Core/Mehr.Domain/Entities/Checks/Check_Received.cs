@@ -29,6 +29,8 @@ public class Check_Received : DetailedAccount
     public DateTime PassDate { get; set; }
     public int LastDocId { get; set; }
 
+    public CheckRecivedStatus Status { get; set; }
+    public int DepositDocId { get; set; }
 }
 
 public enum SayadiStatus
