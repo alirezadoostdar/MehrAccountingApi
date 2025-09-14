@@ -1,4 +1,6 @@
 ﻿using Mehr.Domain.Entities.Accounts;
+using Mehr.Domain.Entities.Contacts;
+using Mehr.Domain.Entities.Costs;
 
 namespace Mehr.Domain.Entities.Persons;
 
@@ -12,6 +14,15 @@ public class Person : DetailedAccount
     public string Comment { get; set; }
     public string Introducer { get; set; }
     public long Code { get; set; }
+    public SellPriceType SellPriceTpye { get; set; }
+    public int ContactInfoId { get; set; }
+    public ContactInfo ContactInfo { get; set; }
+    public int VisitorCostId { get; set; }
+    public Cost VisitorCost { get; set; }
+    public decimal VisitorBaseAmount { get; set; }
+    public decimal VisitorIncreaseAmount { get; set; }
+    public double VisitorIncresePercent { get; set; }
+    public bool VisitorAutoDoc { get; set; }
     public int MyProperty { get; set; }
 }
 
