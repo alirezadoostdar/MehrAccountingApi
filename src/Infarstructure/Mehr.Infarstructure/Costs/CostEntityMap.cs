@@ -10,8 +10,6 @@ public class CostEntityMap : IEntityTypeConfiguration<Cost>
     {
         builder.ToTable("CostTbl");
 
-        builder.HasKey(_ => _.Id);
-
         builder.Property(_ => _.Id)
             .HasColumnName("Fk_AccountSyscode")
             .IsRequired();
