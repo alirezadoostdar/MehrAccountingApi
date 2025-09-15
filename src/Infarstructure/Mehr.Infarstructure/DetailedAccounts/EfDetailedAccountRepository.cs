@@ -6,30 +6,29 @@ namespace Mehr.Infarstructure.DetailedAccounts;
 public class EfDetailedAccountRepository : IDetailedAccountRepository
 {
     private readonly ApplicationDbContext _context;
-    private readonly UnitOfWork _unitOfWork;
 
-    public EfDetailedAccountRepository(ApplicationDbContext context, UnitOfWork unitOfWork)
+
+    public EfDetailedAccountRepository(ApplicationDbContext context)
     {
         _context = context;
-        _unitOfWork = unitOfWork;
     }
 
-    public void Add(DetailedAccount account)
+    public async Task AddAsync(DetailedAccount account, CancellationToken cancellationToken)
+    {
+       await _context.DetailedAccounts.AddAsync(account, cancellationToken);
+    }
+
+    public Task DeleteAsync(DetailedAccount account, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }
 
-    public void Delete(DetailedAccount account)
+    public DetailedAccount GetByIdAsync(int id, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }
 
-    public DetailedAccount GetByIdAsync(int id)
-    {
-        throw new NotImplementedException();
-    }
-
-    public void Update(DetailedAccount account)
+    public Task UpdateAsync(DetailedAccount account, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }

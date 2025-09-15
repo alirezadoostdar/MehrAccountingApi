@@ -1,4 +1,5 @@
-﻿using Mehr.Domain.Entities.Contacts;
+﻿using Mehr.Domain.Entities.Accounts;
+using Mehr.Domain.Entities.Contacts;
 using Mehr.Domain.Entities.Stocks;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,6 +18,8 @@ public class ApplicationDbContext : DbContext
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
     }
 
+    public DbSet<DetailedAccount> DetailedAccounts{ get; set; }
+    public DbSet<DetailedCategoryAccount> DetailedCategoryAccounts { get; set; }
     public DbSet<ProductCategory> ProductCategories { get; set; }
     public DbSet<Zone> Zones { get; set; }
 }
