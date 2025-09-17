@@ -3,7 +3,7 @@ using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Mehr.Infarstructure.Persistance.Config;
+namespace Mehr.Infarstructure.DetailedAccounts;
 
 public class DetailedCategoryAccountConfig : IEntityTypeConfiguration<DetailedCategoryAccount>
 {

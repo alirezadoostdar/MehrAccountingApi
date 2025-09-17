@@ -23,6 +23,16 @@ public class EfDetailedAccountRepository : IDetailedAccountRepository
         throw new NotImplementedException();
     }
 
+    public List<DetailedAccount> GetAllAsync(CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
+
+    public List<DetailedAccount> GetAllByCategoryAsync(DetailedCategoryType category, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
+
     public DetailedAccount GetByIdAsync(int id, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();

@@ -7,6 +7,7 @@ public class DetailedAccount
     public string Title { get; set; }
     public int CategoryId { get; set; }
     public DetailedCategoryAccount Category { get; set; }
+    public decimal CreditLimit { get; set; }
     public SecureLevelType SecureLevel { get; set; }
     public bool IsDebtor { get; set; }
     public bool IsUpdate { get; set; }

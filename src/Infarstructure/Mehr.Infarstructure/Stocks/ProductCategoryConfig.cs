@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Mehr.Infarstructure.Persistance.Config;
+namespace Mehr.Infarstructure.Stocks;
 
 public class ProductCategoryConfig : IEntityTypeConfiguration<ProductCategory>
 {
