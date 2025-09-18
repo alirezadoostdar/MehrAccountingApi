@@ -35,5 +35,13 @@ public class DetaileAccountEntityMap : IEntityTypeConfiguration<DetailedAccount>
 
         builder.Property(x => x.IsUpdate)
             .IsRequired();
+
+        builder.HasOne(x => x.SecureLevel)
+            .WithMany()
+            .HasForeignKey(x => x.SecureLevelId);
+
+        builder.HasOne(x => x.Category)
+            .WithMany()
+            .HasForeignKey(x => x.CategoryId);
     }
 }

@@ -8,7 +8,8 @@ public class DetailedAccount
     public int CategoryId { get; set; }
     public DetailedCategoryAccount Category { get; set; }
     public decimal CreditLimit { get; set; }
-    public SecureLevelType SecureLevel { get; set; }
+    public int SecureLevelId { get; set; }
+    public SecurityLevel SecureLevel { get; set; }
     public bool? IsDebtor { get; set; }
     public bool IsUpdate { get; set; }
 

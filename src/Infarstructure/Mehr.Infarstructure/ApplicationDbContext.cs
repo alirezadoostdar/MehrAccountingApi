@@ -18,6 +18,7 @@ public class ApplicationDbContext : DbContext
         base.OnModelCreating(modelBuilder);
         modelBuilder.ApplyConfiguration(new DetaileAccountEntityMap());
         modelBuilder.ApplyConfiguration(new DetailedCategoryAccountConfig());
+        modelBuilder.ApplyConfiguration(new SecurityLevelEntityMap());
         //modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
     }
 
