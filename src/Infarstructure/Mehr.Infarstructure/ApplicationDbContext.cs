@@ -1,6 +1,7 @@
 ﻿using Mehr.Domain.Entities.Accounts;
 using Mehr.Domain.Entities.Contacts;
 using Mehr.Domain.Entities.Stocks;
+using Mehr.Infarstructure.DetailedAccounts;
 using Microsoft.EntityFrameworkCore;
 
 namespace Mehr.Infarstructure;
@@ -15,7 +16,9 @@ public class ApplicationDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
+        modelBuilder.ApplyConfiguration(new DetaileAccountEntityMap());
+        modelBuilder.ApplyConfiguration(new DetailedCategoryAccountConfig());
+        //modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
     }
 
     public DbSet<DetailedAccount> DetailedAccounts{ get; set; }

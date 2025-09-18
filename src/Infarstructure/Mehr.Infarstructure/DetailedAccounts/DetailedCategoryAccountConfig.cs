@@ -14,7 +14,7 @@ public class DetailedCategoryAccountConfig : IEntityTypeConfiguration<DetailedCa
         builder.HasKey(x => x.Id);
 
         builder.Property(x => x.Id)
-            .HasColumnName("CodeMNGUPTbl")
+            .HasColumnName("AccountSysCode0")
             .IsRequired();
 
         builder.Property(x => x.Title)

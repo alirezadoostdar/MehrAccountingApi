@@ -10,7 +10,7 @@ public class CheckIssuedEntityMap : IEntityTypeConfiguration<Check_Issued>
     {
         builder.ToTable("CheckOUTTBL");
 
-        builder.HasKey(x => x.Id);
+        //builder.HasKey(x => x.Id);
 
         builder.Property(x => x.Id)
             .HasColumnName("FK_DocSysCode")

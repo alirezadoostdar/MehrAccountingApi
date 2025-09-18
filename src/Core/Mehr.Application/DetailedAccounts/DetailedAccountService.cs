@@ -26,10 +26,19 @@ public class DetailedAccountService : IDetailedAccountService
         throw new NotImplementedException();
     }
 
-    public Task<Result<List<GetDetailedAccountDto>>> GetAllAsync(CancellationToken cancellationToken)
+    public async Task<Result<List<GetDetailedAccountDto>>> GetAllAsync(CancellationToken cancellationToken)
     {
-        var DetaileList = _repository.
-        throw new NotImplementedException();
+        var DetaileList = await _repository.GetAllAsync(cancellationToken);
+
+        var dtoList = DetaileList.Select(x => new GetDetailedAccountDto
+        {
+            Id = x.Id,
+            Title = x.Title,
+            SecureLevel = x.SecureLevel,
+            IsDebtor = x.IsDebtor,
+            CategoryId = x.CategoryId,
+        }).ToList();
+        return dtoList;
     }
 
     public Task<Result<GetDetailedAccountDto>> GetByIdAsync(int id, CancellationToken cancellationToken)

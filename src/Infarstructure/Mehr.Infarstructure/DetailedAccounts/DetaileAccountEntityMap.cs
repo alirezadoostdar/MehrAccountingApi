@@ -13,8 +13,7 @@ public class DetaileAccountEntityMap : IEntityTypeConfiguration<DetailedAccount>
         builder.HasKey(x => x.Id);
 
         builder.Property(x => x.Id)
-            .HasColumnName("AccountSysCode")
-            .IsRequired();
+            .HasColumnName("AccountSysCode");
 
         builder.Property(x => x.Title)
             .IsRequired();
@@ -24,9 +23,11 @@ public class DetaileAccountEntityMap : IEntityTypeConfiguration<DetailedAccount>
             .IsRequired();
 
         builder.Property(x => x.CreditLimit)
+            .HasColumnName("CreditLimit")
             .IsRequired();
 
         builder.Property(x => x.SecureLevel)
+            .HasColumnName("SecurLevel")
             .IsRequired();
 
         builder.Property(x => x.IsDebtor)

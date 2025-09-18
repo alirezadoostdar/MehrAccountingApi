@@ -1,5 +1,6 @@
 ﻿using Mehr.Domain.Entities.Accounts;
 using Mehr.Domain.Interfaces.DetailedAccounts;
+using Microsoft.EntityFrameworkCore;
 
 namespace Mehr.Infarstructure.DetailedAccounts;
 
@@ -23,9 +24,10 @@ public class EfDetailedAccountRepository : IDetailedAccountRepository
         throw new NotImplementedException();
     }
 
-    public List<DetailedAccount> GetAllAsync(CancellationToken cancellationToken)
+    public async Task<List<DetailedAccount>> GetAllAsync(CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var list =  await _context.DetailedAccounts.ToListAsync(cancellationToken);
+        return list;
     }
 
     public List<DetailedAccount> GetAllByCategoryAsync(DetailedCategoryType category, CancellationToken cancellationToken)

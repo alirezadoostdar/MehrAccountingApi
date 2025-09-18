@@ -8,5 +8,5 @@ public class GetDetailedAccountDto
     public string Title { get; set; }
     public int CategoryId { get; set; }
     public SecureLevelType SecureLevel { get; set; }
-    public bool IsDebtor { get; set; }
+    public bool? IsDebtor { get; set; }
 }
