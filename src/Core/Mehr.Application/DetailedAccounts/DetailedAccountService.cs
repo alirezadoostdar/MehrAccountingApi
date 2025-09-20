@@ -1,7 +1,10 @@
 ﻿using Mehr.Application.DetailedAccounts.Contracts;
 using Mehr.Application.DetailedAccounts.Contracts.Dtos;
+using Mehr.Application.DetailedAccounts.Contracts.Exceptions;
+using Mehr.Application.Zones.Contracts.Dtos;
 using Mehr.Domain.Entities.Accounts;
 using Mehr.Domain.Entities.Accounts.Dtos;
+using Mehr.Domain.Entities.Contacts;
 using Mehr.Domain.Interfaces.DetailedAccounts;
 using Mehr.SharedKernel;
 
@@ -47,9 +50,21 @@ public class DetailedAccountService : IDetailedAccountService
         return DetaileList;
     }
 
-    public Task<Result<GetDetailedAccountDto>> GetByIdAsync(int id, CancellationToken cancellationToken)
+    public async Task<Result<GetDetailedAccountDto>> GetByIdAsync(int id, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var account = await _repository.GetByIdAsync(id, cancellationToken);
+        if (account is null)
+            return Result.Failure<GetDetailedAccountDto>(DetailedAccountError.NotFound(id));
+        var dto = new GetDetailedAccountDto
+        {
+            Id = account.Id,
+            Title = account.Title,
+            Category = account.Category.Title,
+            CreditLimit = account.CreditLimit,
+            IsDebtor = account.IsDebtor,
+            SecureLevel =account.SecureLevel.Title
+        };
+        return dto;
     }
 
     public Task<Result> UpdateAsync(int id, UpdateDetailedAccountDto dto, CancellationToken cancellationToken)

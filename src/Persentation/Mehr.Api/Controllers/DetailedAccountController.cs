@@ -27,4 +27,18 @@ public class DetailedAccountController : Controller
     {
         return await _detailedAccountService.AddAsync(dto, cancellationToken);
     }
+
+    [HttpPut("{id:int}")] 
+    public async Task<ActionResult<Result>> UpdateAsync(int id, 
+        UpdateDetailedAccountDto dto,
+        CancellationToken cancellationToken)
+    {
+        return await _detailedAccountService.UpdateAsync(id, dto, cancellationToken);
+    }
+
+    [HttpGet("{id:int}")]
+    public async Task<ActionResult<Result>> GetByIdAsync(int id, CancellationToken cancellationToken)
+    {
+        return await _detailedAccountService.GetByIdAsync(id, cancellationToken);
+    }
 }

@@ -45,9 +45,9 @@ public class EfDetailedAccountRepository : IDetailedAccountRepository
         throw new NotImplementedException();
     }
 
-    public DetailedAccount GetByIdAsync(int id, CancellationToken cancellationToken)
+    public async Task<DetailedAccount> GetByIdAsync(int id, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        return await _context.DetailedAccounts.FindAsync(id, cancellationToken);
     }
 
     public Task UpdateAsync(DetailedAccount account, CancellationToken cancellationToken)
