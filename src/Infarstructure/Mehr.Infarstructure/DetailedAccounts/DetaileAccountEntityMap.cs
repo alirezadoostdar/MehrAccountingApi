@@ -26,7 +26,7 @@ public class DetaileAccountEntityMap : IEntityTypeConfiguration<DetailedAccount>
             .HasColumnName("CreditLimit")
             .IsRequired();
 
-        builder.Property(x => x.SecureLevel)
+        builder.Property(x => x.SecureLevelId)
             .HasColumnName("SecurLevel")
             .IsRequired();
 

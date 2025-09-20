@@ -1,4 +1,5 @@
 ﻿using Mehr.Application.DetailedAccounts.Contracts.Dtos;
+using Mehr.Domain.Entities.Accounts.Dtos;
 using Mehr.Domain.Interfaces.DetailedAccounts;
 using Mehr.SharedKernel;
 

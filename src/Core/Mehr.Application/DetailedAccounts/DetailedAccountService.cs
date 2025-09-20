@@ -1,5 +1,7 @@
 ﻿using Mehr.Application.DetailedAccounts.Contracts;
 using Mehr.Application.DetailedAccounts.Contracts.Dtos;
+using Mehr.Domain.Entities.Accounts;
+using Mehr.Domain.Entities.Accounts.Dtos;
 using Mehr.Domain.Interfaces.DetailedAccounts;
 using Mehr.SharedKernel;
 
@@ -16,9 +18,21 @@ public class DetailedAccountService : IDetailedAccountService
         _unitOfWork = unitOfWork;
     }
 
-    public Task<Result<int>> AddAsync(AddDetailedAccountDto dto, CancellationToken cancellationToken)
+    public async Task<Result<int>> AddAsync(AddDetailedAccountDto dto, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var detailedAccount = new DetailedAccount
+        {
+            Title = dto.Title,
+            CategoryId = dto.CategoryId,
+            CreditLimit = dto.CreditLimit,
+            SecureLevelId = (int)dto.SecureLevel,
+            IsDebtor = dto.IsDebtor,
+            IsUpdate = true
+        };
+
+        await _repository.AddAsync(detailedAccount, cancellationToken);
+        await _unitOfWork.SaveChangesAsync();
+        return detailedAccount.Id;
     }
 
     public Task<Result> DeleteAsync(int id, CancellationToken cancellationToken)
@@ -30,15 +44,7 @@ public class DetailedAccountService : IDetailedAccountService
     {
         var DetaileList = await _repository.GetAllAsync(cancellationToken);
 
-        var dtoList = DetaileList.Select(x => new GetDetailedAccountDto
-        {
-            Id = x.Id,
-            Title = x.Title,
-            SecureLevel = x.SecureLevel,
-            IsDebtor = x.IsDebtor,
-            CategoryId = x.CategoryId,
-        }).ToList();
-        return dtoList;
+        return DetaileList;
     }
 
     public Task<Result<GetDetailedAccountDto>> GetByIdAsync(int id, CancellationToken cancellationToken)

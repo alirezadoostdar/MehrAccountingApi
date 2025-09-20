@@ -5,6 +5,12 @@ namespace Mehr.Infarstructure;
 public class UnitOfWork : IUnitOfWork
 {
     private readonly ApplicationDbContext _context;
+
+    public UnitOfWork(ApplicationDbContext context)
+    {
+        _context = context;
+    }
+
     public void Begin()
     {
         _context.Database.BeginTransaction();
