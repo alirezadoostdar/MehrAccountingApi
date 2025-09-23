@@ -45,9 +45,21 @@ public class EfDetailedAccountRepository : IDetailedAccountRepository
         throw new NotImplementedException();
     }
 
-    public async Task<DetailedAccount> GetByIdAsync(int id, CancellationToken cancellationToken)
+    public async Task<GetDetailedAccountDto> GetByIdAsync(int id, CancellationToken cancellationToken)
     {
-        return await _context.DetailedAccounts.FindAsync(id, cancellationToken);
+        var account = await _context.DetailedAccounts.FindAsync(id, cancellationToken);
+        if (account is null)
+            return null;
+        var dto = new GetDetailedAccountDto
+        {
+            Id = account.Id,
+            Title = account.Title,
+            Category = account.Category.Title,
+            CreditLimit = account.CreditLimit,
+            IsDebtor = account.IsDebtor,
+            SecureLevel = account.SecureLevel.Title
+        };
+        return dto;
     }
 
     public Task UpdateAsync(DetailedAccount account, CancellationToken cancellationToken)

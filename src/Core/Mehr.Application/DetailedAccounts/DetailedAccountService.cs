@@ -55,16 +55,8 @@ public class DetailedAccountService : IDetailedAccountService
         var account = await _repository.GetByIdAsync(id, cancellationToken);
         if (account is null)
             return Result.Failure<GetDetailedAccountDto>(DetailedAccountError.NotFound(id));
-        var dto = new GetDetailedAccountDto
-        {
-            Id = account.Id,
-            Title = account.Title,
-            Category = account.Category.Title,
-            CreditLimit = account.CreditLimit,
-            IsDebtor = account.IsDebtor,
-            SecureLevel =account.SecureLevel.Title
-        };
-        return dto;
+
+        return account;
     }
 
     public Task<Result> UpdateAsync(int id, UpdateDetailedAccountDto dto, CancellationToken cancellationToken)
