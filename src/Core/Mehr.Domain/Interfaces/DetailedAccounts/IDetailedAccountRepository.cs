@@ -5,7 +5,7 @@ namespace Mehr.Domain.Interfaces.DetailedAccounts;
 
 public interface IDetailedAccountRepository
 {
-    Task<GetDetailedAccountDto> GetByIdAsync(int id, CancellationToken cancellationToken);
+    Task<GetDetailedAccountDto?> GetByIdAsync(int id, CancellationToken cancellationToken);
     Task<List<GetDetailedAccountDto>> GetAllAsync(CancellationToken cancellationToken);
     List<DetailedAccount> GetAllByCategoryAsync(DetailedCategoryType category, CancellationToken cancellationToken);
     Task AddAsync(DetailedAccount account, CancellationToken cancellationToken);

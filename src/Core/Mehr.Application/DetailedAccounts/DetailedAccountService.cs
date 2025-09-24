@@ -46,7 +46,6 @@ public class DetailedAccountService : IDetailedAccountService
     public async Task<Result<List<GetDetailedAccountDto>>> GetAllAsync(CancellationToken cancellationToken)
     {
         var DetaileList = await _repository.GetAllAsync(cancellationToken);
-
         return DetaileList;
     }
 

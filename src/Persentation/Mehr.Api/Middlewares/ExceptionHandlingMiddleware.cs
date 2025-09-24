@@ -25,13 +25,14 @@ public class ExceptionHandlingMiddleware
         }
         catch (BusinessException ex) // custom domain/application exception
         {
-            _logger.LogWarning(ex, "Business exception occurred.");
-            await HandleExceptionAsync(context, ex, HttpStatusCode.BadRequest);
-        }
-        catch (NotFoundException ex)
-        {
-            _logger.LogWarning(ex, "Entity not found.");
-            await HandleExceptionAsync(context, ex, HttpStatusCode.NotFound);
+            _logger.LogError(ex, "Unhandled exception occurred.");
+            //await HandleExceptionAsync(context, ex, HttpStatusCode.InternalServerError);
+
+            context.Response.ContentType = "application/json";
+            context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+
+            var json = JsonSerializer.Serialize(ex.Result);
+            await context.Response.WriteAsync(json);
         }
         catch (Exception ex)
         {

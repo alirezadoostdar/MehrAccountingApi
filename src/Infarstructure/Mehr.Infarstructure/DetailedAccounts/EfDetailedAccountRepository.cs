@@ -25,6 +25,11 @@ public class EfDetailedAccountRepository : IDetailedAccountRepository
         throw new NotImplementedException();
     }
 
+    public Task<DetailedAccount> FindAsync(int id, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
+
     public async Task<List<GetDetailedAccountDto>> GetAllAsync(CancellationToken cancellationToken)
     {
         var list = await _context.DetailedAccounts
@@ -45,20 +50,23 @@ public class EfDetailedAccountRepository : IDetailedAccountRepository
         throw new NotImplementedException();
     }
 
-    public async Task<GetDetailedAccountDto> GetByIdAsync(int id, CancellationToken cancellationToken)
+    public async Task<GetDetailedAccountDto?> GetByIdAsync(int id, CancellationToken cancellationToken)
     {
+        GetDetailedAccountDto? dto = new GetDetailedAccountDto();
         var account = await _context.DetailedAccounts.FindAsync(id, cancellationToken);
         if (account is null)
-            return null;
-        var dto = new GetDetailedAccountDto
         {
-            Id = account.Id,
-            Title = account.Title,
-            Category = account.Category.Title,
-            CreditLimit = account.CreditLimit,
-            IsDebtor = account.IsDebtor,
-            SecureLevel = account.SecureLevel.Title
-        };
+            dto = null;
+            return dto;
+        }
+
+        dto.Id = account.Id;
+        dto.Title = account.Title;
+        dto.Category = account.Category.Title;
+        dto.CreditLimit = account.CreditLimit;
+        dto.IsDebtor = account.IsDebtor;
+        dto.SecureLevel = account.SecureLevel.Title;
+        
         return dto;
     }
 

@@ -1,5 +1,6 @@
 ﻿using Mehr.Application.DetailedAccounts.Contracts;
 using Mehr.Application.DetailedAccounts.Contracts.Dtos;
+using Mehr.Domain.Entities.Accounts.Dtos;
 using Mehr.SharedKernel;
 using Microsoft.AspNetCore.Mvc;
 
@@ -39,6 +40,7 @@ public class DetailedAccountController : Controller
     [HttpGet("{id:int}")]
     public async Task<ActionResult<Result>> GetByIdAsync(int id, CancellationToken cancellationToken)
     {
-        return await _detailedAccountService.GetByIdAsync(id, cancellationToken);
+        Result<GetDetailedAccountDto> result = await _detailedAccountService.GetByIdAsync(id, cancellationToken);
+        return result;
     }
 }

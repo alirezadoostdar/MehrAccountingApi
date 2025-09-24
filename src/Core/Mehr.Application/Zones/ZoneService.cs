@@ -46,7 +46,7 @@ public class ZoneService : IZoneService
         }
         var zone = await _zoneRepository.GetByIdAsync(id, cancellationToken);
         if (zone is null)
-            throw new NotFoundException(nameof(Zone),id);
+            throw new Exception(nameof(Zone));
 
         return new GetZoneDto { 
             Id = zone.Id, 
