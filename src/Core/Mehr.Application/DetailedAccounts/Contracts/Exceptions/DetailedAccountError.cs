@@ -1,6 +1,4 @@
-﻿
-
-using Mehr.SharedKernel;
+﻿using Mehr.SharedKernel;
 
 namespace Mehr.Application.DetailedAccounts.Contracts.Exceptions;
 
