@@ -2,22 +2,11 @@
 
 namespace Mehr.Application.Costs.Contracts.Dtos;
 
-public class AddCostDto
+public class UpdateCostDto
 {
     public string Title { get; set; }
     public SecureLevelType SecureLevel { get; set; }
     public string Comment { get; set; }
     public int FirstGroupId { get; set; }
     public int SecondGroupId { get; set; }
-}
-
-
-public class GetCostDto
-{
-    public int Id { get; set; }
-    public string Title { get; set; }
-    public SecureLevelType SecureLevel { get; set; }
-    public string Comment { get; set; }
-    public string FirstGroup { get; set; }
-    public string SecondGroup { get; set; }
 }
