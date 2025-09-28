@@ -10,6 +10,6 @@ public interface IDetailedAccountRepository
     List<DetailedAccount> GetAllByCategoryAsync(DetailedCategoryType category, CancellationToken cancellationToken);
     Task AddAsync(DetailedAccount account, CancellationToken cancellationToken);
     Task UpdateAsync(DetailedAccount account, CancellationToken cancellationToken);
-    Task DeleteAsync(DetailedAccount account, CancellationToken cancellationToken);
+    void Delete(DetailedAccount account);
     Task<DetailedAccount?> FindAsync(int id, CancellationToken cancellationToken);
 }

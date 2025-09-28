@@ -20,9 +20,9 @@ public class EfDetailedAccountRepository : IDetailedAccountRepository
         await _context.DetailedAccounts.AddAsync(account, cancellationToken);
     }
 
-    public Task DeleteAsync(DetailedAccount account, CancellationToken cancellationToken)
+    public void Delete(DetailedAccount account)
     {
-        throw new NotImplementedException();
+        _context.DetailedAccounts.Remove(account);
     }
 
     public async Task<DetailedAccount?> FindAsync(int id, CancellationToken cancellationToken)
@@ -61,10 +61,10 @@ public class EfDetailedAccountRepository : IDetailedAccountRepository
                 Title = x.Title,
                 Category = x.Category.Title,
                 SecureLevel = x.SecureLevel.Title,
-                CreditLimit= x.CreditLimit,
+                CreditLimit = x.CreditLimit,
                 IsDebtor = x.IsDebtor
-            }).FirstOrDefaultAsync( cancellationToken);
-        
+            }).FirstOrDefaultAsync(cancellationToken);
+
         return account;
     }
 

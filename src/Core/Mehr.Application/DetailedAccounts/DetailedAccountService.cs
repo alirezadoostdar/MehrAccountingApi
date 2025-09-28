@@ -38,9 +38,16 @@ public class DetailedAccountService : IDetailedAccountService
         return detailedAccount.Id;
     }
 
-    public Task<Result> DeleteAsync(int id, CancellationToken cancellationToken)
+    public async Task<Result> DeleteAsync(int id, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var account = await _repository.FindAsync(id, cancellationToken);
+        if (account is null)
+            return Result.Failure(DetailedAccountError.NotFound(id));
+
+        _repository.Delete(account);
+        await _unitOfWork.SaveChangesAsync();
+
+        return Result.Success();
     }
 
     public async Task<Result<List<GetDetailedAccountDto>>> GetAllAsync(CancellationToken cancellationToken)

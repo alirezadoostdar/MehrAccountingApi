@@ -43,4 +43,11 @@ public class DetailedAccountController : Controller
         Result<GetDetailedAccountDto> result = await _detailedAccountService.GetByIdAsync(id, cancellationToken);
         return result;
     }
+
+    [HttpDelete("{id:int}")]
+    public async Task<ActionResult<Result>> DeleteAsync(int id, CancellationToken cancellationToken)
+    {
+        return await _detailedAccountService.DeleteAsync(id, cancellationToken);
+    }
+
 }
