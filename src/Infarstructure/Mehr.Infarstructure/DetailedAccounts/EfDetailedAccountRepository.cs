@@ -25,9 +25,9 @@ public class EfDetailedAccountRepository : IDetailedAccountRepository
         throw new NotImplementedException();
     }
 
-    public Task<DetailedAccount> FindAsync(int id, CancellationToken cancellationToken)
+    public async Task<DetailedAccount?> FindAsync(int id, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        return await _context.DetailedAccounts.FindAsync(id, cancellationToken);
     }
 
     public async Task<List<GetDetailedAccountDto>> GetAllAsync(CancellationToken cancellationToken)
@@ -52,22 +52,20 @@ public class EfDetailedAccountRepository : IDetailedAccountRepository
 
     public async Task<GetDetailedAccountDto?> GetByIdAsync(int id, CancellationToken cancellationToken)
     {
-        GetDetailedAccountDto? dto = new GetDetailedAccountDto();
-        var account = await _context.DetailedAccounts.FindAsync(id, cancellationToken);
-        if (account is null)
-        {
-            dto = null;
-            return dto;
-        }
 
-        dto.Id = account.Id;
-        dto.Title = account.Title;
-        dto.Category = account.Category.Title;
-        dto.CreditLimit = account.CreditLimit;
-        dto.IsDebtor = account.IsDebtor;
-        dto.SecureLevel = account.SecureLevel.Title;
+        var account = await _context.DetailedAccounts
+            .Where(x => x.Id == id)
+            .Select(x => new GetDetailedAccountDto
+            {
+                Id = x.Id,
+                Title = x.Title,
+                Category = x.Category.Title,
+                SecureLevel = x.SecureLevel.Title,
+                CreditLimit= x.CreditLimit,
+                IsDebtor = x.IsDebtor
+            }).FirstOrDefaultAsync( cancellationToken);
         
-        return dto;
+        return account;
     }
 
     public Task UpdateAsync(DetailedAccount account, CancellationToken cancellationToken)

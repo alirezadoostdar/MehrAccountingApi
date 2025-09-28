@@ -11,5 +11,5 @@ public interface IDetailedAccountRepository
     Task AddAsync(DetailedAccount account, CancellationToken cancellationToken);
     Task UpdateAsync(DetailedAccount account, CancellationToken cancellationToken);
     Task DeleteAsync(DetailedAccount account, CancellationToken cancellationToken);
-    Task<DetailedAccount> FindAsync(int id, CancellationToken cancellationToken);
+    Task<DetailedAccount?> FindAsync(int id, CancellationToken cancellationToken);
 }

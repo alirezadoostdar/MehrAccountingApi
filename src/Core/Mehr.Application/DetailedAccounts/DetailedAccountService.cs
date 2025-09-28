@@ -51,15 +51,26 @@ public class DetailedAccountService : IDetailedAccountService
 
     public async Task<Result<GetDetailedAccountDto>> GetByIdAsync(int id, CancellationToken cancellationToken)
     {
+        var xx = await _repository.FindAsync(id, cancellationToken);
         var account = await _repository.GetByIdAsync(id, cancellationToken);
         if (account is null)
             return Result.Failure<GetDetailedAccountDto>(DetailedAccountError.NotFound(id));
-
+        xx.Title = account.Title;
         return account;
     }
 
-    public Task<Result> UpdateAsync(int id, UpdateDetailedAccountDto dto, CancellationToken cancellationToken)
+    public async Task<Result> UpdateAsync(int id, UpdateDetailedAccountDto dto, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var account = await _repository.FindAsync(id, cancellationToken);
+        if (account is null)
+            return Result.Failure(DetailedAccountError.NotFound(id));
+
+        account.Title = dto.Title;
+        account.SecureLevelId = (int)dto.SecureLevel;
+        account.CreditLimit = dto.CreditLimit;
+        account.IsDebtor = dto.IsDebtor;
+
+        await _unitOfWork.SaveChangesAsync();
+        return Result.Success();
     }
 }
