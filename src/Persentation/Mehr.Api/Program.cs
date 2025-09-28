@@ -1,5 +1,7 @@
 using Mehr.Api.Middlewares;
 using Mehr.Application;
+using Mehr.Application.Costs;
+using Mehr.Application.Costs.Contracts;
 using Mehr.Application.DetailedAccounts;
 using Mehr.Application.DetailedAccounts.Contracts;
 using Mehr.Application.Intrefaces;
@@ -7,8 +9,10 @@ using Mehr.Application.Services;
 using Mehr.Application.Zones;
 using Mehr.Application.Zones.Contracts;
 using Mehr.Domain.Interfaces;
+using Mehr.Domain.Interfaces.Costs;
 using Mehr.Domain.Interfaces.DetailedAccounts;
 using Mehr.Infarstructure;
+using Mehr.Infarstructure.Costs;
 using Mehr.Infarstructure.DetailedAccounts;
 using Mehr.Infarstructure.Repositories.Stocks;
 using Mehr.Infarstructure.Zones;
@@ -35,6 +39,9 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 builder.Services.AddScoped<IDetailedAccountRepository, EfDetailedAccountRepository>();
 builder.Services.AddScoped<IDetailedAccountService, DetailedAccountService>();
+
+builder.Services.AddScoped<ICostRepository, EfCostRepository>();
+builder.Services.AddScoped<ICostService, CostService>();
 
 builder.Services.AddScoped<IProductCategoryRepository, EfProductCategoryRepository>();
 builder.Services.AddScoped<IZoneRepository, EfZoneRepository>();
