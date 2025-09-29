@@ -5,6 +5,7 @@ namespace Mehr.Domain.Entities.Costs;
 
 public class Cost : DetailedAccount
 {
+    public int AccountSysCode { get; set; }
     public int FirstGroupId { get; set; }
     public CostFirstGroup FirstGroup { get; set; }
 

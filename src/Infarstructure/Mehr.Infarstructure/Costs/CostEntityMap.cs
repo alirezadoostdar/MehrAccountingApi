@@ -1,4 +1,6 @@
-﻿using Mehr.Domain.Entities.Costs;
+﻿using Mehr.Domain.Entities.Accounts;
+using Mehr.Domain.Entities.Costs;
+using Mehr.Domain.Entities.Docs;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -10,9 +12,15 @@ public class CostEntityMap : IEntityTypeConfiguration<Cost>
     {
         builder.ToTable("CostTbl");
 
-        builder.Property(_ => _.Id)
-            .HasColumnName("Fk_AccountSyscode")
-            .IsRequired();
+        builder.HasKey(x => x.AccountSysCode);
+
+        builder.Property(x => x.AccountSysCode)
+            .HasColumnName("Fk_AccountSyscode");
+
+        builder.HasOne<DetailedAccount>()         
+            .WithOne()                     
+            .HasForeignKey<Cost>(d => d.AccountSysCode) 
+            .HasPrincipalKey<DetailedAccount>(a => a.Id);
 
         builder.Property(x => x.FirstGroupId)
            .HasColumnName("GroupID1");
