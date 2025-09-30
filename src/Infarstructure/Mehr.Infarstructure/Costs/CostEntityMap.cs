@@ -12,14 +12,14 @@ public class CostEntityMap : IEntityTypeConfiguration<Cost>
     {
         builder.ToTable("CostTbl");
 
-        builder.HasKey(x => x.AccountSysCode);
+        //builder.HasBaseType<DetailedAccount>();
 
-        builder.Property(x => x.AccountSysCode)
-            .HasColumnName("Fk_AccountSyscode");
+        //builder.Property(x => x.Id)
+        //    .HasColumnName("Fk_AccountSyscode");
 
-        builder.HasOne<DetailedAccount>()         
-            .WithOne()                     
-            .HasForeignKey<Cost>(d => d.AccountSysCode) 
+        builder.HasOne<DetailedAccount>()
+            .WithOne()
+            .HasForeignKey<Cost>(d => d.Fk_AccountSyscode)
             .HasPrincipalKey<DetailedAccount>(a => a.Id);
 
         builder.Property(x => x.FirstGroupId)
