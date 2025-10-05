@@ -7,5 +7,5 @@ public interface ICostService
 {
     Task<Result<int>> AddAsync(AddCostDto cost, CancellationToken cancellation);
     Task<Result<int>> AddFirstGroupAsync(AddCostFristGroupDto dto, CancellationToken cancellationToken);
-    Task<Result<int>> AddSecondGroupAsync(AddCostFristGroupDto dto, CancellationToken cancellationToken);
+    Task<Result<int>> AddSecondGroupAsync(AddCostSecondGroupDto dto, CancellationToken cancellationToken);
 }

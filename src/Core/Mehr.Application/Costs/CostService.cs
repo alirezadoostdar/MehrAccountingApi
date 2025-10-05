@@ -1,5 +1,6 @@
 ﻿using Mehr.Application.Costs.Contracts;
 using Mehr.Application.Costs.Contracts.Dtos;
+using Mehr.Domain.Entities.Banks;
 using Mehr.Domain.Entities.Costs;
 using Mehr.Domain.Interfaces.Costs;
 using Mehr.SharedKernel;
@@ -36,13 +37,27 @@ public class CostService : ICostService
     }
 
 
-    public Task<Result<int>> AddFirstGroupAsync(AddCostFristGroupDto dto, CancellationToken cancellationToken)
+    public async Task<Result<int>> AddFirstGroupAsync(AddCostFristGroupDto dto, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var firstGroup = new CostFirstGroup
+        {
+            Title = dto.Title
+        };
+
+        await _repository.AddFirstGroupAsync(firstGroup, cancellationToken);
+        await _unitOfWork.SaveChangesAsync();
+        return firstGroup.Id;
     }
 
-    public Task<Result<int>> AddSecondGroupAsync(AddCostFristGroupDto dto, CancellationToken cancellationToken)
+    public async Task<Result<int>> AddSecondGroupAsync(AddCostSecondGroupDto dto, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var secondGroup = new CostSecondGroup
+        {
+            Title = dto.Title
+        };
+
+        await _repository.AddSecondGroupAsync(secondGroup, cancellationToken);
+        await _unitOfWork.SaveChangesAsync();
+        return secondGroup.Id;
     }
 }
