@@ -34,4 +34,15 @@ public class CostService : ICostService
         await _unitOfWork.SaveChangesAsync();
         return cost.Id;
     }
+
+
+    public Task<Result<int>> AddFirstGroupAsync(AddCostFristGroupDto dto, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<Result<int>> AddSecondGroupAsync(AddCostFristGroupDto dto, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
 }

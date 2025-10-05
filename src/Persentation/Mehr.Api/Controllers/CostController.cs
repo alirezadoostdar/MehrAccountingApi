@@ -21,5 +21,13 @@ namespace Mehr.Api.Controllers
         {
             return await _service.AddAsync(dto, cancellationToken);
         }
+
+        [HttpPost("add-first-group")]
+        public async Task<ActionResult<Result>> AddFirstGroupAsync(
+            AddCostFristGroupDto dto,
+            CancellationToken cancellationToken)
+        {
+            return await _service.AddFirstGroup(dto, cancellationToken);
+        }
     }
 }

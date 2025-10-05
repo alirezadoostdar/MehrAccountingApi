@@ -1,4 +1,5 @@
-﻿using Mehr.Domain.Entities.Costs;
+﻿using Mehr.Domain.Entities.Banks;
+using Mehr.Domain.Entities.Costs;
 using Mehr.Domain.Interfaces.Costs;
 
 namespace Mehr.Infarstructure.Costs;
@@ -15,5 +16,15 @@ public class EfCostRepository : ICostRepository
     public async Task AddAsync(Cost cost, CancellationToken cancellation)
     {
        await _context.Costs.AddAsync(cost);
+    }
+
+    public Task AddFirstGroupAsync(CostFirstGroup costFirstGroup, CancellationToken cancellation)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task AddSecondGroupAsync(CostSecondGroup costSecondGroup, CancellationToken cancellation)
+    {
+        throw new NotImplementedException();
     }
 }
