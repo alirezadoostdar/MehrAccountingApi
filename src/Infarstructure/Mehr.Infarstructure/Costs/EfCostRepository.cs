@@ -18,13 +18,13 @@ public class EfCostRepository : ICostRepository
        await _context.Costs.AddAsync(cost);
     }
 
-    public Task AddFirstGroupAsync(CostFirstGroup costFirstGroup, CancellationToken cancellation)
+    public async Task AddFirstGroupAsync(CostFirstGroup costFirstGroup, CancellationToken cancellation)
     {
-        throw new NotImplementedException();
+        await _context.CostFirstGroups.AddAsync(costFirstGroup, cancellation);
     }
 
-    public Task AddSecondGroupAsync(CostSecondGroup costSecondGroup, CancellationToken cancellation)
+    public async Task AddSecondGroupAsync(CostSecondGroup costSecondGroup, CancellationToken cancellation)
     {
-        throw new NotImplementedException();
+        await _context.CostSecondGroups.AddAsync(costSecondGroup);
     }
 }
