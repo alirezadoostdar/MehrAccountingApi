@@ -60,4 +60,29 @@ public class CostService : ICostService
         await _unitOfWork.SaveChangesAsync();
         return secondGroup.Id;
     }
+
+    public Task<Result<bool>> DeleteFirstGroupAsync(int id, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
+
+    public async Task<Result<List<GetCostFristGroupDto>>> GetAllFirstGroupAsync(CancellationToken cancellationToken)
+    {
+        var list = await _repository.GetAllFirstGroupAsync(cancellationToken);
+        return list.Select(x => new GetCostFristGroupDto
+        {
+            Id = x.Id,
+            Title = x.Title
+        }).ToList();
+    }
+
+    public async Task<Result<List<GetCostSecondGroupDto>>> GetAllSecondGroupAsync(CancellationToken cancellationToken)
+    {
+        var list = await _repository.GetAllSecondGroupAsync(cancellationToken);
+        return list.Select(x => new GetCostSecondGroupDto
+        {
+            Id = x.Id,
+            Title = x.Title
+        }).ToList();
+    }
 }

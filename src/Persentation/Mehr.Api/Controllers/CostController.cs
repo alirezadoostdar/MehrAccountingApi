@@ -32,6 +32,18 @@ namespace Mehr.Api.Controllers
         {
             return await _service.AddFirstGroupAsync(dto, cancellationToken);
         }
+
+        [HttpGet("first-group")]
+        public async Task<ActionResult<Result>> GetAllFirstGroupAsync(CancellationToken cancellationToken)
+        {
+            return await _service.GetAllFirstGroupAsync(cancellationToken);
+        }
+
+        [HttpDelete("first-group/{id:int}")]
+        public async Task<ActionResult<Result>> DeleteFirstGroupAsync(int id, CancellationToken cancellationToken)
+        {
+
+        }
         #endregion
 
         #region Second Group
@@ -41,6 +53,12 @@ namespace Mehr.Api.Controllers
             CancellationToken cancellationToken)
         {
             return await _service.AddSecondGroupAsync(dto, cancellationToken);
+        }
+
+        [HttpGet("second-group")]
+        public async Task<ActionResult<Result>> GetAllSecondGroupAsync(CancellationToken cancellationToken)
+        {
+            return await _service.GetAllSecondGroupAsync(cancellationToken);
         }
         #endregion
 
