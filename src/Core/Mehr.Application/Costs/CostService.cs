@@ -113,4 +113,16 @@ public class CostService : ICostService
             Title = x.Title
         }).ToList();
     }
+
+    public async Task<Result<bool>> UpdateCostSecondGroupAsync(int id, UpdateCostSecondGroupDto dto, CancellationToken cancellationToken)
+    {
+        var group = await _repository.GetSecondGroupByIdAsync(id, cancellationToken);
+        if (group is null)
+            return Result.Failure<bool>(CostErrors.SecondGroupNotFound(id));
+
+        group.Title = dto.Title;
+
+        await _unitOfWork.SaveChangesAsync();
+        return true;
+    }
 }
