@@ -9,7 +9,7 @@ public static class CostErrors
         $"The user with the Id = '{id}' was not found");
 
 
-    public static Error FirsGroupNotFound(int id) => Error.NotFound(
+    public static Error FirstGroupNotFound(int id) => Error.NotFound(
     "CostFirstGroup.NotFound",
     $"The cost first group with the Id = '{id}' was not found");
 

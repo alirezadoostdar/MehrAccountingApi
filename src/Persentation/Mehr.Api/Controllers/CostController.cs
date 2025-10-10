@@ -44,6 +44,15 @@ namespace Mehr.Api.Controllers
         {
             return await _service.DeleteFirstGroupAsync(id, cancellationToken);
         }
+
+        [HttpPut("first-group/{id:int}")]
+        public async Task<ActionResult<Result>> UpdateFirstGroupAsync(
+            int id,
+            UpdateCostFirstGroupDto dto,
+            CancellationToken cancellationToken)
+        {
+            return await _service.UpdateCostFirstGroupAsync(id, dto, cancellationToken);
+        }
         #endregion
 
         #region Second Group

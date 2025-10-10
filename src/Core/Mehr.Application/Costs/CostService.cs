@@ -66,7 +66,7 @@ public class CostService : ICostService
     {
         var group =await _repository.GetFirstGroupByIdAsync(id, cancellationToken);
         if (group is null)
-            return Result.Failure<bool>(CostErrors.FirsGroupNotFound(id));
+            return Result.Failure<bool>(CostErrors.FirstGroupNotFound(id));
 
         var used = await _repository.IsUsedFirstGroupAsync(id, cancellationToken);
         if (used)
@@ -112,6 +112,18 @@ public class CostService : ICostService
             Id = x.Id,
             Title = x.Title
         }).ToList();
+    }
+
+    public async Task<Result<bool>> UpdateCostFirstGroupAsync(int id, UpdateCostFirstGroupDto dto, CancellationToken cancellationToken)
+    {
+        var group = await _repository.GetFirstGroupByIdAsync(id, cancellationToken);
+        if (group is null)
+            return Result.Failure<bool>(CostErrors.FirstGroupNotFound(id));
+
+        group.Title = dto.Title;
+
+        await _unitOfWork.SaveChangesAsync();
+        return true;
     }
 
     public async Task<Result<bool>> UpdateCostSecondGroupAsync(int id, UpdateCostSecondGroupDto dto, CancellationToken cancellationToken)
