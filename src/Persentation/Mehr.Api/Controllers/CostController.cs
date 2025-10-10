@@ -42,7 +42,7 @@ namespace Mehr.Api.Controllers
         [HttpDelete("first-group/{id:int}")]
         public async Task<ActionResult<Result>> DeleteFirstGroupAsync(int id, CancellationToken cancellationToken)
         {
-
+            return await _service.DeleteFirstGroupAsync(id, cancellationToken);
         }
         #endregion
 

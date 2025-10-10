@@ -1,5 +1,4 @@
 ﻿using Mehr.Domain.Entities.Accounts;
-using Mehr.Domain.Entities.Banks;
 using Mehr.Domain.Entities.Contacts;
 using Mehr.Domain.Entities.Costs;
 using Mehr.Domain.Entities.Stocks;

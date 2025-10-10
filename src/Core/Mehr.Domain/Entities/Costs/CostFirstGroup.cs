@@ -1,4 +1,4 @@
-﻿namespace Mehr.Domain.Entities.Banks;
+﻿namespace Mehr.Domain.Entities.Costs;
 
 public class CostFirstGroup
 {

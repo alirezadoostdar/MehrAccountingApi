@@ -1,4 +1,4 @@
-﻿using Mehr.Domain.Entities.Banks;
+﻿using Mehr.Domain.Entities.Costs;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;

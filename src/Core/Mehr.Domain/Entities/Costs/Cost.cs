@@ -1,5 +1,4 @@
 ﻿using Mehr.Domain.Entities.Accounts;
-using Mehr.Domain.Entities.Banks;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Mehr.Domain.Entities.Costs;

@@ -1,5 +1,4 @@
-﻿using Mehr.Domain.Entities.Banks;
-using Mehr.Domain.Entities.Costs;
+﻿using Mehr.Domain.Entities.Costs;
 using Mehr.Domain.Interfaces.Costs;
 using Microsoft.EntityFrameworkCore;
 
@@ -29,6 +28,11 @@ public class EfCostRepository : ICostRepository
         await _context.CostSecondGroups.AddAsync(costSecondGroup);
     }
 
+    public void DeleteFirstGroup(CostFirstGroup costFirstGroup)
+    {
+        _context.CostFirstGroups.Remove(costFirstGroup);
+    }
+
     public async Task<List<CostFirstGroup>> GetAllFirstGroupAsync(CancellationToken cancellationToken)
     {
         return await _context.CostFirstGroups.ToListAsync(cancellationToken);
@@ -37,5 +41,10 @@ public class EfCostRepository : ICostRepository
     public async Task<List<CostSecondGroup>> GetAllSecondGroupAsync(CancellationToken cancellationToken)
     {
         return await _context.CostSecondGroups.ToListAsync(cancellationToken);
+    }
+
+    public async Task<CostFirstGroup?> GetFirstGroupByIdAsync(int id, CancellationToken cancellationToken)
+    {
+        return await _context.CostFirstGroups.FindAsync(id, cancellationToken);
     }
 }
