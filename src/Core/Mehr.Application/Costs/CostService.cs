@@ -80,6 +80,10 @@ public class CostService : ICostService
         if (group is null)
             return Result.Failure<bool>(CostErrors.FirsGroupNotFound(id));
 
+        var used = await _repository.IsUsedFirstGroupAsync(id, cancellationToken);
+        if( used)
+            return Result.Failure<bool>(CostErrors.FirsGroupIsUsed(id));
+
         _repository.DeleteSecondGroup(group);
         await _unitOfWork.SaveChangesAsync();
 

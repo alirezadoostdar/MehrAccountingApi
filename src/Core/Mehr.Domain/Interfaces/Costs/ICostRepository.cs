@@ -10,6 +10,7 @@ public interface ICostRepository
     Task<List<CostFirstGroup>> GetAllFirstGroupAsync(CancellationToken cancellationToken);
     Task<CostFirstGroup?> GetFirstGroupByIdAsync(int id, CancellationToken cancellationToken);
     void DeleteFirstGroup(CostFirstGroup costFirstGroup);
+    Task<bool> IsUsedFirstGroupAsync(int id, CancellationToken cancellationToken);
 
     Task AddSecondGroupAsync(CostSecondGroup costSecondGroup, CancellationToken cancellation);
     Task<List<CostSecondGroup>> GetAllSecondGroupAsync(CancellationToken cancellationToken);

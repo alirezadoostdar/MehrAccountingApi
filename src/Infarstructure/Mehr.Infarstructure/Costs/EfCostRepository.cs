@@ -57,4 +57,9 @@ public class EfCostRepository : ICostRepository
     {
         return await _context.CostSecondGroups.FindAsync(id, cancellationToken);
     }
+
+    public async Task<bool> IsUsedFirstGroupAsync(int id, CancellationToken cancellationToken)
+    {
+        return await _context.Costs.AnyAsync(x => x.FirstGroupId == id);
+    }
 }

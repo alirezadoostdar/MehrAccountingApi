@@ -60,6 +60,12 @@ namespace Mehr.Api.Controllers
         {
             return await _service.GetAllSecondGroupAsync(cancellationToken);
         }
+
+        [HttpDelete("second-group/{id:int}")]
+        public async Task<ActionResult<Result>> DeleteSecondGroupAsync(int id, CancellationToken cancellationToken)
+        {
+            return await _service.DeleteSecondGroupAsync(id, cancellationToken);
+        }
         #endregion
 
     }

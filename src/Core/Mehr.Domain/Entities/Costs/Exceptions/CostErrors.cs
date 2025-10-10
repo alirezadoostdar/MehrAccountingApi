@@ -13,7 +13,13 @@ public static class CostErrors
     "CostFirstGroup.NotFound",
     $"The cost first group with the Id = '{id}' was not found");
 
+    public static Error FirsGroupIsUsed(int id) => Error.Conflict(
+    "CostFirstGroup.IsUsed",
+    $"The cost first group with the Id = '{id}' is used");
+
     public static Error SecondGroupNotFound(int id) => Error.NotFound(
         "CostSecondGroup.NotFound",
         $"The cost second group with the Id = '{id}' was not found");
+
+
 }
