@@ -33,6 +33,11 @@ public class EfCostRepository : ICostRepository
         _context.CostFirstGroups.Remove(costFirstGroup);
     }
 
+    public void DeleteSecondGroup(CostSecondGroup costSecondGroup)
+    {
+        _context.CostSecondGroups.Remove(costSecondGroup);
+    }
+
     public async Task<List<CostFirstGroup>> GetAllFirstGroupAsync(CancellationToken cancellationToken)
     {
         return await _context.CostFirstGroups.ToListAsync(cancellationToken);
@@ -46,5 +51,10 @@ public class EfCostRepository : ICostRepository
     public async Task<CostFirstGroup?> GetFirstGroupByIdAsync(int id, CancellationToken cancellationToken)
     {
         return await _context.CostFirstGroups.FindAsync(id, cancellationToken);
+    }
+
+    public async Task<CostSecondGroup?> GetSecondGroupByIdAsync(int id, CancellationToken cancellationToken)
+    {
+        return await _context.CostSecondGroups.FindAsync(id, cancellationToken);
     }
 }

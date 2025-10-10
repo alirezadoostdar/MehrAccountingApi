@@ -74,6 +74,18 @@ public class CostService : ICostService
         return true;
     }
 
+    public async Task<Result<bool>> DeleteSecondGroupAsync(int id, CancellationToken cancellationToken)
+    {
+        var group = await _repository.GetSecondGroupByIdAsync(id, cancellationToken);
+        if (group is null)
+            return Result.Failure<bool>(CostErrors.FirsGroupNotFound(id));
+
+        _repository.DeleteSecondGroup(group);
+        await _unitOfWork.SaveChangesAsync();
+
+        return true;
+    }
+
     public async Task<Result<List<GetCostFristGroupDto>>> GetAllFirstGroupAsync(CancellationToken cancellationToken)
     {
         var list = await _repository.GetAllFirstGroupAsync(cancellationToken);

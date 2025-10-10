@@ -13,4 +13,5 @@ public interface ICostService
 
     Task<Result<int>> AddSecondGroupAsync(AddCostSecondGroupDto dto, CancellationToken cancellationToken);
     Task<Result<List<GetCostSecondGroupDto>>> GetAllSecondGroupAsync(CancellationToken cancellationToken);
+    Task<Result<bool>> DeleteSecondGroupAsync(int id, CancellationToken cancellationToken);
 }

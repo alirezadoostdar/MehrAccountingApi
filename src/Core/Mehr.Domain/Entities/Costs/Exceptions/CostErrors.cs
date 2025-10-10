@@ -12,4 +12,8 @@ public static class CostErrors
     public static Error FirsGroupNotFound(int id) => Error.NotFound(
     "CostFirstGroup.NotFound",
     $"The cost first group with the Id = '{id}' was not found");
+
+    public static Error SecondGroupNotFound(int id) => Error.NotFound(
+        "CostSecondGroup.NotFound",
+        $"The cost second group with the Id = '{id}' was not found");
 }

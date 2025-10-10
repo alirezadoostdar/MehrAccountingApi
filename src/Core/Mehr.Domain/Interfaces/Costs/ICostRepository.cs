@@ -13,4 +13,6 @@ public interface ICostRepository
 
     Task AddSecondGroupAsync(CostSecondGroup costSecondGroup, CancellationToken cancellation);
     Task<List<CostSecondGroup>> GetAllSecondGroupAsync(CancellationToken cancellationToken);
+    Task<CostSecondGroup?> GetSecondGroupByIdAsync(int id, CancellationToken cancellationToken);
+    void DeleteSecondGroup(CostSecondGroup costSecondGroup);
 }
