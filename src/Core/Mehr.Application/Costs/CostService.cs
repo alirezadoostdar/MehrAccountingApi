@@ -68,6 +68,10 @@ public class CostService : ICostService
         if (group is null)
             return Result.Failure<bool>(CostErrors.FirsGroupNotFound(id));
 
+        var used = await _repository.IsUsedFirstGroupAsync(id, cancellationToken);
+        if (used)
+            return Result.Failure<bool>(CostErrors.FirstGroupIsUsed(id));
+
         _repository.DeleteFirstGroup(group);
         await _unitOfWork.SaveChangesAsync();
 
@@ -78,11 +82,11 @@ public class CostService : ICostService
     {
         var group = await _repository.GetSecondGroupByIdAsync(id, cancellationToken);
         if (group is null)
-            return Result.Failure<bool>(CostErrors.FirsGroupNotFound(id));
+            return Result.Failure<bool>(CostErrors.SecondGroupNotFound(id));
 
-        var used = await _repository.IsUsedFirstGroupAsync(id, cancellationToken);
+        var used = await _repository.IsUsedSecondGroupAsync(id, cancellationToken);
         if( used)
-            return Result.Failure<bool>(CostErrors.FirsGroupIsUsed(id));
+            return Result.Failure<bool>(CostErrors.SecondGroupIsUsed(id));
 
         _repository.DeleteSecondGroup(group);
         await _unitOfWork.SaveChangesAsync();
