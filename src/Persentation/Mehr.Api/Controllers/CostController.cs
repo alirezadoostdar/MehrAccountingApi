@@ -22,6 +22,12 @@ namespace Mehr.Api.Controllers
         {
             return await _service.AddAsync(dto, cancellationToken);
         }
+
+        [HttpGet("{id:int}")]
+        public async Task<ActionResult<Result>> GetByIdAsync(int id, CancellationToken cancellationToken)
+        {
+            return await _service.GetByIdAsync(id, cancellationToken);
+        }
         #endregion
 
         #region First Group

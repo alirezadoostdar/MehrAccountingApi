@@ -8,12 +8,11 @@ public class DetaileAccountEntityMap : IEntityTypeConfiguration<DetailedAccount>
 {
     public void Configure(EntityTypeBuilder<DetailedAccount> builder)
     {
-        builder.ToTable("CodeMNGDWNTbl");
+        builder.ToTable("CodeMNGDWNTbl", tb => { 
+            tb.Property(e => e.Id).HasColumnName("AccountSysCode");
+        });
 
         builder.HasKey(x => x.Id);
-
-        builder.Property(x => x.Id)
-            .HasColumnName("AccountSysCode");
 
         builder.Property(x => x.Title)
             .IsRequired();
@@ -43,5 +42,7 @@ public class DetaileAccountEntityMap : IEntityTypeConfiguration<DetailedAccount>
         builder.HasOne(x => x.Category)
             .WithMany()
             .HasForeignKey(x => x.CategoryId);
+
+        builder.UseTptMappingStrategy();
     }
 }

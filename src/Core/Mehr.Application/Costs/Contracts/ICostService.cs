@@ -6,6 +6,7 @@ namespace Mehr.Application.Costs.Contracts;
 public interface ICostService
 {
     Task<Result<int>> AddAsync(AddCostDto cost, CancellationToken cancellation);
+    Task<Result<GetCostDto>> GetByIdAsync(int id, CancellationToken cancellationToken);
 
     Task<Result<int>> AddFirstGroupAsync(AddCostFristGroupDto dto, CancellationToken cancellationToken);
     Task<Result<List<GetCostFristGroupDto>>> GetAllFirstGroupAsync(CancellationToken cancellationToken);

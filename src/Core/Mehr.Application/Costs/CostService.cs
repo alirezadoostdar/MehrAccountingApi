@@ -114,6 +114,20 @@ public class CostService : ICostService
         }).ToList();
     }
 
+    public async Task<Result<GetCostDto>> GetByIdAsync(int id, CancellationToken cancellationToken)
+    {
+        var cost = await _repository.GetByIdAsync(id, cancellationToken);
+        if (cost is null)
+            return Result.Failure<GetCostDto>(CostErrors.NotFound(id));
+        var dto = new GetCostDto
+        {
+            Id = cost.Id,
+            Title = cost.Title,
+            Comment = cost.Comment
+        };
+        return dto;
+    }
+
     public async Task<Result<bool>> UpdateCostFirstGroupAsync(int id, UpdateCostFirstGroupDto dto, CancellationToken cancellationToken)
     {
         var group = await _repository.GetFirstGroupByIdAsync(id, cancellationToken);

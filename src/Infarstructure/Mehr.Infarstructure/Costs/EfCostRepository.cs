@@ -1,4 +1,5 @@
-﻿using Mehr.Domain.Entities.Costs;
+﻿using Mehr.Domain.Entities.Checks;
+using Mehr.Domain.Entities.Costs;
 using Mehr.Domain.Interfaces.Costs;
 using Microsoft.EntityFrameworkCore;
 
@@ -46,6 +47,12 @@ public class EfCostRepository : ICostRepository
     public async Task<List<CostSecondGroup>> GetAllSecondGroupAsync(CancellationToken cancellationToken)
     {
         return await _context.CostSecondGroups.ToListAsync(cancellationToken);
+    }
+
+    public async Task<Cost> GetByIdAsync(int id, CancellationToken cancellationToken)
+    {
+        var cost = await _context.Costs.FindAsync(id, cancellationToken);
+        return cost;
     }
 
     public async Task<CostFirstGroup?> GetFirstGroupByIdAsync(int id, CancellationToken cancellationToken)

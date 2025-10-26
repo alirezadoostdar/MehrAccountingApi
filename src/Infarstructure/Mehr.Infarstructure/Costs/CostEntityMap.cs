@@ -10,11 +10,11 @@ public class CostEntityMap : IEntityTypeConfiguration<Cost>
 {
     public void Configure(EntityTypeBuilder<Cost> builder)
     {
-        builder.ToTable("CostTbl");
 
-        builder.Property(x => x.Id)
-            .HasColumnName("Fk_AccountSyscode")
-            .ValueGeneratedNever();
+        builder.ToTable("CostTbl", tb =>
+        {
+            tb.Property(e => e.Id).HasColumnName("Fk_AccountSyscode");
+        });
 
         builder.Property(x => x.FirstGroupId)
            .HasColumnName("GroupID1");
