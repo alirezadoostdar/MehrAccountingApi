@@ -2,6 +2,7 @@
 using Mehr.Application.Costs.Contracts.Dtos;
 using Mehr.Domain.Entities.Banks;
 using Mehr.Domain.Entities.Costs;
+using Mehr.Domain.Entities.Costs.Dtos;
 using Mehr.Domain.Entities.Costs.Exceptions;
 using Mehr.Domain.Interfaces.Costs;
 using Mehr.SharedKernel;
@@ -92,6 +93,12 @@ public class CostService : ICostService
         await _unitOfWork.SaveChangesAsync();
 
         return true;
+    }
+
+    public async Task<Result<List<GetListCostDto>>> GetAllCostAsync(int financialYearId, CancellationToken cancellationToken)
+    {
+        var cotList = await _repository.GetAllCostAsync(financialYearId, cancellationToken);
+        return cotList.ToList() ;
     }
 
     public async Task<Result<List<GetCostFristGroupDto>>> GetAllFirstGroupAsync(CancellationToken cancellationToken)

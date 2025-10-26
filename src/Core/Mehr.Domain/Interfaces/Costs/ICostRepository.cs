@@ -1,4 +1,5 @@
 ﻿using Mehr.Domain.Entities.Costs;
+using Mehr.Domain.Entities.Costs.Dtos;
 
 namespace Mehr.Domain.Interfaces.Costs;
 
@@ -6,6 +7,9 @@ public interface ICostRepository
 {
     Task AddAsync(Cost cost, CancellationToken cancellation);
     Task<Cost> GetByIdAsync(int id, CancellationToken cancellationToken);
+    Task<IEnumerable<GetListCostDto>> GetAllCostAsync(int financialYearId, CancellationToken cancellationToken);
+
+
 
     Task AddFirstGroupAsync(CostFirstGroup costFirstGroup, CancellationToken cancellation);
     Task<List<CostFirstGroup>> GetAllFirstGroupAsync(CancellationToken cancellationToken);

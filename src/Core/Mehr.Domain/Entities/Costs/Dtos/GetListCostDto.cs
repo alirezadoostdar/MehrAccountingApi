@@ -1,6 +1,6 @@
 ﻿namespace Mehr.Domain.Entities.Costs.Dtos;
 
-public class GetCostDto
+public class GetListCostDto
 {
     public int Id { get; set; }
     public string Title { get; set; }
@@ -13,4 +13,5 @@ public class GetCostDto
     public decimal ThirdCurrency { get; set; }
     public decimal CreditLimit { get; set; }
     public string Comment { get; set; }
+    public string LastDate { get; set; }
 }

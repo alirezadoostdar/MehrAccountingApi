@@ -1,5 +1,6 @@
 ﻿using Mehr.Application.Costs.Contracts;
 using Mehr.Application.Costs.Contracts.Dtos;
+using Mehr.Domain.Entities.FinancialYears;
 using Mehr.SharedKernel;
 using Microsoft.AspNetCore.Mvc;
 
@@ -27,6 +28,12 @@ namespace Mehr.Api.Controllers
         public async Task<ActionResult<Result>> GetByIdAsync(int id, CancellationToken cancellationToken)
         {
             return await _service.GetByIdAsync(id, cancellationToken);
+        }
+
+        [HttpGet("{financialYearId:int}")]
+        public async Task<ActionResult<Result>> GetCostsAsync(int financialYearId, CancellationToken cancellationToken)
+        {
+            return await _service.GetAllCostAsync( financialYearId,  cancellationToken);
         }
         #endregion
 

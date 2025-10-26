@@ -1,5 +1,6 @@
 ﻿using Mehr.Domain.Entities.Checks;
 using Mehr.Domain.Entities.Costs;
+using Mehr.Domain.Entities.Costs.Dtos;
 using Mehr.Domain.Interfaces.Costs;
 using Microsoft.EntityFrameworkCore;
 
@@ -37,6 +38,25 @@ public class EfCostRepository : ICostRepository
     public void DeleteSecondGroup(CostSecondGroup costSecondGroup)
     {
         _context.CostSecondGroups.Remove(costSecondGroup);
+    }
+
+    public async Task<IEnumerable<GetListCostDto>> GetAllCostAsync(int financialYearId, CancellationToken cancellationToken)
+    {
+        return await _context.Costs.Select(x => new GetListCostDto
+        {
+            Id = x.Id,
+            Title = x.Title,
+            FirstGroup = x.FirstGroup.Title,
+            SecondGroup = x.SecondGroup.Title,
+            CreditLimit = x.CreditLimit,
+            Comment = x.Comment,
+            SecureLevel = x.SecureLevel.Title,
+            Remain = 0,
+            FirstCurrency = 0,
+            SecondCurrency = 0,
+            ThirdCurrency = 0,
+            LastDate = "1404/12/03"
+        }).ToListAsync();
     }
 
     public async Task<List<CostFirstGroup>> GetAllFirstGroupAsync(CancellationToken cancellationToken)

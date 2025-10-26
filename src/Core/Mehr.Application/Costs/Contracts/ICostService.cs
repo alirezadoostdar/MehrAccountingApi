@@ -1,4 +1,5 @@
 ﻿using Mehr.Application.Costs.Contracts.Dtos;
+using Mehr.Domain.Entities.Costs.Dtos;
 using Mehr.SharedKernel;
 
 namespace Mehr.Application.Costs.Contracts;
@@ -7,6 +8,9 @@ public interface ICostService
 {
     Task<Result<int>> AddAsync(AddCostDto cost, CancellationToken cancellation);
     Task<Result<GetCostDto>> GetByIdAsync(int id, CancellationToken cancellationToken);
+    Task<Result<List<GetListCostDto>>> GetAllCostAsync(int financialYearId, CancellationToken cancellationToken);
+
+
 
     Task<Result<int>> AddFirstGroupAsync(AddCostFristGroupDto dto, CancellationToken cancellationToken);
     Task<Result<List<GetCostFristGroupDto>>> GetAllFirstGroupAsync(CancellationToken cancellationToken);
@@ -20,4 +24,5 @@ public interface ICostService
     Task<Result<bool>> DeleteSecondGroupAsync(int id, CancellationToken cancellationToken);
     Task<Result<bool>> UpdateCostSecondGroupAsync(int id, UpdateCostSecondGroupDto dto,
         CancellationToken cancellationToken);
+ 
 }
