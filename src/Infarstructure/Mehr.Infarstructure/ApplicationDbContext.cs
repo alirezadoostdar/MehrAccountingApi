@@ -5,6 +5,7 @@ using Mehr.Domain.Entities.Docs;
 using Mehr.Domain.Entities.Stocks;
 using Mehr.Infarstructure.Costs;
 using Mehr.Infarstructure.DetailedAccounts;
+using Mehr.Infarstructure.Docs;
 using Microsoft.EntityFrameworkCore;
 
 namespace Mehr.Infarstructure;
@@ -25,6 +26,8 @@ public class ApplicationDbContext : DbContext
         modelBuilder.ApplyConfiguration(new CostFirstGroupEntityMap());
         modelBuilder.ApplyConfiguration(new CostSecondGroupEntityMap());
         modelBuilder.ApplyConfiguration(new SecurityLevelEntityMap());
+        modelBuilder.ApplyConfiguration(new DocEntityMap());
+        modelBuilder.ApplyConfiguration(new DocItemEntityMap());
         //modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
     }
 
@@ -36,4 +39,5 @@ public class ApplicationDbContext : DbContext
     public DbSet<ProductCategory> ProductCategories { get; set; }
     public DbSet<Zone> Zones { get; set; }
     public DbSet<Doc> Docs{ get; set; }
+    public DbSet<DocItem> DocItems{ get; set; }
 }

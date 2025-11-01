@@ -17,9 +17,9 @@ public class DocController : Controller
 
 
     [HttpGet("{id:int}")]
-    public Task<ActionResult<Result>> GetByIdAsync(int id, CancellationToken cancellationToken)
+    public async Task<ActionResult<Result>> GetByIdAsync(int id, CancellationToken cancellationToken)
     {
-
+        return await _service.GetByIdAsync(id, cancellationToken);
     }
 
 }

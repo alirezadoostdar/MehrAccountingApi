@@ -4,6 +4,8 @@ using Mehr.Application.Costs;
 using Mehr.Application.Costs.Contracts;
 using Mehr.Application.DetailedAccounts;
 using Mehr.Application.DetailedAccounts.Contracts;
+using Mehr.Application.Docs;
+using Mehr.Application.Docs.Contracts;
 using Mehr.Application.Intrefaces;
 using Mehr.Application.Services;
 using Mehr.Application.Zones;
@@ -11,9 +13,11 @@ using Mehr.Application.Zones.Contracts;
 using Mehr.Domain.Interfaces;
 using Mehr.Domain.Interfaces.Costs;
 using Mehr.Domain.Interfaces.DetailedAccounts;
+using Mehr.Domain.Interfaces.Docs;
 using Mehr.Infarstructure;
 using Mehr.Infarstructure.Costs;
 using Mehr.Infarstructure.DetailedAccounts;
+using Mehr.Infarstructure.Docs;
 using Mehr.Infarstructure.Repositories.Stocks;
 using Mehr.Infarstructure.Zones;
 using Microsoft.EntityFrameworkCore;
@@ -48,6 +52,9 @@ builder.Services.AddScoped<IZoneRepository, EfZoneRepository>();
 
 builder.Services.AddScoped<IProductCategoryService, ProductCategoryService>();
 builder.Services.AddScoped<IZoneService, ZoneService>();
+
+builder.Services.AddScoped<IDocRepository, EfDocRepository>();
+builder.Services.AddScoped<IDocService, DocService>();
 
 var app = builder.Build();
 

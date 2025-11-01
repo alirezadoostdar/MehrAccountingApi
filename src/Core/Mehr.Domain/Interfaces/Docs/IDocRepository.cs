@@ -4,5 +4,5 @@ namespace Mehr.Domain.Interfaces.Docs;
 
 public interface IDocRepository
 {
-    Task<Doc> GetByIdAsync(int id);
+    Task<Doc?> GetByIdAsync(int id, CancellationToken cancellationToken);
 }

@@ -12,8 +12,9 @@ public class EfDocRepository : IDocRepository
         _context = context;
     }
 
-    public async Task<Doc> GetByIdAsync(int id)
+    public async Task<Doc?> GetByIdAsync(int id, CancellationToken cancellationToken)
     {
-        return await _context.do ;
+        var doc = await _context.Docs.FindAsync(id, cancellationToken);
+        return doc;
     }
 }
