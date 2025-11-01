@@ -6,10 +6,13 @@ using Mehr.Application.DetailedAccounts;
 using Mehr.Application.DetailedAccounts.Contracts;
 using Mehr.Application.Docs;
 using Mehr.Application.Docs.Contracts;
+using Mehr.Application.FinancialYears;
+using Mehr.Application.FinancialYears.Contracts;
 using Mehr.Application.Intrefaces;
 using Mehr.Application.Services;
 using Mehr.Application.Zones;
 using Mehr.Application.Zones.Contracts;
+using Mehr.Domain.FinancialYears.Contracts;
 using Mehr.Domain.Interfaces;
 using Mehr.Domain.Interfaces.Costs;
 using Mehr.Domain.Interfaces.DetailedAccounts;
@@ -18,6 +21,7 @@ using Mehr.Infarstructure;
 using Mehr.Infarstructure.Costs;
 using Mehr.Infarstructure.DetailedAccounts;
 using Mehr.Infarstructure.Docs;
+using Mehr.Infarstructure.FinancialYears;
 using Mehr.Infarstructure.Repositories.Stocks;
 using Mehr.Infarstructure.Zones;
 using Microsoft.EntityFrameworkCore;
@@ -38,7 +42,6 @@ builder.Services.AddDbContext<ApplicationDbContext>(option =>
 });
 
 
-
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 builder.Services.AddScoped<IDetailedAccountRepository, EfDetailedAccountRepository>();
@@ -55,6 +58,9 @@ builder.Services.AddScoped<IZoneService, ZoneService>();
 
 builder.Services.AddScoped<IDocRepository, EfDocRepository>();
 builder.Services.AddScoped<IDocService, DocService>();
+
+builder.Services.AddScoped<IFinancialYearRepositrory, EfFinancialYearRepository>();
+builder.Services.AddScoped<IFinancialYearService, FinancialYearsService>();
 
 var app = builder.Build();
 

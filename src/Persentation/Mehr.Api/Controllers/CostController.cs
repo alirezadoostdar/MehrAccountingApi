@@ -1,6 +1,6 @@
 ﻿using Mehr.Application.Costs.Contracts;
 using Mehr.Application.Costs.Contracts.Dtos;
-using Mehr.Domain.Entities.FinancialYears;
+using Mehr.Domain.FinancialYears;
 using Mehr.SharedKernel;
 using Microsoft.AspNetCore.Mvc;
 

@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Mehr.Application.FinancialYears.Contracts;
+using Mehr.SharedKernel;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Mehr.Api.Controllers;
 
@@ -6,9 +8,17 @@ namespace Mehr.Api.Controllers;
 [Route("api/finanialyears")]
 public class FinancialYearController : Controller
 {
-    
-    public IActionResult Index()
+    private readonly IFinancialYearService _service;
+
+    public FinancialYearController(IFinancialYearService service)
     {
-        return View();
+        _service = service;
     }
+
+    [HttpGet]
+    public async Task<ActionResult<Result>> GetAllAsync(CancellationToken cancellationToken)
+    {
+        return await _service.GetAllAsync(cancellationToken);
+    }
+
 }

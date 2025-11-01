@@ -15,6 +15,7 @@ public class EfFinancialYearRepository : IFinancialYearRepositrory
 
     public async Task<List<FinancialYear>> GetAllAsync(CancellationToken cancellationToken)
     {
-        return await _context.FinancialYears.ToListAsync(cancellationToken);
+        var list = await _context.FinancialYears.ToListAsync(cancellationToken);
+        return list;
     }
 }
