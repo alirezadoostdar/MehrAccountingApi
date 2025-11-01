@@ -3,6 +3,7 @@ using Mehr.Domain.Entities.Contacts;
 using Mehr.Domain.Entities.Costs;
 using Mehr.Domain.Entities.Docs;
 using Mehr.Domain.Entities.Stocks;
+using Mehr.Domain.FinancialYears;
 using Mehr.Infarstructure.Costs;
 using Mehr.Infarstructure.DetailedAccounts;
 using Mehr.Infarstructure.Docs;
@@ -40,4 +41,5 @@ public class ApplicationDbContext : DbContext
     public DbSet<Zone> Zones { get; set; }
     public DbSet<Doc> Docs{ get; set; }
     public DbSet<DocItem> DocItems{ get; set; }
+    public DbSet<FinancialYear> FinancialYears{ get; set; }
 }

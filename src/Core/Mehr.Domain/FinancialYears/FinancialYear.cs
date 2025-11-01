@@ -1,6 +1,6 @@
 ﻿using Mehr.Domain.Entities.Docs;
 
-namespace Mehr.Domain.Entities.FinancialYears;
+namespace Mehr.Domain.FinancialYears;
 
 public class FinancialYear
 {
@@ -13,5 +13,5 @@ public class FinancialYear
     public DateTime RegisterDate { get; set; }
     public bool Active { get; set; }
 
-    public ICollection<Doc> Docs{ get; set; } = new List<Doc>();
+    public ICollection<Doc> Docs { get; set; } = new List<Doc>();
 }

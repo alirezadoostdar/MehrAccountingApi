@@ -1,4 +1,4 @@
-﻿using Mehr.Domain.Entities.FinancialYears;
+﻿using Mehr.Domain.FinancialYears;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
