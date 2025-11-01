@@ -20,15 +20,15 @@ public class ApplicationDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-        modelBuilder.ApplyConfiguration(new DetaileAccountEntityMap());
-        modelBuilder.ApplyConfiguration(new DetailedCategoryAccountConfig());
-        modelBuilder.ApplyConfiguration(new CostEntityMap());
-        modelBuilder.ApplyConfiguration(new CostFirstGroupEntityMap());
-        modelBuilder.ApplyConfiguration(new CostSecondGroupEntityMap());
-        modelBuilder.ApplyConfiguration(new SecurityLevelEntityMap());
-        modelBuilder.ApplyConfiguration(new DocEntityMap());
-        modelBuilder.ApplyConfiguration(new DocItemEntityMap());
-        //modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
+        //modelBuilder.ApplyConfiguration(new DetaileAccountEntityMap());
+        //modelBuilder.ApplyConfiguration(new DetailedCategoryAccountConfig());
+        //modelBuilder.ApplyConfiguration(new CostEntityMap());
+        //modelBuilder.ApplyConfiguration(new CostFirstGroupEntityMap());
+        //modelBuilder.ApplyConfiguration(new CostSecondGroupEntityMap());
+        //modelBuilder.ApplyConfiguration(new SecurityLevelEntityMap());
+        //modelBuilder.ApplyConfiguration(new DocEntityMap());
+        //modelBuilder.ApplyConfiguration(new DocItemEntityMap());
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
     }
 
     public DbSet<DetailedAccount> DetailedAccounts{ get; set; }

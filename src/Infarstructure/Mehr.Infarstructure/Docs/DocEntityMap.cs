@@ -96,5 +96,9 @@ public class DocEntityMap : IEntityTypeConfiguration<Doc>
         builder.Property(x => x.ModifiedAt)
             .HasColumnName("ModifiedDate");
 
+        builder.HasOne(x => x.FinancialYear)
+            .WithMany()
+            .HasForeignKey(x => x.FinancialYearId);
+
     }
 }

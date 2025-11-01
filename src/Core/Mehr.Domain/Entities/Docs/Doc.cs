@@ -37,8 +37,8 @@ public class Doc
     public bool IsTemp { get; set; }
     public int? OpeningLeadAccountCode { get; set; }
 
-    public byte? FinancialYearId { get; set; }
-    public FinancialYear? FinancialYear { get; set; }
+    public byte FinancialYearId { get; set; }
+    public FinancialYear FinancialYear { get; set; }
 
     public int? Code { get; set; }
     public DateTime ModifiedAt { get; set; }

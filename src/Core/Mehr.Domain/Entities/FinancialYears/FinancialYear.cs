@@ -4,7 +4,7 @@ namespace Mehr.Domain.Entities.FinancialYears;
 
 public class FinancialYear
 {
-    public int Id { get; set; }
+    public byte Id { get; set; }
     public string Title { get; set; }
     public DateTime StartDateMiladi { get; set; }
     public string StartDateShamsi { get; set; }
