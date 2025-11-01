@@ -1,6 +1,7 @@
 ﻿using Mehr.Domain.Entities.Accounts;
 using Mehr.Domain.Entities.Contacts;
 using Mehr.Domain.Entities.Costs;
+using Mehr.Domain.Entities.Docs;
 using Mehr.Domain.Entities.Stocks;
 using Mehr.Infarstructure.Costs;
 using Mehr.Infarstructure.DetailedAccounts;
@@ -34,4 +35,5 @@ public class ApplicationDbContext : DbContext
     public DbSet<CostSecondGroup> CostSecondGroups { get; set; }
     public DbSet<ProductCategory> ProductCategories { get; set; }
     public DbSet<Zone> Zones { get; set; }
+    public DbSet<Doc> Docs{ get; set; }
 }
