@@ -32,13 +32,13 @@ public class Doc
     public int? ProjectId { get; set; }
     public Project? Project { get; set; }
 
-    public DocType Type { get; set; }
+    public byte Type { get; set; }
 
     public bool IsTemp { get; set; }
     public int? OpeningLeadAccountCode { get; set; }
 
     public byte FinancialYearId { get; set; }
-    public FinancialYear FinancialYear { get; set; }
+    public FinancialYear? FinancialYear { get; set; }
 
     public int? Code { get; set; }
     public DateTime ModifiedAt { get; set; }
@@ -51,3 +51,4 @@ public enum DocType
     Transaction = 2,
     Closing = 3
 }
+

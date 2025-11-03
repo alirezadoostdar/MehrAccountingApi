@@ -51,11 +51,13 @@ public class EfCostRepository : ICostRepository
             CreditLimit = x.CreditLimit,
             Comment = x.Comment,
             SecureLevel = x.SecureLevel.Title,
-            Remain = 0,
+            Remain = x.DocItems.Where(x => x.Doc.FinancialYearId == financialYearId)
+                .Sum(x => x.AmountIn - x.AmountOut),
             FirstCurrency = 0,
             SecondCurrency = 0,
             ThirdCurrency = 0,
-            LastDate = "1404/12/03"
+            LastDate = x.DocItems.Where(x => x.Doc.FinancialYearId == financialYearId)
+                .Max(x => x.Doc.ShamsiDate)
         }).ToListAsync();
     }
 

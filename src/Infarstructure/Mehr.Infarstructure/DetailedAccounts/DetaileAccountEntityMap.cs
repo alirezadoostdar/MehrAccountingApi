@@ -43,6 +43,10 @@ public class DetaileAccountEntityMap : IEntityTypeConfiguration<DetailedAccount>
             .WithMany()
             .HasForeignKey(x => x.CategoryId);
 
+        builder.HasMany(x => x.DocItems)
+            .WithOne()
+            .HasForeignKey(x => x.DetailedAccountId);
+
         builder.UseTptMappingStrategy();
     }
 }

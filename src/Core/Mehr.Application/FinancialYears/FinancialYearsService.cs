@@ -10,8 +10,9 @@ public class FinancialYearsService : IFinancialYearService
     private readonly IFinancialYearRepositrory _repositrory;
     private readonly IUnitOfWork _unitOfWork;
 
-    public FinancialYearsService(IUnitOfWork unitOfWork)
+    public FinancialYearsService(IFinancialYearRepositrory repositrory, IUnitOfWork unitOfWork)
     {
+        _repositrory = repositrory;
         _unitOfWork = unitOfWork;
     }
 

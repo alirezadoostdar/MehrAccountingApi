@@ -1,4 +1,6 @@
-﻿namespace Mehr.Domain.Entities.Accounts;
+﻿using Mehr.Domain.Entities.Docs;
+
+namespace Mehr.Domain.Entities.Accounts;
 
 //tafsil account حساب های تفصیلی
 public class DetailedAccount
@@ -12,6 +14,8 @@ public class DetailedAccount
     public SecurityLevel SecureLevel { get; set; }
     public bool? IsDebtor { get; set; }
     public bool IsUpdate { get; set; }
+
+    public ICollection<DocItem> DocItems{ get; set; } = new List<DocItem>();
 
 }
 public enum SecureLevelType
