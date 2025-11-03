@@ -1,6 +1,6 @@
 ﻿using Mehr.Domain.Entities.Accounts;
 
-namespace Mehr.Domain.Entities.Docs;
+namespace Mehr.Domain.Docs;
 
 public class DocItem
 {

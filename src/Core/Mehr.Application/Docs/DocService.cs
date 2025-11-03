@@ -1,6 +1,7 @@
 ﻿using Mehr.Application.Docs.Contracts;
-using Mehr.Domain.Entities.Docs.Dtos;
-using Mehr.Domain.Interfaces.Docs;
+using Mehr.Domain.Docs.Contracts;
+using Mehr.Domain.Docs.Contracts.Dtos;
+using Mehr.Domain.Paginations;
 using Mehr.SharedKernel;
 
 namespace Mehr.Application.Docs;
@@ -25,5 +26,15 @@ public class DocService : IDocService
             Comment = doc.Comment,
             ShamsiDate = doc.ShamsiDate,
         };
+    }
+
+    public async Task<Result<PageResult<GetDocItemAccountDetailDto>>> GetDocItemOfDetailAccountAsync(
+        int detailAccountId, int financialYearId,
+        int page, int pageSize,
+        CancellationToken cancellationToken)
+    {
+        var result = await _repository.GetDocItemOfDetailAccountAsync(detailAccountId,
+            financialYearId, page, pageSize, cancellationToken);
+        return result;
     }
 }

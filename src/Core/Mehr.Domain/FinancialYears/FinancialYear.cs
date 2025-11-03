@@ -1,4 +1,4 @@
-﻿using Mehr.Domain.Entities.Docs;
+﻿using Mehr.Domain.Docs;
 
 namespace Mehr.Domain.FinancialYears;
 

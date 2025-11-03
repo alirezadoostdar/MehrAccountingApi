@@ -22,4 +22,15 @@ public class DocController : Controller
         return await _service.GetByIdAsync(id, cancellationToken);
     }
 
+
+    [HttpGet("detail-account/{detailAccountId:int}/financial-year/{financialYearId:int}")]
+    public async Task<ActionResult<Result>> GetDocRowsAsync(int detailAccountId,
+        int financialYearId,
+        CancellationToken cancellationToken,
+        [FromQuery] int page = 1,
+        [FromQuery] int pageSize = 20)
+    {
+        return await _service.GetDocItemOfDetailAccountAsync(detailAccountId,financialYearId
+            ,page,pageSize,cancellationToken);
+    }
 }

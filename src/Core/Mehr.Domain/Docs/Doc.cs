@@ -3,7 +3,7 @@ using Mehr.Domain.Entities.Users;
 using Mehr.Domain.FinancialYears;
 using Microsoft.Identity.Client;
 
-namespace Mehr.Domain.Entities.Docs;
+namespace Mehr.Domain.Docs;
 
 public class Doc
 {
@@ -15,7 +15,7 @@ public class Doc
     public DateTime CreateAt { get; set; }
 
     public int UserId { get; set; }
-    public User User{ get; set; }
+    public User User { get; set; }
 
     public string Comment { get; set; }
     public string? ArchiveName { get; set; }

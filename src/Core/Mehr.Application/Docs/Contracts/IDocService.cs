@@ -1,8 +1,12 @@
-﻿using Mehr.Domain.Entities.Docs.Dtos;
+﻿using Mehr.Domain.Docs.Contracts.Dtos;
+using Mehr.Domain.Paginations;
 using Mehr.SharedKernel;
 
 namespace Mehr.Application.Docs.Contracts;
 public interface IDocService
 {
     Task<Result<GetDocDto>> GetByIdAsync(int id, CancellationToken cancellationToken );
+    Task<Result<PageResult<GetDocItemAccountDetailDto>>> GetDocItemOfDetailAccountAsync(
+        int detailAccountId, int financialYearId, int page, int pageSize,
+        CancellationToken cancellationToken);
 }

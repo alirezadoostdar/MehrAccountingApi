@@ -30,7 +30,6 @@ namespace Mehr.Api.Controllers
             return await _service.GetByIdAsync(id, cancellationToken);
         }
 
-
         [HttpGet("{id:int}/financial-year/{financialYearId:int}")]
         public async Task<ActionResult<Result>> GetCostByIdWithRemainAsync(int id, int financialYearId, CancellationToken cancellationToken)
         {

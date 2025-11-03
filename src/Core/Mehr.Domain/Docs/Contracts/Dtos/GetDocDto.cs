@@ -1,4 +1,4 @@
-﻿namespace Mehr.Domain.Entities.Docs.Dtos;
+﻿namespace Mehr.Domain.Docs.Contracts.Dtos;
 
 public class GetDocDto
 {

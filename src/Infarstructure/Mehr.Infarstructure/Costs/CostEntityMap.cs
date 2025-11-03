@@ -1,6 +1,5 @@
 ﻿using Mehr.Domain.Entities.Accounts;
 using Mehr.Domain.Entities.Costs;
-using Mehr.Domain.Entities.Docs;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
