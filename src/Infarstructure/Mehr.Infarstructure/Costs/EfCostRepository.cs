@@ -77,6 +77,31 @@ public class EfCostRepository : ICostRepository
         return cost;
     }
 
+    public async Task<GetListCostDto> GetByIdAsync(int id, int financialYearId, CancellationToken cancellationToken)
+    {
+        return await _context.Costs.Where(x => x.Id == id) 
+            .Select(x => new GetListCostDto
+        {
+            Id = x.Id,
+            Title = x.Title,
+            FirstGroup = x.FirstGroup.Title,
+            SecondGroup = x.SecondGroup.Title,
+            CreditLimit = x.CreditLimit,
+            Comment = x.Comment,
+            SecureLevel = x.SecureLevel.Title,
+            Remain = x.DocItems.Where(x => x.Doc.FinancialYearId == financialYearId)
+                .Sum(x => x.AmountIn - x.AmountOut),
+            FirstCurrency = x.DocItems.Where(x => x.Doc.FinancialYearId == financialYearId)
+                .Sum(x => x.CurrencyAmount1),
+            SecondCurrency = x.DocItems.Where(x => x.Doc.FinancialYearId == financialYearId)
+                .Sum(x => x.CurrencyAmount2),
+            ThirdCurrency = x.DocItems.Where(x => x.Doc.FinancialYearId == financialYearId)
+                .Sum(x => x.CurrencyAmount3),
+            LastDate = x.DocItems.Where(x => x.Doc.FinancialYearId == financialYearId)
+                .Max(x => x.Doc.ShamsiDate)
+        }).FirstOrDefaultAsync();
+    }
+
     public async Task<CostFirstGroup?> GetFirstGroupByIdAsync(int id, CancellationToken cancellationToken)
     {
         return await _context.CostFirstGroups.FindAsync(id, cancellationToken);

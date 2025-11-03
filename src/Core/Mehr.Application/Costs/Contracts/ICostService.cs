@@ -9,7 +9,7 @@ public interface ICostService
     Task<Result<int>> AddAsync(AddCostDto cost, CancellationToken cancellation);
     Task<Result<GetCostDto>> GetByIdAsync(int id, CancellationToken cancellationToken);
     Task<Result<List<GetListCostDto>>> GetAllCostAsync(int financialYearId, CancellationToken cancellationToken);
-
+    Task<Result<GetListCostDto>> GetCostByIdWithRemainAsync(int id, int financialId , CancellationToken cancellationToken);
 
 
     Task<Result<int>> AddFirstGroupAsync(AddCostFristGroupDto dto, CancellationToken cancellationToken);

@@ -8,7 +8,7 @@ public interface ICostRepository
     Task AddAsync(Cost cost, CancellationToken cancellation);
     Task<Cost> GetByIdAsync(int id, CancellationToken cancellationToken);
     Task<IEnumerable<GetListCostDto>> GetAllCostAsync(int financialYearId, CancellationToken cancellationToken);
-
+    Task<GetListCostDto> GetByIdAsync(int id, int financialYearId, CancellationToken cancellationToken);
 
 
     Task AddFirstGroupAsync(CostFirstGroup costFirstGroup, CancellationToken cancellation);

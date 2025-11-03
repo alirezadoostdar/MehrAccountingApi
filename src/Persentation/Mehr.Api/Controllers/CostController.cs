@@ -30,10 +30,11 @@ namespace Mehr.Api.Controllers
             return await _service.GetByIdAsync(id, cancellationToken);
         }
 
-        [HttpGet("{financialYearId:int}/all-cost-with-remain")]
-        public async Task<ActionResult<Result>> GetCostsAsync(int financialYearId, CancellationToken cancellationToken)
+
+        [HttpGet("{id:int}/financial-year/{financialYearId:int}")]
+        public async Task<ActionResult<Result>> GetCostByIdWithRemainAsync(int id, int financialYearId, CancellationToken cancellationToken)
         {
-            return await _service.GetAllCostAsync(financialYearId, cancellationToken);
+            return await _service.GetCostByIdWithRemainAsync(id,financialYearId, cancellationToken);
         }
         #endregion
 
