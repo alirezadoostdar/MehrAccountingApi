@@ -33,4 +33,7 @@ public class DocController : Controller
         return await _service.GetDocItemOfDetailAccountAsync(detailAccountId,financialYearId
             ,page,pageSize,cancellationToken);
     }
+
+    [HttpPost]
+    public async Task<ActionResult<Result>> AddAsync()
 }
