@@ -15,6 +15,11 @@ public class EfDocRepository : IDocRepository
         _context = context;
     }
 
+    public Task AddAsync(Doc doc, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
+
     public async Task<Doc?> GetByIdAsync(int id, CancellationToken cancellationToken)
     {
         var doc = await _context.Docs.FindAsync(id, cancellationToken);

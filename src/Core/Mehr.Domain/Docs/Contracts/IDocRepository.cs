@@ -7,6 +7,7 @@ namespace Mehr.Domain.Docs.Contracts;
 public interface IDocRepository
 {
     Task<Doc?> GetByIdAsync(int id, CancellationToken cancellationToken);
+    Task AddAsync(Doc doc, CancellationToken cancellationToken);
     Task<PageResult<GetDocItemAccountDetailDto>> GetDocItemOfDetailAccountAsync(
         int detailAccountId, int financialYearId, int page, int pageSize,
         CancellationToken cancellationToken);
