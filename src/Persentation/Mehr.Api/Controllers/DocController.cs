@@ -1,4 +1,5 @@
 ﻿using Mehr.Application.Docs.Contracts;
+using Mehr.Domain.Docs.Contracts.Dtos;
 using Mehr.SharedKernel;
 using Microsoft.AspNetCore.Mvc; 
 
@@ -35,5 +36,8 @@ public class DocController : Controller
     }
 
     [HttpPost]
-    public async Task<ActionResult<Result>> AddAsync()
+    public async Task<ActionResult<Result>> AddAsync(AddDocDto dto, CancellationToken cancellationToken)
+    {
+        return await _service.AddS
+    }
 }

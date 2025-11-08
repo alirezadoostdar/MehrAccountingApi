@@ -16,6 +16,11 @@ public class DocService : IDocService
         _unitOfWork = unitOfWork;
     }
 
+    public Task<Result<AddDocDto>> AddAsync(AddDocDto dto, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
+
     public async Task<Result<GetDocDto>> GetByIdAsync(int id, CancellationToken cancellationToken)
     {
         var doc =await _repository.GetByIdAsync(id, cancellationToken);
