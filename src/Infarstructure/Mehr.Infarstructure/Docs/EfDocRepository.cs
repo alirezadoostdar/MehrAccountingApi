@@ -15,9 +15,9 @@ public class EfDocRepository : IDocRepository
         _context = context;
     }
 
-    public Task AddAsync(Doc doc, CancellationToken cancellationToken)
+    public async Task AddAsync(Doc doc, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        await _context.Docs.AddAsync(doc, cancellationToken);
     }
 
     public async Task<Doc?> GetByIdAsync(int id, CancellationToken cancellationToken)
