@@ -1,4 +1,5 @@
 ﻿using Mehr.Application.Docs.Contracts;
+using Mehr.Domain.Docs;
 using Mehr.Domain.Docs.Contracts;
 using Mehr.Domain.Docs.Contracts.Dtos;
 using Mehr.Domain.Paginations;
@@ -16,9 +17,50 @@ public class DocService : IDocService
         _unitOfWork = unitOfWork;
     }
 
-    public Task<Result<AddDocDto>> AddAsync(AddDocDto dto, CancellationToken cancellationToken)
+    public async Task<Result<int>> AddAsync(AddDocDto dto, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var doc = new Doc
+        {
+            ShamsiDate = dto.ShamsiDate,
+            Date = DateTime.Now,
+            Comment = dto.Comment,
+            ArchiveName = "",
+            CreateShamsiAt = "1404/01/01",
+            FinancialYearId = 1,
+            IsTemp = false,
+            CreateAt = DateTime.Now,
+            Lock = false,
+            Type = 2,
+            UserId = 1,
+            ModifiedAt = DateTime.Now,
+            CurrencyBaseRate1 = 0,
+            CurrencyBaseRate2 = 0,
+            CurrencyBaseRate3 = 0,
+            CurrencyRate1Part2 = 0,
+            CurrencyRate2Part2 = 0,
+            CurrencyRate3Part2 = 0,
+            Items = dto.Items.Select(x => new DocItem
+            {
+                DetailedAccountId = x.DetailedAccountId,
+                AmountIn = x.AmountIn,
+                AmountOut = x.AmountOut,
+                LeadAccountId = x.LeadAccountId,
+                ArchiveName = "",
+                Comment = x.Comment,
+                SecondDetailedAccountId = x.SecondDetailedAccountId,
+                CurrencyAmount1 = 0,
+                CurrencyAmount2 = 0,
+                CurrencyAmount3 = 0,
+                RowNumber = 1,
+                IsMoeinRow = false,
+                Check = false,
+                IsVisitorAutoDoc = false,
+
+            }).ToList()
+        };
+        await _repository.AddAsync(doc, cancellationToken);
+        await _unitOfWork.SaveChangesAsync();
+        return doc.Id;
     }
 
     public async Task<Result<GetDocDto>> GetByIdAsync(int id, CancellationToken cancellationToken)

@@ -38,6 +38,6 @@ public class DocController : Controller
     [HttpPost]
     public async Task<ActionResult<Result>> AddAsync(AddDocDto dto, CancellationToken cancellationToken)
     {
-        return await _service.AddS
+        return await _service.AddAsync(dto, cancellationToken);
     }
 }

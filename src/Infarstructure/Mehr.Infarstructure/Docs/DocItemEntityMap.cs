@@ -19,6 +19,7 @@ public class DocItemEntityMap : IEntityTypeConfiguration<DocItem>
             .HasColumnName("Fk_docSysCode");
 
         builder.Property(x => x.DetailedAccountId)
+            .IsRequired()
             .HasColumnName("Fk_AccountSyscode");
 
         builder.Property(x => x.AmountIn)
@@ -56,6 +57,9 @@ public class DocItemEntityMap : IEntityTypeConfiguration<DocItem>
         builder.Property(x => x.CurrencyAmount3)
             .IsRequired()
             .HasColumnName("Cur3Amount");
+
+        builder.Property(x => x.Check)
+            .HasColumnName("Chek");
 
         builder.Property(x => x.VisitorId)
             .IsRequired()

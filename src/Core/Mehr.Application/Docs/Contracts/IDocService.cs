@@ -5,8 +5,8 @@ using Mehr.SharedKernel;
 namespace Mehr.Application.Docs.Contracts;
 public interface IDocService
 {
-    Task<Result<GetDocDto>> GetByIdAsync(int id, CancellationToken cancellationToken );
-    Task<Result<AddDocDto>> AddAsync(AddDocDto dto, CancellationToken cancellationToken);
+    Task<Result<GetDocDto>> GetByIdAsync(int id, CancellationToken cancellationToken);
+    Task<Result<int>> AddAsync(AddDocDto dto, CancellationToken cancellationToken);
     Task<Result<PageResult<GetDocItemAccountDetailDto>>> GetDocItemOfDetailAccountAsync(
         int detailAccountId, int financialYearId, int page, int pageSize,
         CancellationToken cancellationToken);

@@ -29,5 +29,5 @@ public class DocItem
     public int LeadAccountId { get; set; }
     public LeadAccount LeadAccount { get; set; }
     public bool IsMoeinRow { get; set; }
-    public byte MoreType { get; set; }
+    public byte? MoreType { get; set; }
 }

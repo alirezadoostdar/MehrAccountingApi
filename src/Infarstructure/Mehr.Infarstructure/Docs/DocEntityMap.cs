@@ -103,5 +103,9 @@ public class DocEntityMap : IEntityTypeConfiguration<Doc>
         builder.HasOne(x => x.Project)
             .WithMany()
             .HasForeignKey(x => x.ProjectId);
+
+        builder.HasMany(x => x.Items)
+            .WithOne(x => x.Doc)
+            .HasForeignKey(x => x.DocId);
     }
 }
