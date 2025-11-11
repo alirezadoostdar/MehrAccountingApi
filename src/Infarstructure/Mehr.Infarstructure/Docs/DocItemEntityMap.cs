@@ -22,6 +22,10 @@ public class DocItemEntityMap : IEntityTypeConfiguration<DocItem>
             .IsRequired()
             .HasColumnName("Fk_AccountSyscode");
 
+        builder.HasOne(x => x.DetailedAccount)
+            .WithMany()
+            .HasForeignKey(x => x.DetailedAccountId);
+
         builder.Property(x => x.AmountIn)
             .IsRequired()
             .HasColumnName("AmmountIN");
@@ -41,6 +45,10 @@ public class DocItemEntityMap : IEntityTypeConfiguration<DocItem>
         builder.Property(x => x.SecondDetailedAccountId)
             .IsRequired()
             .HasColumnName("SndFk_AccountSyscode");
+
+        builder.HasOne(x => x.SecondDetailedAccount)
+            .WithMany()
+            .HasForeignKey(x => x.SecondDetailedAccountId);
 
         builder.Property(x => x.Comment)
             .IsRequired()
@@ -68,6 +76,10 @@ public class DocItemEntityMap : IEntityTypeConfiguration<DocItem>
         builder.Property(x => x.LeadAccountId)
             .IsRequired()
             .HasColumnName("Fk_AccountId");
+
+        builder.HasOne(x => x.LeadAccount)
+            .WithMany()
+            .HasForeignKey(x => x.LeadAccountId);
 
         builder.Property(x => x.IsMoeinRow)
             .IsRequired();
