@@ -84,4 +84,30 @@ public class DocService : IDocService
             financialYearId, page, pageSize, cancellationToken);
         return result;
     }
+
+    public async Task<Result<bool>> UpdateAsync(int id, UpdateDocDto dto, CancellationToken cancellationToken)
+    {
+        var doc = await _repository.GetByIdAsync(id, cancellationToken);
+        doc.Items.Add(new DocItem
+        {
+            Id = 0,
+            AmountIn = 333333,
+            AmountOut = 0,
+            DetailedAccountId = 51,
+            LeadAccountId = 150,
+            SecondDetailedAccountId = 9,
+            RowNumber = 3,
+            IsMoeinRow = false,
+            Check = false,
+            IsVisitorAutoDoc = false,
+            CurrencyAmount1 = 0,
+            CurrencyAmount2 = 0,
+            CurrencyAmount3 = 0,
+            ArchiveName = "",
+            Comment = "Test",
+        });
+        
+        await _unitOfWork.SaveChangesAsync();
+        return true;
+    }
 }

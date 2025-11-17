@@ -44,7 +44,7 @@ public class DocController : Controller
     [HttpPut("{id:int}")]
     public async Task<ActionResult<Result>> UpdaeAsync(int id, UpdateDocDto dto, CancellationToken cancellationToken)
     {
-
+        return await _service.UpdateAsync(id, dto, cancellationToken);
     }
 
 }

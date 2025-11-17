@@ -22,7 +22,10 @@ public class EfDocRepository : IDocRepository
 
     public async Task<Doc?> GetByIdAsync(int id, CancellationToken cancellationToken)
     {
-        var doc = await _context.Docs.FindAsync(id, cancellationToken);
+        var doc = await _context.Docs
+            .Where(x => x.Id == id)
+            .Include(x => x.Items)
+            .FirstOrDefaultAsync(cancellationToken);
         return doc;
     }
 
