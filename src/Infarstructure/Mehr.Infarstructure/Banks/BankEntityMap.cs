@@ -1,4 +1,4 @@
-﻿using Mehr.Domain.Entities.Banks;
+﻿using Mehr.Domain.Banks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

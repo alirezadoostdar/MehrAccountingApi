@@ -1,5 +1,5 @@
-﻿using Mehr.Domain.Entities.Accounts;
-using Mehr.Domain.Entities.Banks;
+﻿using Mehr.Domain.Banks;
+using Mehr.Domain.Entities.Accounts;
 
 namespace Mehr.Domain.Entities.Checks;
 

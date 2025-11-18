@@ -1,6 +1,6 @@
 ﻿using Mehr.Domain.Entities.Accounts;
 
-namespace Mehr.Domain.Entities.Banks;
+namespace Mehr.Domain.Banks;
 
 public class Bank : DetailedAccount
 {

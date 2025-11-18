@@ -30,4 +30,13 @@ public class DocItem
     public LeadAccount LeadAccount { get; set; }
     public bool IsMoeinRow { get; set; }
     public byte? MoreType { get; set; }
+    public virtual DocItemType GetItemType() => DocItemType.None;
+}
+
+public enum DocItemType
+{
+    None,
+    Bank,
+    CheckReceived,
+    CheckIssued
 }
