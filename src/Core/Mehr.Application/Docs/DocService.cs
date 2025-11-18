@@ -4,6 +4,7 @@ using Mehr.Domain.Docs.Contracts;
 using Mehr.Domain.Docs.Contracts.Dtos;
 using Mehr.Domain.Paginations;
 using Mehr.SharedKernel;
+using Mehr.SharedKernel.Dates;
 
 namespace Mehr.Application.Docs;
 
@@ -22,18 +23,18 @@ public class DocService : IDocService
         var doc = new Doc
         {
             ShamsiDate = dto.ShamsiDate,
-            Date = DateTime.Now,
+            Date = dto.ShamsiDate.GregorianDateTime(),
             Comment = dto.Comment,
             ArchiveName = "",
-            CreateShamsiAt = "1404/01/01",
+            CreateShamsiAt = DateTime.Now.PersianDate(),
             FinancialYearId = 1,
             IsTemp = false,
             CreateAt = DateTime.Now,
+            ModifiedAt = DateTime.Now,
             Lock = false,
             Type = 2,
-            UserId = 1,
-            ModifiedAt = DateTime.Now,
             CurrencyBaseRate1 = 0,
+            UserId = 1,
             CurrencyBaseRate2 = 0,
             CurrencyBaseRate3 = 0,
             CurrencyRate1Part2 = 0,
@@ -65,7 +66,7 @@ public class DocService : IDocService
 
     public async Task<Result<GetDocDto>> GetByIdAsync(int id, CancellationToken cancellationToken)
     {
-        var doc =await _repository.GetByIdAsync(id, cancellationToken);
+        var doc = await _repository.GetByIdAsync(id, cancellationToken);
 
         return new GetDocDto
         {
