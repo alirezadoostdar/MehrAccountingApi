@@ -1,6 +1,5 @@
 ﻿using Mehr.Application.Costs.Contracts;
 using Mehr.Application.Costs.Contracts.Dtos;
-using Mehr.Domain.Entities.Banks;
 using Mehr.Domain.Entities.Costs;
 using Mehr.Domain.Entities.Costs.Dtos;
 using Mehr.Domain.Entities.Costs.Exceptions;

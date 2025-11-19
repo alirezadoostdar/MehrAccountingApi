@@ -1,4 +1,5 @@
 ﻿using Mehr.Application.Docs.Contracts;
+using Mehr.Application.Docs.Contracts.Exceptions;
 using Mehr.Domain.Docs;
 using Mehr.Domain.Docs.Contracts;
 using Mehr.Domain.Docs.Contracts.Dtos;
@@ -64,11 +65,15 @@ public class DocService : IDocService
         return doc.Id;
     }
 
-    public async Task<Result<bool>> DeleteAsync(int id, CancellationToken cancellationToken)
+    public async Task<Result> DeleteAsync(int id, CancellationToken cancellationToken)
     {
         var doc = await _repository.GetByIdAsync(id, cancellationToken);
         if(doc is null)
+            return Result.Failure(DocErros.NotFound(id));
 
+        _repository.Delete(doc);
+        await _unitOfWork.SaveChangesAsync();
+        return Result.Success();
     }
 
     public async Task<Result<GetDocDto>> GetByIdAsync(int id, CancellationToken cancellationToken)
