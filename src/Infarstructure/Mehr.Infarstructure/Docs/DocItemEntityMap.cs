@@ -1,5 +1,6 @@
 ﻿using Mehr.Domain.Docs;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Mehr.Infarstructure.Docs;
@@ -13,7 +14,9 @@ public class DocItemEntityMap : IEntityTypeConfiguration<DocItem>
         builder.HasKey(x => x.Id);
 
         builder.Property(x => x.Id)
-            .HasColumnName("Syscode");
+            .HasColumnName("Syscode")
+            .ValueGeneratedOnAdd()
+            .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Throw);
 
         builder.Property(x => x.DocId)
             .HasColumnName("Fk_docSysCode");
