@@ -47,4 +47,9 @@ public class DocController : Controller
         return await _service.UpdateAsync(id, dto, cancellationToken);
     }
 
+    [HttpDelete("{id:int}")]
+    public Task<ActionResult<Result>> DeleteAsync(int id)
+    {
+
+    }
 }

@@ -20,6 +20,11 @@ public class EfDocRepository : IDocRepository
         await _context.Docs.AddAsync(doc, cancellationToken);
     }
 
+    public void Delete(Doc doc)
+    {
+        _context.Docs.Remove(doc);
+    }
+
     public async Task<Doc?> GetByIdAsync(int id, CancellationToken cancellationToken)
     {
         var doc = await _context.Docs

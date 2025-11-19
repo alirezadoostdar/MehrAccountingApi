@@ -8,6 +8,7 @@ public interface IDocRepository
 {
     Task<Doc?> GetByIdAsync(int id, CancellationToken cancellationToken);
     Task AddAsync(Doc doc, CancellationToken cancellationToken);
+    void Delete(Doc doc);
     Task<PageResult<GetDocItemAccountDetailDto>> GetDocItemOfDetailAccountAsync(
         int detailAccountId, int financialYearId, int page, int pageSize,
         CancellationToken cancellationToken);
