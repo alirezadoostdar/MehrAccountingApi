@@ -8,3 +8,4 @@ public static class DetailedAccountError
         "510",
         $"The detaileAccount with the Id = '{id}' was not found");
 }
+ 

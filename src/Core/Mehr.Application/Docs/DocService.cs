@@ -64,6 +64,13 @@ public class DocService : IDocService
         return doc.Id;
     }
 
+    public async Task<Result<bool>> DeleteAsync(int id, CancellationToken cancellationToken)
+    {
+        var doc = await _repository.GetByIdAsync(id, cancellationToken);
+        if(doc is null)
+
+    }
+
     public async Task<Result<GetDocDto>> GetByIdAsync(int id, CancellationToken cancellationToken)
     {
         var doc = await _repository.GetByIdAsync(id, cancellationToken);
