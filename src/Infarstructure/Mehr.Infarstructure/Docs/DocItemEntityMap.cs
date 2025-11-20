@@ -14,9 +14,7 @@ public class DocItemEntityMap : IEntityTypeConfiguration<DocItem>
         builder.HasKey(x => x.Id);
 
         builder.Property(x => x.Id)
-            .HasColumnName("Syscode")
-            .ValueGeneratedOnAdd()
-            .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Throw);
+            .HasColumnName("Syscode");
 
         builder.Property(x => x.DocId)
             .HasColumnName("Fk_docSysCode");

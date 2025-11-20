@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Mehr.Domain\Mehr.Domain.csproj" />
+    <ProjectReference Include="..\Mehr.Resources\Mehr.Resources.csproj" />
     <ProjectReference Include="..\Mehr.SharedKernel\Mehr.SharedKernel.csproj" />
   </ItemGroup>
 
@@ -15,6 +16,10 @@
     <Folder Include="Costs\Contracts\Exceptions\" />
     <Folder Include="Docs\Contracts\Dtos\" />
     <Folder Include="Zones\Contracts\Exceptions\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="8.0.22" />
   </ItemGroup>
 
 </Project>

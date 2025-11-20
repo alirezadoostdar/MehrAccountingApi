@@ -19,7 +19,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Persentation", "Persentatio
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mehr.Api", "src\Persentation\Mehr.Api\Mehr.Api.csproj", "{A5013058-DF89-4B5E-90BD-96ACD1382A91}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mehr.SharedKernel", "src\Core\Mehr.SharedKernel\Mehr.SharedKernel.csproj", "{AFB15EC1-0C3D-4F78-9D10-9A63E10E4394}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mehr.SharedKernel", "src\Core\Mehr.SharedKernel\Mehr.SharedKernel.csproj", "{AFB15EC1-0C3D-4F78-9D10-9A63E10E4394}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mehr.Resources", "src\Core\Mehr.Resources\Mehr.Resources.csproj", "{B9906FFF-4874-4264-AA01-4BBF2A6D617A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +49,10 @@ Global
 		{AFB15EC1-0C3D-4F78-9D10-9A63E10E4394}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AFB15EC1-0C3D-4F78-9D10-9A63E10E4394}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AFB15EC1-0C3D-4F78-9D10-9A63E10E4394}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9906FFF-4874-4264-AA01-4BBF2A6D617A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9906FFF-4874-4264-AA01-4BBF2A6D617A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9906FFF-4874-4264-AA01-4BBF2A6D617A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9906FFF-4874-4264-AA01-4BBF2A6D617A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -60,6 +66,7 @@ Global
 		{286507E1-1D49-406F-BA74-4D799EC46233} = {D45EDD30-846B-49F5-8F6B-166127658DA1}
 		{A5013058-DF89-4B5E-90BD-96ACD1382A91} = {286507E1-1D49-406F-BA74-4D799EC46233}
 		{AFB15EC1-0C3D-4F78-9D10-9A63E10E4394} = {315C9B73-2E16-486B-B7AF-4F264B0CF00F}
+		{B9906FFF-4874-4264-AA01-4BBF2A6D617A} = {315C9B73-2E16-486B-B7AF-4F264B0CF00F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4B8848AA-BBD7-4242-8DB9-EE8EB0A87B70}

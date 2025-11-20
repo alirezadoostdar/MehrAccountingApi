@@ -24,7 +24,9 @@ using Mehr.Infarstructure.Docs;
 using Mehr.Infarstructure.FinancialYears;
 using Mehr.Infarstructure.Repositories.Stocks;
 using Mehr.Infarstructure.Zones;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -41,6 +43,17 @@ builder.Services.AddDbContext<ApplicationDbContext>(option =>
         x => x.UseNetTopologySuite());
 });
 
+builder.Services.AddLocalization(options => options.ResourcesPath = "Mehr.Resources");
+
+var supportedCultures = new[] { new CultureInfo("en"), new CultureInfo("fa") };
+builder.Services.Configure<RequestLocalizationOptions>(options =>
+{
+    options.DefaultRequestCulture = new RequestCulture("en-US");
+    options.SupportedCultures = supportedCultures;
+    options.SupportedUICultures = supportedCultures;
+    options.AddInitialRequestCultureProvider(new QueryStringRequestCultureProvider());
+    options.RequestCultureProviders.Insert(0, new CookieRequestCultureProvider());
+});
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 

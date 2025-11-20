@@ -14,9 +14,7 @@ public class DocEntityMap : IEntityTypeConfiguration<Doc>
         builder.HasKey(x => x.Id);
 
         builder.Property(x => x.Id)
-            .HasColumnName("SysCode")
-            .ValueGeneratedOnAdd()
-            .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Throw);
+            .HasColumnName("SysCode");
 
         builder.Property(x => x.ShamsiDate)
             .HasColumnName("DocDate")
