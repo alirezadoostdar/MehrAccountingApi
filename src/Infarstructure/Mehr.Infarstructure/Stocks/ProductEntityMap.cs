@@ -1,4 +1,5 @@
 ﻿using Mehr.Domain.Stocks;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -34,6 +35,50 @@ public class ProductEntityMap : IEntityTypeConfiguration<Prouduct>
             .IsRequired();
 
         builder.Property(x => x.SecondUnit)
-            .
+            .HasColumnName("SecUnit")
+            .HasMaxLength(100)
+            .IsRequired();
+
+        builder.Property(x => x.UnitRate)
+            .IsRequired();
+
+        builder.Property(x => x.OrderPoint)
+            .IsRequired();
+
+        builder.Property(x => x.SalePrice1)
+            .IsRequired();
+
+        builder.Property(x => x.SalePrice2)
+            .IsRequired();
+
+        builder.Property(x => x.SalePrice3)
+            .IsRequired();
+
+        builder.Property(x => x.SalePrice4)
+            .IsRequired();
+
+        builder.Property(x => x.SalePrice5)
+            .IsRequired();
+
+        builder.Property(x => x.VisitorPercent)
+            .HasColumnName("VisitorPer");
+
+        builder.Property(x => x.Comment)
+            .HasMaxLength(300)
+            .IsRequired();
+
+        builder.Property(x => x.DiscountPercent)
+            .HasColumnName("DiscountPer");
+
+        builder.Property(x => x.UserPrice)
+            .IsRequired();
+
+        builder.Property(x => x.ProductGroup1)
+            .HasColumnName("GroupID1");
+
+        builder.HasOne(x => x.ProductGroup1)
+            .WithMany()
+            .HasForeignKey(x => x.ProductGroup1);
+
     }
 }
