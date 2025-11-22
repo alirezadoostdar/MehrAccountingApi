@@ -2,8 +2,8 @@
 using Mehr.Domain.Entities.Accounts;
 using Mehr.Domain.Entities.Contacts;
 using Mehr.Domain.Entities.Costs;
-using Mehr.Domain.Entities.Stocks;
 using Mehr.Domain.FinancialYears;
+using Mehr.Domain.Stocks;
 using Mehr.Infarstructure.Costs;
 using Mehr.Infarstructure.DetailedAccounts;
 using Mehr.Infarstructure.Docs;

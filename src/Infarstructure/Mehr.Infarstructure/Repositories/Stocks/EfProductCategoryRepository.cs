@@ -1,6 +1,6 @@
 ﻿using Mehr.Domain.Dtos.ProdcutCategory;
-using Mehr.Domain.Entities.Stocks;
 using Mehr.Domain.Interfaces;
+using Mehr.Domain.Stocks;
 using Microsoft.EntityFrameworkCore;
 
 namespace Mehr.Infarstructure.Repositories.Stocks;

@@ -1,4 +1,4 @@
-﻿namespace Mehr.Domain.Entities.Stocks;
+﻿namespace Mehr.Domain.Stocks;
 
 public class Prouduct
 {

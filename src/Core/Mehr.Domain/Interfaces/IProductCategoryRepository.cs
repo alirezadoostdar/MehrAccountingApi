@@ -1,5 +1,5 @@
 ﻿using Mehr.Domain.Dtos.ProdcutCategory;
-using Mehr.Domain.Entities.Stocks;
+using Mehr.Domain.Stocks;
 
 namespace Mehr.Domain.Interfaces;
 

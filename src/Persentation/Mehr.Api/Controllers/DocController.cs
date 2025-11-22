@@ -1,4 +1,5 @@
 ﻿using Mehr.Application.Docs.Contracts;
+using Mehr.Application.Localizations;
 using Mehr.Domain.Docs.Contracts.Dtos;
 using Mehr.SharedKernel;
 using Microsoft.AspNetCore.Mvc; 
@@ -10,6 +11,7 @@ namespace Mehr.Api.Controllers;
 public class DocController : Controller
 {
     private readonly IDocService _service;
+    private readonly ILocalizationService _localizationService;
 
     public DocController(IDocService service)
     {
@@ -20,7 +22,8 @@ public class DocController : Controller
     [HttpGet("{id:int}")]
     public async Task<ActionResult<Result>> GetByIdAsync(int id, CancellationToken cancellationToken)
     {
-        return await _service.GetByIdAsync(id, cancellationToken);
+        var res = await _service.GetByIdAsync(id, cancellationToken);
+        return res;
     }
 
 

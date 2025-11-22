@@ -14,6 +14,7 @@ public class LocalizationService : ILocalizationService
 
     public string GetString(string key, params object[] args)
     {
-        throw new NotImplementedException();
+        return _localizer[key, args];
     }
+
 }

@@ -1,4 +1,4 @@
-﻿using Mehr.Domain.Entities.Stocks;
+﻿using Mehr.Domain.Stocks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

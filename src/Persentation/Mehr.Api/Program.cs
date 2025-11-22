@@ -9,6 +9,7 @@ using Mehr.Application.Docs.Contracts;
 using Mehr.Application.FinancialYears;
 using Mehr.Application.FinancialYears.Contracts;
 using Mehr.Application.Intrefaces;
+using Mehr.Application.Localizations;
 using Mehr.Application.Services;
 using Mehr.Application.Zones;
 using Mehr.Application.Zones.Contracts;
@@ -55,6 +56,7 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
     options.RequestCultureProviders.Insert(0, new CookieRequestCultureProvider());
 });
 
+builder.Services.AddScoped<ILocalizationService, LocalizationService>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 builder.Services.AddScoped<IDetailedAccountRepository, EfDetailedAccountRepository>();
