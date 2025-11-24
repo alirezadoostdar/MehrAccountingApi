@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Mehr.Infarstructure.Stocks;
 
-public class ProductEntityMap : IEntityTypeConfiguration<Prouduct>
+public class ProductEntityMap : IEntityTypeConfiguration<Product>
 {
-    public void Configure(EntityTypeBuilder<Prouduct> builder)
+    public void Configure(EntityTypeBuilder<Product> builder)
     {
         builder.ToTable("StockTbl");
 
@@ -77,8 +77,114 @@ public class ProductEntityMap : IEntityTypeConfiguration<Prouduct>
             .HasColumnName("GroupID1");
 
         builder.HasOne(x => x.ProductGroup1)
-            .WithMany()
+            .WithMany(x => x.Products)
             .HasForeignKey(x => x.ProductGroup1);
 
+        builder.Property(x => x.productGroup2)
+            .HasColumnName("GroupID2");
+
+        builder.HasOne(x => x.productGroup2)
+            .WithMany(x => x.Products)
+            .HasForeignKey(x => x.ProductGroup2Id);
+
+        builder.Property(x => x.HasSerial)
+            .HasColumnName("SerialNo")
+            .IsRequired();
+
+        builder.Property(x => x.Weight)
+            .IsRequired();
+
+        builder.Property(x => x.Term)
+            .HasMaxLength(1000)
+            .IsRequired();
+
+        builder.Property(x => x.Tax1)
+            .HasColumnName("MaliatArzeshAfzoodeh")
+            .IsRequired();
+
+        builder.Property(x => x.HasDateExpire)
+            .HasColumnName("DateExpite")
+            .IsRequired();
+
+        builder.Property(x => x.Tax2)
+            .HasColumnName("Avarez")
+            .IsRequired();
+
+        builder.Property(x => x.DateExpireAlarm)
+            .HasColumnName("Alarm")
+            .IsRequired();
+
+        builder.Property(x => x.TechnicalDescription)
+            .HasColumnName("TechnicalBox");
+
+        builder.Property(x => x.MaximumQuantity)
+            .HasColumnName("MaxQTY");
+
+        builder.Property(x => x.RightToLeft)
+            .HasColumnName("rtlTOlft");
+
+        builder.Property(x => x.UnderSalePrice)
+            .IsRequired();
+
+        builder.Property(x => x.IsCardDiscount)
+            .IsRequired();
+
+        builder.Property(x => x.NotReturn)
+            .IsRequired();
+
+        builder.Property(x => x.Field1)
+            .HasMaxLength(1000);
+
+        builder.Property(x => x.Field2)
+            .HasMaxLength(1000);
+
+        builder.Property(x => x.Field3)
+            .HasMaxLength(1000);
+
+        builder.Property(x => x.LastPurchasePrice)
+            .HasColumnName("BuyLastFee")
+            .IsRequired();
+
+        builder.Property(x => x.ImageName)
+            .HasMaxLength(200);
+
+        builder.Property(x => x.IsUpdate)
+            .IsRequired();
+
+        builder.Property(x => x.ProductGroup3Id)
+            .HasColumnName("GroupID3");
+
+        builder.HasOne(x => x.productGroup3)
+            .WithMany(x => x.Products)
+            .HasForeignKey(x => x.ProductGroup3Id);
+
+        builder.Property(x => x.ProductCategoryId)
+            .HasColumnName("CategoryID");
+
+        builder.HasOne(x => x.ProductCategory)
+            .WithMany(x => x.Products)
+            .HasForeignKey(x => x.ProductCategoryId);
+
+        builder.Property(x => x.SendToServer)
+            .IsRequired();
+
+        builder.Property(x => x.LastPurchasePriceNoCost)
+            .HasColumnName("LastFeeNoCost")
+            .IsRequired();
+
+        builder.Property(x => x.Field4)
+            .HasMaxLength(200);
+
+        builder.Property(x => x.Field5)
+            .HasMaxLength(200);
+
+        builder.Property(x => x.GovermentTaxId)
+            .HasColumnName("IdTaxGov");
+
+        builder.Property(x => x.TaxUnitId)
+            .HasColumnName("Fk_TaxUnitId");
+
+        builder.Property(x => x.CheckList)
+            .IsRequired();
     }
 }

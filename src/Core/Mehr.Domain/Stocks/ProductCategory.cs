@@ -10,4 +10,6 @@ public class ProductCategory
     public string ImageUrl { get; set; }
 
     public ICollection<ProductCategory> Children { get; set; } = new List<ProductCategory>();
+
+    public List<Product> Products { get; set; } = new();
 }

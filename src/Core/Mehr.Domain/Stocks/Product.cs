@@ -1,6 +1,6 @@
 ﻿namespace Mehr.Domain.Stocks;
 
-public class Prouduct
+public class Product
 {
     public int Id { get; set; }
     public string Title { get; set; }
