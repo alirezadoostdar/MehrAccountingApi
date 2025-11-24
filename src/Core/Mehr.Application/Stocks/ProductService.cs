@@ -1,14 +1,23 @@
 ﻿using Mehr.Application.Stocks.Contracts;
 using Mehr.Domain.Stocks;
+using Mehr.Domain.Stocks.Contracts;
 using Mehr.SharedKernel;
 
 namespace Mehr.Application.Stocks;
 
 internal class ProductService : IProductService
 {
-    private readonly Iproductre
-    public Task<Result<List<Product>>> GetAllAsync(CancellationToken cancellationToken)
+    private readonly IProductRepository _repository;
+    private readonly IUnitOfWork _unitOfWork;
+
+    public ProductService(IProductRepository repository, IUnitOfWork unitOfWork)
     {
-        throw new NotImplementedException();
+        _repository = repository;
+        _unitOfWork = unitOfWork;
+    }
+
+    public async Task<Result<List<Product>>> GetAllAsync(CancellationToken cancellationToken)
+    {
+        return await _repository.GetAllAsync(cancellationToken);
     }
 }

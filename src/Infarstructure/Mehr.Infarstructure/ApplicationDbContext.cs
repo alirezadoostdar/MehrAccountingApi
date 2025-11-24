@@ -37,6 +37,8 @@ public class ApplicationDbContext : DbContext
     public DbSet<Cost> Costs { get; set; }
     public DbSet<CostFirstGroup> CostFirstGroups { get; set; }
     public DbSet<CostSecondGroup> CostSecondGroups { get; set; }
+
+    public DbSet<Product> Products { get; set; }
     public DbSet<ProductCategory> ProductCategories { get; set; }
     public DbSet<Zone> Zones { get; set; }
     public DbSet<Doc> Docs{ get; set; }
