@@ -6,7 +6,7 @@ public class Product
     public string Title { get; set; }
     public string Code { get; set; }
     public string Barcode { get; set; }
-    public ProductType Type { get; set; }
+    public int Type { get; set; }
     public string FirstUnit { get; set; }
     public string SecondUnit { get; set; }
     public double UnitRate { get; set; }
@@ -21,11 +21,11 @@ public class Product
     public double DiscountPercent { get; set; }
     public decimal UserPrice { get; set; }
 
-    public int ProductGroup1Id { get; set; }
-    public ProductGroup1 ProductGroup1 { get; set; }
+    public int? ProductGroup1Id { get; set; }
+    public ProductGroup1? ProductGroup1 { get; set; }
 
-    public int ProductGroup2Id { get; set; }
-    public ProductGroup2 productGroup2 { get; set; }
+    public int? ProductGroup2Id { get; set; }
+    public ProductGroup2? productGroup2 { get; set; }
 
     public bool HasSerial { get; set; }
     public float Weight { get; set; }
@@ -48,18 +48,18 @@ public class Product
     public string ImageName { get; set; }
     public bool IsUpdate { get; set; }
 
-    public int ProductGroup3Id { get; set; }
-    public ProductGroup2 productGroup3 { get; set; }
+    public int? ProductGroup3Id { get; set; }
+    public ProductGroup2? productGroup3 { get; set; }
 
-    public int ProductCategoryId { get; set; }
-    public ProductCategory ProductCategory { get; set; }
+    public int? ProductCategoryId { get; set; }
+    public ProductCategory? ProductCategory { get; set; }
 
     public bool SendToServer { get; set; } = false;
     public decimal LastPurchasePriceNoCost { get; set; }
     public string Field4 { get; set; }
     public string Field5 { get; set; }
     public string Located { get; set; }
-    public long GovermentTaxId { get; set; }
+    public long? GovermentTaxId { get; set; }
     public int SellerId { get; set; }
     public int TaxUnitId { get; set; }
     public DateTime CreateDateTime { get; set; }

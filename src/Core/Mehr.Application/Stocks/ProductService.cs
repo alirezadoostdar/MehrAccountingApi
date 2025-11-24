@@ -5,7 +5,7 @@ using Mehr.SharedKernel;
 
 namespace Mehr.Application.Stocks;
 
-internal class ProductService : IProductService
+public class ProductService : IProductService
 {
     private readonly IProductRepository _repository;
     private readonly IUnitOfWork _unitOfWork;

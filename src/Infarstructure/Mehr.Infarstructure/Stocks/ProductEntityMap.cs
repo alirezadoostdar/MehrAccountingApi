@@ -78,7 +78,7 @@ public class ProductEntityMap : IEntityTypeConfiguration<Product>
 
         builder.HasOne(x => x.ProductGroup1)
             .WithMany(x => x.Products)
-            .HasForeignKey(x => x.ProductGroup1);
+            .HasForeignKey(x => x.ProductGroup1Id);
 
         builder.Property(x => x.productGroup2)
             .HasColumnName("GroupID2");

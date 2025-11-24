@@ -1,6 +1,6 @@
 ﻿using Mehr.Application.Intrefaces;
 using Mehr.Domain.Dtos.ProdcutCategory;
-using Mehr.Domain.Entities.Stocks;
+using Mehr.Domain.Stocks;
 using Mehr.Domain.Interfaces;
 
 namespace Mehr.Application.Services;

@@ -11,6 +11,8 @@ using Mehr.Application.FinancialYears.Contracts;
 using Mehr.Application.Intrefaces;
 using Mehr.Application.Localizations;
 using Mehr.Application.Services;
+using Mehr.Application.Stocks;
+using Mehr.Application.Stocks.Contracts;
 using Mehr.Application.Zones;
 using Mehr.Application.Zones.Contracts;
 using Mehr.Domain.Docs.Contracts;
@@ -18,12 +20,14 @@ using Mehr.Domain.FinancialYears.Contracts;
 using Mehr.Domain.Interfaces;
 using Mehr.Domain.Interfaces.Costs;
 using Mehr.Domain.Interfaces.DetailedAccounts;
+using Mehr.Domain.Stocks.Contracts;
 using Mehr.Infarstructure;
 using Mehr.Infarstructure.Costs;
 using Mehr.Infarstructure.DetailedAccounts;
 using Mehr.Infarstructure.Docs;
 using Mehr.Infarstructure.FinancialYears;
 using Mehr.Infarstructure.Repositories.Stocks;
+using Mehr.Infarstructure.Stocks;
 using Mehr.Infarstructure.Zones;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
@@ -76,6 +80,9 @@ builder.Services.AddScoped<IDocService, DocService>();
 
 builder.Services.AddScoped<IFinancialYearRepositrory, EfFinancialYearRepository>();
 builder.Services.AddScoped<IFinancialYearService, FinancialYearsService>();
+
+builder.Services.AddScoped<IProductRepository, EfProductRepository>();
+builder.Services.AddScoped<IProductService, ProductService>();
 
 var app = builder.Build();
 
