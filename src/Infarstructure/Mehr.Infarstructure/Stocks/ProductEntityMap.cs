@@ -73,17 +73,17 @@ public class ProductEntityMap : IEntityTypeConfiguration<Product>
         builder.Property(x => x.UserPrice)
             .IsRequired();
 
-        builder.Property(x => x.ProductGroup1)
+        builder.Property(x => x.ProductGroup1Id)
             .HasColumnName("GroupID1");
 
         builder.HasOne(x => x.ProductGroup1)
             .WithMany(x => x.Products)
             .HasForeignKey(x => x.ProductGroup1Id);
 
-        builder.Property(x => x.productGroup2)
+        builder.Property(x => x.ProductGroup2Id)
             .HasColumnName("GroupID2");
 
-        builder.HasOne(x => x.productGroup2)
+        builder.HasOne(x => x.ProductGroup2)
             .WithMany(x => x.Products)
             .HasForeignKey(x => x.ProductGroup2Id);
 

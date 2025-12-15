@@ -25,7 +25,7 @@ public class Product
     public ProductGroup1? ProductGroup1 { get; set; }
 
     public int? ProductGroup2Id { get; set; }
-    public ProductGroup2? productGroup2 { get; set; }
+    public ProductGroup2? ProductGroup2 { get; set; }
 
     public bool HasSerial { get; set; }
     public float Weight { get; set; }
@@ -49,7 +49,7 @@ public class Product
     public bool IsUpdate { get; set; }
 
     public int? ProductGroup3Id { get; set; }
-    public ProductGroup2? productGroup3 { get; set; }
+    public ProductGroup3? productGroup3 { get; set; }
 
     public int? ProductCategoryId { get; set; }
     public ProductCategory? ProductCategory { get; set; }
