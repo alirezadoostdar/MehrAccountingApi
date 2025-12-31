@@ -4,7 +4,7 @@ namespace Mehr.Api.Controllers;
 
 [ApiController]
 [Route("api/authentication")]
-public class AuthenticationController : Controller
+public class UserController : Controller
 {
     public IActionResult Index()
     {
