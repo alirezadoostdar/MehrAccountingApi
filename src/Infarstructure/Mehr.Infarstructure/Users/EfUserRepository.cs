@@ -3,7 +3,7 @@ using Mehr.Domain.Users.Contracts;
 
 namespace Mehr.Infarstructure.Users;
 
-internal class EfUserRepository : IUserRepository
+public class EfUserRepository : IUserRepository
 {
     private readonly ApplicationDbContext _context;
 
@@ -12,8 +12,8 @@ internal class EfUserRepository : IUserRepository
         _context = context;
     }
 
-    public Task<User> GetUserById(int id, CancellationToken cancellation)
+    public async Task<User> GetUserById(int id, CancellationToken cancellation)
     {
-        return _context.
+        return await _context.Users.FindAsync(id, cancellation);
     }
 }

@@ -1,5 +1,7 @@
 using Mehr.Api.Middlewares;
 using Mehr.Application;
+using Mehr.Application.ApiValidate;
+using Mehr.Application.ApiValidate.Contracts;
 using Mehr.Application.Costs;
 using Mehr.Application.Costs.Contracts;
 using Mehr.Application.DetailedAccounts;
@@ -13,6 +15,8 @@ using Mehr.Application.Localizations;
 using Mehr.Application.Services;
 using Mehr.Application.Stocks;
 using Mehr.Application.Stocks.Contracts;
+using Mehr.Application.Users;
+using Mehr.Application.Users.Contracts;
 using Mehr.Application.Zones;
 using Mehr.Application.Zones.Contracts;
 using Mehr.Domain.Docs.Contracts;
@@ -21,6 +25,7 @@ using Mehr.Domain.Interfaces;
 using Mehr.Domain.Interfaces.Costs;
 using Mehr.Domain.Interfaces.DetailedAccounts;
 using Mehr.Domain.Stocks.Contracts;
+using Mehr.Domain.Users.Contracts;
 using Mehr.Infarstructure;
 using Mehr.Infarstructure.Costs;
 using Mehr.Infarstructure.DetailedAccounts;
@@ -28,6 +33,7 @@ using Mehr.Infarstructure.Docs;
 using Mehr.Infarstructure.FinancialYears;
 using Mehr.Infarstructure.Repositories.Stocks;
 using Mehr.Infarstructure.Stocks;
+using Mehr.Infarstructure.Users;
 using Mehr.Infarstructure.Zones;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
@@ -83,6 +89,11 @@ builder.Services.AddScoped<IFinancialYearService, FinancialYearsService>();
 
 builder.Services.AddScoped<IProductRepository, EfProductRepository>();
 builder.Services.AddScoped<IProductService, ProductService>();
+
+builder.Services.AddScoped<IUserRepository, EfUserRepository>();
+builder.Services.AddScoped<IUserService, UserService>();
+
+builder.Services.AddScoped<IApiValidateService, ApiValidateService>();
 
 var app = builder.Build();
 
