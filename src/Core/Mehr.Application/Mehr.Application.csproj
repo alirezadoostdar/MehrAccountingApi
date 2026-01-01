@@ -15,6 +15,7 @@
   <ItemGroup>
     <Folder Include="Costs\Contracts\Exceptions\" />
     <Folder Include="Docs\Contracts\Dtos\" />
+    <Folder Include="Users\Contracts\Dtos\" />
     <Folder Include="Zones\Contracts\Exceptions\" />
   </ItemGroup>
 

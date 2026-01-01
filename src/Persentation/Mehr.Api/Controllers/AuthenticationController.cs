@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc; 
+﻿using Mehr.SharedKernel;
+using Microsoft.AspNetCore.Mvc; 
 
 namespace Mehr.Api.Controllers;
 
@@ -6,8 +7,11 @@ namespace Mehr.Api.Controllers;
 [Route("api/authentication")]
 public class UserController : Controller
 {
-    public IActionResult Index()
+
+
+    [HttpGet]
+    public async Task<ActionResult<Result>> GetUser(int id, CancellationToken cancellationToken)
     {
-        return View();
+
     }
 }

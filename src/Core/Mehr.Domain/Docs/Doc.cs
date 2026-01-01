@@ -1,6 +1,6 @@
 ﻿using Mehr.Domain.Entities.Projects;
-using Mehr.Domain.Entities.Users;
 using Mehr.Domain.FinancialYears;
+using Mehr.Domain.Users;
 using Microsoft.Identity.Client;
 
 namespace Mehr.Domain.Docs;

@@ -4,6 +4,7 @@ using Mehr.Domain.Entities.Contacts;
 using Mehr.Domain.Entities.Costs;
 using Mehr.Domain.FinancialYears;
 using Mehr.Domain.Stocks;
+using Mehr.Domain.Users;
 using Mehr.Infarstructure.Costs;
 using Mehr.Infarstructure.DetailedAccounts;
 using Mehr.Infarstructure.Docs;
@@ -44,4 +45,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<Doc> Docs{ get; set; }
     public DbSet<DocItem> DocItems{ get; set; }
     public DbSet<FinancialYear> FinancialYears{ get; set; }
+
+    public DbSet<User> Users { get; set; }
+    public DbSet<Role> Roles { get; set; }
 }

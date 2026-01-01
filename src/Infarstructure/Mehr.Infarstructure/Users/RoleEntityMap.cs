@@ -1,4 +1,4 @@
-﻿using Mehr.Domain.Entities.Users;
+﻿using Mehr.Domain.Users;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

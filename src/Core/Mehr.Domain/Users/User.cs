@@ -1,6 +1,6 @@
 ﻿using Mehr.Domain.Entities.Accounts;
 
-namespace Mehr.Domain.Entities.Users;
+namespace Mehr.Domain.Users;
 
 public class User
 {

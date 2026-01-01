@@ -1,4 +1,4 @@
-﻿namespace Mehr.Domain.Entities.Users;
+﻿namespace Mehr.Domain.Users;
 
 public class Role
 {
