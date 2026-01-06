@@ -17,12 +17,16 @@ namespace Mehr.Application.Users;
 public class UserService : IUserService
 {
     private readonly IUserRepository _repository;
+    private readonly IRoleRepository _roleRepository;
     private readonly IUnitOfWork _unitOfWork;
     private readonly IApiValidateService _apiValidateService;
 
-    public UserService(IUserRepository repository, IUnitOfWork unitOfWork, IApiValidateService apiValidateService)
+    public UserService(IUserRepository repository,
+        IRoleRepository roleRepository,
+        IUnitOfWork unitOfWork, IApiValidateService apiValidateService)
     {
         _repository = repository;
+        _roleRepository = roleRepository;
         _unitOfWork = unitOfWork;
         _apiValidateService = apiValidateService;
     }
@@ -62,7 +66,9 @@ public class UserService : IUserService
         if (!resValidateService.IsSuccess)
             return Result.Failure<string>(resValidateService.Error);
 
-        var token = CreateToken(user, (DateTime)resValidateService.Value);
+        var policies = await _roleRepository.GetPolicyList(user.RoleId, cancellationToken);
+
+        var token = CreateToken(user, (DateTime)resValidateService.Value, policies);
         return token;
     }
 
@@ -79,7 +85,7 @@ public class UserService : IUserService
         return true;
 
     }
-    private string CreateToken(User user, DateTime validDate)
+    private string CreateToken(User user, DateTime validDate, List<RolePolicy_QueryModel> policies)
     {
 
         var securityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("c0d0cd85-f64e-4fcd-8625-c8c37c5bdd85"));
