@@ -18,7 +18,7 @@ public class UserController : Controller
         _apiValidateService = apiValidateService;
     }
 
-    [HttpGet]
+    [HttpGet("{id:int}")]
     public async Task<ActionResult<Result>> GetUser(int id, CancellationToken cancellationToken)
     {
         return await _service.GetUserById(id, cancellationToken);
@@ -27,7 +27,7 @@ public class UserController : Controller
     [HttpPost("authenticate")]
     public async Task<ActionResult<Result>> Authenticate(UserLoginDto dto, CancellationToken cancellationToken)
     {
-        var res = await _apiValidateService.IsValidate(dto, cancellationToken);
+        var res = await _service.UserLoginAsync(dto, cancellationToken);
         return res;
     }
 }

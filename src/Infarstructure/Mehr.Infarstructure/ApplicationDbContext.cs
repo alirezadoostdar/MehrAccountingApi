@@ -48,4 +48,5 @@ public class ApplicationDbContext : DbContext
 
     public DbSet<User> Users { get; set; }
     public DbSet<Role> Roles { get; set; }
+    public DbSet<RolePolicy_QueryModel> RolePloicies_QueryModel { get; set; }
 }

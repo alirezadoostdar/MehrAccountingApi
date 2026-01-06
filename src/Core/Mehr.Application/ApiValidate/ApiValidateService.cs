@@ -1,5 +1,6 @@
 ﻿using Mehr.Application.ApiValidate.Contracts;
 using Mehr.Application.ApiValidate.Contracts.Dtos;
+using Mehr.Application.ApiValidate.Contracts.Exceptions;
 using Mehr.Domain.Users.Contracts.Dtos;
 using Mehr.SharedKernel;
 using Newtonsoft.Json;
@@ -9,8 +10,9 @@ namespace Mehr.Application.ApiValidate;
 
 public class ApiValidateService : IApiValidateService
 {
-
-    public async Task<Result<bool>> IsValidate(UserLoginDto loginDto, CancellationToken cancellationToken)
+    private DateTime _validDate;
+    public DateTime ValidDate { get => _validDate; }
+    public async Task<Result<DateTime>> IsValidate(UserLoginDto loginDto, CancellationToken cancellationToken)
     {
         var dto = new ValidateApiDto
         {
@@ -21,25 +23,26 @@ public class ApiValidateService : IApiValidateService
             mehrPassword = loginDto.Password,
         };
 
-        try
+        using (HttpClient client = new HttpClient())
         {
-            using (HttpClient client = new HttpClient())
+            client.BaseAddress = new Uri("https://mehraccounting.com/");
+            var response = client.PostAsJsonAsync<ValidateApiDto>($"webApi/CheckValidate/", dto).Result;
+            var res = JsonConvert.DeserializeObject<ApiValidateResult>(await response.Content.ReadAsStringAsync());
+            if (res.IsSuccess)
             {
-                client.BaseAddress = new Uri("https://mehraccounting.com/");
-                var response = client.PostAsJsonAsync<ValidateApiDto>($"webApi/CheckValidate/", dto).Result;
-                var res = JsonConvert.DeserializeObject<ApiValidateResult>(await response.Content.ReadAsStringAsync());
-                if (res.IsSuccess)
-                {
-
-                    return true;
-                }
+                _validDate = (DateTime)res.ReturnObject;
+                return _validDate;
             }
-            return true;
-
-        }
-        catch (Exception ex)
-        {
-            throw ex;
+            else
+            {
+                return res.StatusCode switch
+                {
+                    101 => Result.Failure<DateTime>(ApiValidateErrors.NoFeature()),
+                    102 => Result.Failure<DateTime>(ApiValidateErrors.NotFound()),
+                    104 => Result.Failure<DateTime>(ApiValidateErrors.NotFound()),
+                    500 => Result.Failure<DateTime>(ApiValidateErrors.Unexpected())
+                };
+            }
         }
     }
 
