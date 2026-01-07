@@ -1,3 +1,4 @@
+using Mehr.Api.Authorization;
 using Mehr.Api.Middlewares;
 using Mehr.Application;
 using Mehr.Application.ApiValidate;
@@ -35,6 +36,7 @@ using Mehr.Infarstructure.Repositories.Stocks;
 using Mehr.Infarstructure.Stocks;
 using Mehr.Infarstructure.Users;
 using Mehr.Infarstructure.Zones;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using System.Globalization;
@@ -65,6 +67,10 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
     options.AddInitialRequestCultureProvider(new QueryStringRequestCultureProvider());
     options.RequestCultureProviders.Insert(0, new CookieRequestCultureProvider());
 });
+
+builder.Services.AddAuthorization();
+builder.Services.AddSingleton<IAuthorizationHandler, PermissionAuthorizationHandler>();
+builder.Services.AddSingleton<IAuthorizationPolicyProvider, PermissionPolicyProvider>();
 
 builder.Services.AddScoped<ILocalizationService, LocalizationService>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
