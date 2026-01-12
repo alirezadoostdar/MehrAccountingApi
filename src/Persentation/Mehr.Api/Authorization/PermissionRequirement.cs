@@ -9,6 +9,7 @@ public class PermissionRequirement : IAuthorizationRequirement
     public IEnumerable<string> Permissions { get; }
     public PermissionRequirement(IEnumerable<string> permissions) => Permissions = permissions;
 }
+//
 
 
 public class PermissionAuthorizationHandler : AuthorizationHandler<PermissionRequirement>
