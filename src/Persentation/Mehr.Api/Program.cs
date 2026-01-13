@@ -36,10 +36,13 @@ using Mehr.Infarstructure.Repositories.Stocks;
 using Mehr.Infarstructure.Stocks;
 using Mehr.Infarstructure.Users;
 using Mehr.Infarstructure.Zones;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using System.Globalization;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -59,6 +62,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(option =>
 builder.Services.AddLocalization(options => options.ResourcesPath = "Mehr.Resources");
 
 var supportedCultures = new[] { new CultureInfo("en"), new CultureInfo("fa") };
+
 builder.Services.Configure<RequestLocalizationOptions>(options =>
 {
     options.DefaultRequestCulture = new RequestCulture("en-US");
@@ -67,6 +71,26 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
     options.AddInitialRequestCultureProvider(new QueryStringRequestCultureProvider());
     options.RequestCultureProviders.Insert(0, new CookieRequestCultureProvider());
 });
+#region Authentication
+builder.Services.AddAuthentication(option =>
+{
+    option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    option.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+
+}).AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = builder.Configuration["Jwt:Issuer"],
+        ValidAudience = builder.Configuration["Jwt:Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["c0d0cd85-f64e-4fcd-8625-c8c37c5bdd85"])) //Configuration["JwtToken:SecretKey"]
+    };
+});
+#endregion
 
 builder.Services.AddAuthorization();
 builder.Services.AddSingleton<IAuthorizationHandler, PermissionAuthorizationHandler>();
@@ -99,6 +123,8 @@ builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IUserRepository, EfUserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
 
+builder.Services.AddScoped<IRoleRepository, EfRoleRepository>();
+
 builder.Services.AddScoped<IApiValidateService, ApiValidateService>();
 
 var app = builder.Build();
@@ -113,6 +139,7 @@ if (app.Environment.IsDevelopment())
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
