@@ -64,5 +64,5 @@ public class PermissionPolicyProvider : DefaultAuthorizationPolicyProvider
 public class HasPermissionAttribute : AuthorizeAttribute
 {
     public HasPermissionAttribute(params string[] permissions)
-        : base(policy: string.Join(",", permissions)) { }
+        : base(policy: string.Join(",", permissions)) { }//
 }
