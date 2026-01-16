@@ -10,7 +10,7 @@ public class PermissionRequirement : IAuthorizationRequirement
 
     public PermissionRequirement(string permission)
     {
-        Permission = permission;
+        Permission = permission;//
     }
 }
 //
