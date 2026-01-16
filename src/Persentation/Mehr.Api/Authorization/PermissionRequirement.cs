@@ -6,8 +6,12 @@ namespace Mehr.Api.Authorization;
 
 public class PermissionRequirement : IAuthorizationRequirement
 {
-    public IEnumerable<string> Permissions { get; }
-    public PermissionRequirement(IEnumerable<string> permissions) => Permissions = permissions;
+    public string Permission { get; }
+
+    public PermissionRequirement(string permission)
+    {
+        Permission = permission;
+    }
 }
 //
 
@@ -16,14 +20,14 @@ public class PermissionAuthorizationHandler : AuthorizationHandler<PermissionReq
 {
     protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, PermissionRequirement requirement)
     {
-        var userPermissions = context.User.Claims
-            .Where(c => c.Type == CustomClaimTypes.Permission)
-            .Select(c => c.Value);
 
-        if (requirement.Permissions.Any(p => userPermissions.Contains(p)))
-        {
+        var hasPermission = context.User.Claims.Any(c =>
+            c.Type == "Permission" &&
+            c.Value == requirement.Permission);
+
+        if (hasPermission)
             context.Succeed(requirement);
-        }
+
         return Task.CompletedTask;
     }
 }
@@ -31,17 +35,29 @@ public class PermissionAuthorizationHandler : AuthorizationHandler<PermissionReq
 // Web/Authorization/PermissionPolicyProvider.cs
 public class PermissionPolicyProvider : DefaultAuthorizationPolicyProvider
 {
-    public PermissionPolicyProvider(IOptions<AuthorizationOptions> options) : base(options) { }
+    private const string POLICY_PREFIX = "permission:";
 
-    public override async Task<AuthorizationPolicy?> GetPolicyAsync(string policyName)
+    public PermissionPolicyProvider(
+        IOptions<AuthorizationOptions> options)
+        : base(options)
     {
-        var policy = await base.GetPolicyAsync(policyName);
-        if (policy != null) return policy;
+    }
 
-        var permissions = policyName.Split(',');
-        return new AuthorizationPolicyBuilder()
-            .AddRequirements(new PermissionRequirement(permissions))
-            .Build();
+    public override Task<AuthorizationPolicy?> GetPolicyAsync(
+        string policyName)
+    {
+        if (policyName.StartsWith(POLICY_PREFIX))
+        {
+            var permission = policyName.Substring(POLICY_PREFIX.Length);
+
+            var policy = new AuthorizationPolicyBuilder()
+                .AddRequirements(new PermissionRequirement(permission))
+                .Build();
+
+            return Task.FromResult<AuthorizationPolicy?>(policy);
+        }
+
+        return base.GetPolicyAsync(policyName);
     }
 }
 

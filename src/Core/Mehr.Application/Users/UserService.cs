@@ -97,7 +97,10 @@ public class UserService : IUserService
         claimsForToken.Add(new Claim("UserName", user.UserName.ToString()));
         claimsForToken.Add(new Claim("GroupId", user.RoleId.ToString()));
         claimsForToken.Add(new Claim("SecureLevel", user.SecureLevel.ToString()));
-        claimsForToken.Add(new Claim(CustomClaimTypes.Permission, string.Join(",", policyArr)));
+        foreach (var item in policyArr)
+        {
+            claimsForToken.Add(new Claim(CustomClaimTypes.Permission, item.ToString()));
+        }
         var jwtSecurityToke = new JwtSecurityToken(
             "Jwt:Issuer",
             "Jwt:Audience",
@@ -351,5 +354,5 @@ public class UserService : IUserService
 
 public static class CustomClaimTypes
 {
-    public const string Permission = "permission";
+    public const string Permission = "permission.";
 }
