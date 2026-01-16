@@ -57,7 +57,7 @@ public class PermissionPolicyProvider : DefaultAuthorizationPolicyProvider
             return Task.FromResult<AuthorizationPolicy?>(policy);
         }
 
-        return base.GetPolicyAsync(policyName);
+        return base.GetPolicyAsync(policyName);//
     }
 }
 
