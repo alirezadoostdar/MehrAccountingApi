@@ -20,7 +20,7 @@ public class UserController : Controller
     }
 
     [HttpGet("{id:int}")]
-    [Authorize(Policy = "200")]
+    [Authorize(Policy = "permission.200")]
     public async Task<ActionResult<Result>> GetUser(int id, CancellationToken cancellationToken)
     {
         return await _service.GetUserById(id, cancellationToken);

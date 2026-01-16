@@ -22,7 +22,7 @@ public class PermissionAuthorizationHandler : AuthorizationHandler<PermissionReq
     {
 
         var hasPermission = context.User.Claims.Any(c =>
-            c.Type == "Permission" &&
+            c.Type == "permission." &&
             c.Value == requirement.Permission);
 
         if (hasPermission)
@@ -35,7 +35,7 @@ public class PermissionAuthorizationHandler : AuthorizationHandler<PermissionReq
 // Web/Authorization/PermissionPolicyProvider.cs
 public class PermissionPolicyProvider : DefaultAuthorizationPolicyProvider
 {
-    private const string POLICY_PREFIX = "permission:";
+    private const string POLICY_PREFIX = "permission.";
 
     public PermissionPolicyProvider(
         IOptions<AuthorizationOptions> options)
