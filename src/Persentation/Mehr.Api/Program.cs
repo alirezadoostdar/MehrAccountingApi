@@ -72,27 +72,8 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
     options.AddInitialRequestCultureProvider(new QueryStringRequestCultureProvider());
     options.RequestCultureProviders.Insert(0, new CookieRequestCultureProvider());
 });
-#region Authentication
-builder.Services
-    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options =>
-    {
-        options.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateIssuer = true,
-            ValidateAudience = true,
-            ValidateLifetime = true,
-            ValidateIssuerSigningKey = true,
 
-            ValidIssuer = "Jwt:Issuer",
-            ValidAudience = "Jwt:Audience",
-            IssuerSigningKey = new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes("c0d0cd85-f64e-4fcd-8625-c8c37c5bdd85")
-            )
-        };
-    });
-
-#endregion
+builder.Services.AddJwtAuthentication(builder.Configuration);
 
 #region Swagger Configuration
 builder.Services.AddSwaggerGen(swagger =>
