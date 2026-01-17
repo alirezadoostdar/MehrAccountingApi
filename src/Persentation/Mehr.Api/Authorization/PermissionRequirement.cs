@@ -6,11 +6,15 @@ namespace Mehr.Api.Authorization;
 
 public class PermissionRequirement : IAuthorizationRequirement
 {
-    public string Permission { get; }
+    public PermissionCheckMode Mode { get; }
+    public IReadOnlyList<string> Permissions { get; }
 
-    public PermissionRequirement(string permission)
+    public PermissionRequirement(
+        PermissionCheckMode mode,
+        IReadOnlyList<string> permissions)
     {
-        Permission = permission;//
+        Mode = mode;
+        Permissions = permissions;
     }
 }
 //
@@ -21,11 +25,23 @@ public class PermissionAuthorizationHandler : AuthorizationHandler<PermissionReq
     protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, PermissionRequirement requirement)
     {
 
-        var hasPermission = context.User.Claims.Any(c =>
-            c.Type == "permission." &&
-            c.Value == requirement.Permission);
+        var userPermissions = context.User.Claims
+                    .Where(c => c.Type == CustomClaimTypes.Permission)
+                    .Select(c => c.Value)
+                    .ToHashSet();
 
-        if (hasPermission)
+        bool isAuthorized = requirement.Mode switch
+        {
+            PermissionCheckMode.All =>
+                requirement.Permissions.All(p => userPermissions.Contains(p)),
+
+            PermissionCheckMode.Any =>
+                requirement.Permissions.Any(p => userPermissions.Contains(p)),
+
+            _ => false
+        };
+
+        if (isAuthorized)
             context.Succeed(requirement);
 
         return Task.CompletedTask;
@@ -46,23 +62,45 @@ public class PermissionPolicyProvider : DefaultAuthorizationPolicyProvider
     public override Task<AuthorizationPolicy?> GetPolicyAsync(
         string policyName)
     {
-        if (policyName.StartsWith(POLICY_PREFIX))
-        {
-            var permission = policyName.Substring(POLICY_PREFIX.Length);
+        if (!policyName.StartsWith("Permission:"))
+            return base.GetPolicyAsync(policyName);
 
-            var policy = new AuthorizationPolicyBuilder()
-                .AddRequirements(new PermissionRequirement(permission))
-                .Build();
+        // Permission:All:InvoiceCreate,InvoiceEdit
+        var parts = policyName.Split(':');
+        var mode = Enum.Parse<PermissionCheckMode>(parts[1]);
+        var permissions = parts[2].Split(',').ToList();
 
-            return Task.FromResult<AuthorizationPolicy?>(policy);
-        }
+        var policy = new AuthorizationPolicyBuilder()
+            .AddRequirements(new PermissionRequirement(mode, permissions))
+            .Build();
 
-        return base.GetPolicyAsync(policyName);//
+        return Task.FromResult<AuthorizationPolicy?>(policy);
     }
 }
 
 public class HasPermissionAttribute : AuthorizeAttribute
 {
-    public HasPermissionAttribute(params string[] permissions)
-        : base(policy: string.Join(",", permissions)) { }
+    public HasPermissionAttribute(
+        PermissionCheckMode mode,
+        params MehrPolicy[] policies)
+    {
+        if (policies == null || policies.Length == 0)
+            throw new ArgumentNullException("At least one permission is required");
+
+        var policiesNames = policies.Select(p => ((int)p).ToString());
+        var joined = string.Join(",", policiesNames);
+
+        Policy = $"Permission:{mode}:{joined}";
+    }
+
+    public HasPermissionAttribute(params MehrPolicy[] policies)
+        :this (PermissionCheckMode.All, policies)
+    {
+    }
+}
+
+public enum PermissionCheckMode
+{
+    All,
+    Any
 }

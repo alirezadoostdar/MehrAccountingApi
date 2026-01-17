@@ -1,4 +1,6 @@
-﻿using Mehr.Application.ApiValidate.Contracts;
+﻿using Mehr.Api.Authorization;
+using Mehr.Application.ApiValidate.Contracts;
+using Mehr.Application.Users;
 using Mehr.Application.Users.Contracts;
 using Mehr.Domain.Users.Contracts.Dtos;
 using Mehr.SharedKernel;
@@ -20,7 +22,7 @@ public class UserController : Controller
     }
 
     [HttpGet("{id:int}")]
-    [Authorize(Policy = "permission.200")]
+    [HasPermission(MehrPolicy.Documnet_Add,MehrPolicy.Document_AddTemp)]
     public async Task<ActionResult<Result>> GetUser(int id, CancellationToken cancellationToken)
     {
         return await _service.GetUserById(id, cancellationToken);
