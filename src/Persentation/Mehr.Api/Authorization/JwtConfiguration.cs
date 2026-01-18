@@ -14,7 +14,7 @@ public static class JwtConfiguration
         IConfiguration configuration)
     {
         return services
-            .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)        
             .AddJwtBearer(options =>
             {
                 options.TokenValidationParameters = JwtTokenValidation(configuration);
