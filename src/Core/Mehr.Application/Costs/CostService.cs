@@ -1,5 +1,6 @@
 ﻿using Mehr.Application.Costs.Contracts;
 using Mehr.Application.Costs.Contracts.Dtos;
+using Mehr.Application.Users.Contracts;
 using Mehr.Domain.Entities.Costs;
 using Mehr.Domain.Entities.Costs.Dtos;
 using Mehr.Domain.Entities.Costs.Exceptions;
@@ -12,11 +13,15 @@ public class CostService : ICostService
 {
     private readonly ICostRepository _repository;
     private readonly IUnitOfWork _unitOfWork;
+    private readonly IUserContext _userContext;
 
-    public CostService(ICostRepository repository, IUnitOfWork unitOfWork)
+    public CostService(ICostRepository repository,
+        IUnitOfWork unitOfWork,
+        IUserContext userContext)
     {
         _repository = repository;
         _unitOfWork = unitOfWork;
+        _userContext = userContext;
     }
 
     public async Task<Result<int>> AddAsync(AddCostDto dto, CancellationToken cancellation)
@@ -96,6 +101,7 @@ public class CostService : ICostService
 
     public async Task<Result<List<GetListCostDto>>> GetAllCostAsync(int financialYearId, CancellationToken cancellationToken)
     {
+        var user = _userContext;
         var cotList = await _repository.GetAllCostAsync(financialYearId, cancellationToken);
         return cotList.ToList() ;
     }

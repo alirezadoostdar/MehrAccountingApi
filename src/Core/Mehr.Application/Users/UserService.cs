@@ -20,15 +20,19 @@ public class UserService : IUserService
     private readonly IRoleRepository _roleRepository;
     private readonly IUnitOfWork _unitOfWork;
     private readonly IApiValidateService _apiValidateService;
+    private readonly IUserContext _userContext;
 
     public UserService(IUserRepository repository,
         IRoleRepository roleRepository,
-        IUnitOfWork unitOfWork, IApiValidateService apiValidateService)
+        IUnitOfWork unitOfWork,
+        IApiValidateService apiValidateService,
+        IUserContext userContext)
     {
         _repository = repository;
         _roleRepository = roleRepository;
         _unitOfWork = unitOfWork;
         _apiValidateService = apiValidateService;
+        _userContext = userContext;
     }
 
     public async Task<Result<GetUserDto>> GetUserById(int id, CancellationToken cancellation)
