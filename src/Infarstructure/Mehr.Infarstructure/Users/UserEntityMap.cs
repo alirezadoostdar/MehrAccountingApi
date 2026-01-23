@@ -23,7 +23,8 @@ public class UserEntityMap : IEntityTypeConfiguration<User>
             .HasMaxLength(1000)
             .IsRequired();
 
-        builder.Property(x => x.SecureLevel)
+        builder.Property(x => x.SecureLevelId)
+            .HasColumnName("SecureLevel")
             .IsRequired();
 
         builder.Property(x => x.Password)

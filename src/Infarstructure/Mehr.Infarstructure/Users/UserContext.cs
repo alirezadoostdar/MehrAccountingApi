@@ -12,6 +12,7 @@ public class UserContext : IUserContext
     public string UserName { get; }
 
     public int SecureLevel { get; }
+
     public UserContext(IHttpContextAccessor httpContextAccessor)
     {
         var user = httpContextAccessor.HttpContext?.User;

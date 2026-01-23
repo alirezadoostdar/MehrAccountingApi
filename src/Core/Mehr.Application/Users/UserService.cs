@@ -48,7 +48,7 @@ public class UserService : IUserService
             UserName = user.UserName,
             IsDisable = user.IsDisable,
             RoleId = user.RoleId,
-            SecureLevel = user.SecureLevel
+            SecureLevel = user.SecureLevelId
         };
     }
 
@@ -100,7 +100,7 @@ public class UserService : IUserService
         claimsForToken.Add(new Claim("userId", user.Id.ToString()));
         claimsForToken.Add(new Claim("UserName", user.UserName.ToString()));
         claimsForToken.Add(new Claim("GroupId", user.RoleId.ToString()));
-        claimsForToken.Add(new Claim("SecureLevel", user.SecureLevel.ToString()));
+        claimsForToken.Add(new Claim("SecureLevel", user.SecureLevelId.ToString()));
         foreach (var item in policyArr)
         {
             claimsForToken.Add(new Claim(CustomClaimTypes.Permission, item.ToString()));

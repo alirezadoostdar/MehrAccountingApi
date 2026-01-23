@@ -40,9 +40,10 @@ public class EfCostRepository : ICostRepository
         _context.CostSecondGroups.Remove(costSecondGroup);
     }
 
-    public async Task<IEnumerable<GetListCostDto>> GetAllCostAsync(int financialYearId, CancellationToken cancellationToken)
+    public async Task<IEnumerable<GetListCostDto>> GetAllCostAsync(int secureLevel, int financialYearId, CancellationToken cancellationToken)
     {
-        return await _context.Costs.Select(x => new GetListCostDto
+        return await _context.Costs.Where(x => x.SecureLevelId <= secureLevel)
+            .Select(x => new GetListCostDto
         {
             Id = x.Id,
             Title = x.Title,

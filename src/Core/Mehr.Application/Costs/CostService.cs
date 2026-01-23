@@ -102,7 +102,7 @@ public class CostService : ICostService
     public async Task<Result<List<GetListCostDto>>> GetAllCostAsync(int financialYearId, CancellationToken cancellationToken)
     {
         var user = _userContext;
-        var cotList = await _repository.GetAllCostAsync(financialYearId, cancellationToken);
+        var cotList = await _repository.GetAllCostAsync(user.SecureLevel, financialYearId, cancellationToken);
         return cotList.ToList() ;
     }
 
