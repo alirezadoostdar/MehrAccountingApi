@@ -1,11 +1,14 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Mehr.SharedKernel;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using Mehr.SharedKernel;
 using System.Text.Json;
 
-namespace Mehr.Api.Authorization;
+namespace Mehr.Infarstructure.Identity;
 
 public static class JwtConfiguration
 {
@@ -14,7 +17,7 @@ public static class JwtConfiguration
         IConfiguration configuration)
     {
         return services
-            .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)        
+            .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>
             {
                 options.TokenValidationParameters = JwtTokenValidation(configuration);

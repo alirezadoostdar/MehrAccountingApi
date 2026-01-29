@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Options;
 
-namespace Mehr.Api.Authorization;
+namespace Mehr.Infarstructure.Identity;
 
 public class PermissionRequirement : IAuthorizationRequirement
 {
@@ -17,8 +17,6 @@ public class PermissionRequirement : IAuthorizationRequirement
         Permissions = permissions;
     }
 }
-//
-
 
 public class PermissionAuthorizationHandler : AuthorizationHandler<PermissionRequirement>
 {
@@ -94,7 +92,7 @@ public class HasPermissionAttribute : AuthorizeAttribute
     }
 
     public HasPermissionAttribute(params MehrPolicy[] policies)
-        :this (PermissionCheckMode.All, policies)
+        : this(PermissionCheckMode.All, policies)
     {
     }
 }

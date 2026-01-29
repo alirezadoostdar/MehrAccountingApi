@@ -1,8 +1,8 @@
-﻿using Mehr.Api.Authorization;
-using Mehr.Application.ApiValidate.Contracts;
+﻿using Mehr.Application.ApiValidate.Contracts;
 using Mehr.Application.Users;
 using Mehr.Application.Users.Contracts;
 using Mehr.Domain.Users.Contracts.Dtos;
+using Mehr.Infarstructure.Identity;
 using Mehr.SharedKernel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc; 

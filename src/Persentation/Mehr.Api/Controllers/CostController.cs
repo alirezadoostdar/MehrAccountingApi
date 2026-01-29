@@ -1,10 +1,10 @@
-﻿using Mehr.Api.Authorization;
-using Mehr.Application.Costs.Contracts;
+﻿using Mehr.Application.Costs.Contracts;
 using Mehr.Application.Costs.Contracts.Dtos;
 using Mehr.Domain.FinancialYears;
 using Mehr.SharedKernel;
 using Microsoft.AspNetCore.Mvc;
 using Mehr.Application.Users;
+using Mehr.Infarstructure.Identity;
 
 namespace Mehr.Api.Controllers
 {
@@ -38,6 +38,7 @@ namespace Mehr.Api.Controllers
         {
             return await _service.GetAllCostAsync(financialYearId, cancellationToken);
         }
+
         [HttpGet("{id:int}/financial-year/{financialYearId:int}")]
         public async Task<ActionResult<Result>> GetCostByIdWithRemainAsync(int id, int financialYearId, CancellationToken cancellationToken)
         {
@@ -46,6 +47,7 @@ namespace Mehr.Api.Controllers
         #endregion
 
         #region First Group
+
         [HttpPost("first-group")]
         public async Task<ActionResult<Result>> AddFirstGroupAsync(
             AddCostFristGroupDto dto,

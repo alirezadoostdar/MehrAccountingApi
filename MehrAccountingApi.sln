@@ -21,7 +21,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mehr.Api", "src\Persentatio
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mehr.SharedKernel", "src\Core\Mehr.SharedKernel\Mehr.SharedKernel.csproj", "{AFB15EC1-0C3D-4F78-9D10-9A63E10E4394}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mehr.Resources", "src\Core\Mehr.Resources\Mehr.Resources.csproj", "{B9906FFF-4874-4264-AA01-4BBF2A6D617A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mehr.Resources", "src\Core\Mehr.Resources\Mehr.Resources.csproj", "{B9906FFF-4874-4264-AA01-4BBF2A6D617A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
