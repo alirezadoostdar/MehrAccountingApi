@@ -1,8 +1,10 @@
-﻿using Mehr.Application.Costs.Contracts;
+﻿using Mehr.Api.Authorization;
+using Mehr.Application.Costs.Contracts;
 using Mehr.Application.Costs.Contracts.Dtos;
 using Mehr.Domain.FinancialYears;
 using Mehr.SharedKernel;
 using Microsoft.AspNetCore.Mvc;
+using Mehr.Application.Users;
 
 namespace Mehr.Api.Controllers
 {
@@ -25,6 +27,7 @@ namespace Mehr.Api.Controllers
         }
 
         [HttpGet("{id:int}")]
+        [HasPermission(MehrPolicy.Account_Cost)]
         public async Task<ActionResult<Result>> GetByIdAsync(int id, CancellationToken cancellationToken)
         {
             return await _service.GetByIdAsync(id, cancellationToken);
