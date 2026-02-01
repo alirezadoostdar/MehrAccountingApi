@@ -11,7 +11,7 @@ public interface ICacheService
         TimeSpan? slidingExpiration = null,
         CancellationToken cancellationToken = default);
 
-    Task<T> SetAsync<T>(
+    Task SetAsync<T>(
         string key,
         T value,
         TimeSpan? absoluteExpirationRelativeToNow = null,
