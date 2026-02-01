@@ -2,7 +2,7 @@
 
 public interface ICacheService
 {
-    Task<T?> GetAsync<T>(string cacheKey, CancellationToken cancellationToken);
+    Task<T?> GetAsync<T>(string key, CancellationToken cancellationToken);
 
     Task<T> GetOrCreateAsync<T>(
         string key,
@@ -20,5 +20,5 @@ public interface ICacheService
 
     Task RemoveAsync(string key, CancellationToken cancellationToken= default);
 
-
+    Task RemoveByPrefixAsync(string key, CancellationToken cancellationToken = default);
 }
