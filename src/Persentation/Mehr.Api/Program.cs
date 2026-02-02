@@ -115,8 +115,14 @@ builder.Services.AddSwaggerGen(swagger =>
 #endregion
 
 builder.Services.AddAuthorization();
-builder.Services.AddSingleton<IAuthorizationHandler, PermissionAuthorizationHandler>();
-builder.Services.AddSingleton<IAuthorizationPolicyProvider, PermissionPolicyProvider>();
+//builder.Services.AddScoped<IAuthorizationHandler, PermissionAuthorizationHandler>();
+//builder.Services.AddScoped<IAuthorizationPolicyProvider, PermissionPolicyProvider>();
+builder.Services.AddScoped<PermissionAuthorizationHandler>(); 
+builder.Services.AddSingleton<IAuthorizationHandler>(sp =>
+{
+    using var scope = sp.CreateScope();
+    return scope.ServiceProvider.GetRequiredService<PermissionAuthorizationHandler>();
+});
 
 builder.Services.AddMemoryCache();
 builder.Services.AddScoped<ICacheService, MemoryCacheService>();
@@ -148,6 +154,7 @@ builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IUserRepository, EfUserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserContext, UserContext>();
+builder.Services.AddScoped<IRoleService, RoleService>();
 builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddScoped<IRoleRepository, EfRoleRepository>();

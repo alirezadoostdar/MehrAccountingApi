@@ -1,5 +1,6 @@
 ﻿using Mehr.Application.Common.Contracts;
 using Mehr.Application.Users;
+using Mehr.Application.Users.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Options;
 
@@ -22,14 +23,33 @@ public class PermissionRequirement : IAuthorizationRequirement
 public class PermissionAuthorizationHandler : AuthorizationHandler<PermissionRequirement>
 {
     private readonly ICacheService _cacheService;
-    private readonly IPol
-    protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, PermissionRequirement requirement)
-    {
+    private readonly IRoleService _roleService;
 
-        var userPermissions = context.User.Claims
-                    .Where(c => c.Type == CustomClaimTypes.Permission)
-                    .Select(c => c.Value)
-                    .ToHashSet();
+    public PermissionAuthorizationHandler(ICacheService cacheService, IRoleService roleService)
+    {
+        _cacheService = cacheService;
+        _roleService = roleService;
+    }
+
+    protected override async Task HandleRequirementAsync(AuthorizationHandlerContext context, PermissionRequirement requirement)
+    {
+        string? roleId = context.User.Claims.Where(x => x.Type == "GroupId")
+            .SingleOrDefault()?
+            .Value;
+        //var userPermissions = context.User.Claims
+        //            .Where(c => c.Type == CustomClaimTypes.Permission)
+        //            .Select(c => c.Value)
+        //            .ToHashSet();
+        var userPermissions = await _cacheService.GetOrCreateAsync(
+            $"permission:{Convert.ToInt32(roleId)}",
+            async ct =>
+            {
+                var perms = await _roleService.GetActivePolicyList(Convert.ToInt32(roleId), ct);
+                return perms;
+            },
+            TimeSpan.FromMinutes(20),
+            TimeSpan.FromSeconds(5),
+            CancellationToken.None);
 
         bool isAuthorized = requirement.Mode switch
         {
@@ -45,7 +65,7 @@ public class PermissionAuthorizationHandler : AuthorizationHandler<PermissionReq
         if (isAuthorized)
             context.Succeed(requirement);
 
-        return Task.CompletedTask;
+        //return Task.CompletedTask;
     }
 }
 
