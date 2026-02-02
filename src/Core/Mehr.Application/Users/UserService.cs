@@ -96,9 +96,9 @@ public class UserService : IUserService
     }
     private string CreateToken(User user, DateTime validDate, List<RolePolicy_QueryModel> policies)
     {
-        string Cache_Key = $"permission:{user.RoleId}";
-        var policyArr = policies.Where(x=> x.Value == 1)
-            .Select(x => x.Id).ToArray();
+        //string Cache_Key = $"permission:{user.RoleId}";
+        //var policyArr = policies.Where(x=> x.Value == 1)
+        //    .Select(x => x.Id).ToArray();
         var securityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("c0d0cd85-f64e-4fcd-8625-c8c37c5bdd85"));
         var signingCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
         var claimsForToken = new List<Claim>();
@@ -106,10 +106,10 @@ public class UserService : IUserService
         claimsForToken.Add(new Claim("UserName", user.UserName.ToString()));
         claimsForToken.Add(new Claim("GroupId", user.RoleId.ToString()));
         claimsForToken.Add(new Claim("SecureLevel", user.SecureLevelId.ToString()));
-        foreach (var item in policyArr)
-        {
-            claimsForToken.Add(new Claim(CustomClaimTypes.Permission, item.ToString()));
-        }
+        //foreach (var item in policyArr)
+        //{
+        //    claimsForToken.Add(new Claim(CustomClaimTypes.Permission, item.ToString()));
+        //}
         var jwtSecurityToke = new JwtSecurityToken(
             "Jwt:Issuer",
             "Jwt:Audience",
