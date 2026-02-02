@@ -1,4 +1,5 @@
-﻿using Mehr.Application.Users;
+﻿using Mehr.Application.Common.Contracts;
+using Mehr.Application.Users;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Options;
 
@@ -20,6 +21,8 @@ public class PermissionRequirement : IAuthorizationRequirement
 
 public class PermissionAuthorizationHandler : AuthorizationHandler<PermissionRequirement>
 {
+    private readonly ICacheService _cacheService;
+    private readonly IPol
     protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, PermissionRequirement requirement)
     {
 

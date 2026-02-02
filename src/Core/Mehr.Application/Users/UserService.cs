@@ -11,6 +11,7 @@ using System.Text;
 using System.Security.Cryptography;
 using Mehr.Application.ApiValidate.Contracts;
 using Mehr.Application.ApiValidate.Contracts.Exceptions;
+using Mehr.Application.Common.Contracts;
 
 namespace Mehr.Application.Users;
 
@@ -21,18 +22,21 @@ public class UserService : IUserService
     private readonly IUnitOfWork _unitOfWork;
     private readonly IApiValidateService _apiValidateService;
     private readonly IUserContext _userContext;
+    private readonly ICacheService _cache;
 
     public UserService(IUserRepository repository,
         IRoleRepository roleRepository,
         IUnitOfWork unitOfWork,
         IApiValidateService apiValidateService,
-        IUserContext userContext)
+        IUserContext userContext,
+        ICacheService cache)
     {
         _repository = repository;
         _roleRepository = roleRepository;
         _unitOfWork = unitOfWork;
         _apiValidateService = apiValidateService;
         _userContext = userContext;
+        _cache = cache;
     }
 
     public async Task<Result<GetUserDto>> GetUserById(int id, CancellationToken cancellation)
@@ -92,6 +96,7 @@ public class UserService : IUserService
     }
     private string CreateToken(User user, DateTime validDate, List<RolePolicy_QueryModel> policies)
     {
+        string Cache_Key = $"permission:{user.RoleId}";
         var policyArr = policies.Where(x=> x.Value == 1)
             .Select(x => x.Id).ToArray();
         var securityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("c0d0cd85-f64e-4fcd-8625-c8c37c5bdd85"));

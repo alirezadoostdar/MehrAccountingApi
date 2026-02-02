@@ -2,6 +2,7 @@ using Mehr.Api.Middlewares;
 using Mehr.Application;
 using Mehr.Application.ApiValidate;
 using Mehr.Application.ApiValidate.Contracts;
+using Mehr.Application.Common.Contracts;
 using Mehr.Application.Costs;
 using Mehr.Application.Costs.Contracts;
 using Mehr.Application.DetailedAccounts;
@@ -27,6 +28,7 @@ using Mehr.Domain.Interfaces.DetailedAccounts;
 using Mehr.Domain.Stocks.Contracts;
 using Mehr.Domain.Users.Contracts;
 using Mehr.Infarstructure;
+using Mehr.Infarstructure.Chaching;
 using Mehr.Infarstructure.Costs;
 using Mehr.Infarstructure.DetailedAccounts;
 using Mehr.Infarstructure.Docs;
@@ -115,6 +117,9 @@ builder.Services.AddSwaggerGen(swagger =>
 builder.Services.AddAuthorization();
 builder.Services.AddSingleton<IAuthorizationHandler, PermissionAuthorizationHandler>();
 builder.Services.AddSingleton<IAuthorizationPolicyProvider, PermissionPolicyProvider>();
+
+builder.Services.AddMemoryCache();
+builder.Services.AddScoped<ICacheService, MemoryCacheService>();
 
 builder.Services.AddScoped<ILocalizationService, LocalizationService>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
