@@ -22,12 +22,10 @@ public class PermissionRequirement : IAuthorizationRequirement
 
 public class PermissionAuthorizationHandler : AuthorizationHandler<PermissionRequirement>
 {
-    private readonly ICacheService _cacheService;
     private readonly IRoleService _roleService;
 
-    public PermissionAuthorizationHandler(ICacheService cacheService, IRoleService roleService)
+    public PermissionAuthorizationHandler(IRoleService roleService)
     {
-        _cacheService = cacheService;
         _roleService = roleService;
     }
 
@@ -40,16 +38,8 @@ public class PermissionAuthorizationHandler : AuthorizationHandler<PermissionReq
         //            .Where(c => c.Type == CustomClaimTypes.Permission)
         //            .Select(c => c.Value)
         //            .ToHashSet();
-        var userPermissions = await _cacheService.GetOrCreateAsync(
-            $"permission:{Convert.ToInt32(roleId)}",
-            async ct =>
-            {
-                var perms = await _roleService.GetActivePolicyList(Convert.ToInt32(roleId), ct);
-                return perms;
-            },
-            TimeSpan.FromMinutes(20),
-            TimeSpan.FromSeconds(5),
-            CancellationToken.None);
+        var userPermissions =  await _roleService.GetActivePolicyList(Convert.ToInt32(roleId),default);
+
 
         bool isAuthorized = requirement.Mode switch
         {

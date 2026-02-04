@@ -115,17 +115,11 @@ builder.Services.AddSwaggerGen(swagger =>
 #endregion
 
 builder.Services.AddAuthorization();
-//builder.Services.AddScoped<IAuthorizationHandler, PermissionAuthorizationHandler>();
-//builder.Services.AddScoped<IAuthorizationPolicyProvider, PermissionPolicyProvider>();
-builder.Services.AddScoped<PermissionAuthorizationHandler>(); 
-builder.Services.AddSingleton<IAuthorizationHandler>(sp =>
-{
-    using var scope = sp.CreateScope();
-    return scope.ServiceProvider.GetRequiredService<PermissionAuthorizationHandler>();
-});
+builder.Services.AddSingleton<IAuthorizationPolicyProvider, PermissionPolicyProvider>();
+builder.Services.AddScoped<IAuthorizationHandler, PermissionAuthorizationHandler>();
 
 builder.Services.AddMemoryCache();
-builder.Services.AddScoped<ICacheService, MemoryCacheService>();
+builder.Services.AddSingleton<ICacheService, MemoryCacheService>();
 
 builder.Services.AddScoped<ILocalizationService, LocalizationService>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
