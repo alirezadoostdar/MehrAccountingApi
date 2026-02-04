@@ -34,10 +34,10 @@ public class PermissionAuthorizationHandler : AuthorizationHandler<PermissionReq
         string? roleId = context.User.Claims.Where(x => x.Type == "GroupId")
             .SingleOrDefault()?
             .Value;
-        //var userPermissions = context.User.Claims
-        //            .Where(c => c.Type == CustomClaimTypes.Permission)
-        //            .Select(c => c.Value)
-        //            .ToHashSet();
+
+        if (roleId is null)
+            return;
+
         var userPermissions =  await _roleService.GetActivePolicyList(Convert.ToInt32(roleId),default);
 
 

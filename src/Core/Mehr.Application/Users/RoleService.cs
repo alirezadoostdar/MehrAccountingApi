@@ -20,14 +20,6 @@ public class RoleService : IRoleService
     {
         var cacheKey = $"permission:{roleId}";
 
-        int xx = 1000;
-        await _cacheService.SetAsync<int>("alireza", xx,
-           TimeSpan.FromMinutes(20),
-           TimeSpan.FromMinutes(5),
-           cancellationToken);
-
-        var cc = await _cacheService.GetAsync<int>("alireza", cancellationToken);
-
         var cached = await _cacheService.GetAsync<HashSet<string>>(cacheKey, cancellationToken);
 
         if (cached is not null)
