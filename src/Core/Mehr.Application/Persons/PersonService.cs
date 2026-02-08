@@ -1,7 +1,9 @@
 ﻿using Mehr.Application.Persons.Contracts;
+using Mehr.Application.Persons.Contracts.Exceptions;
 using Mehr.Domain.Persons;
 using Mehr.Domain.Persons.Contracts;
 using Mehr.SharedKernel;
+using System.Globalization;
 
 namespace Mehr.Application.Persons;
 
@@ -16,8 +18,13 @@ public class PersonService : IPersonService
         _unitOfWork = unitOfWork;
     }
 
-    public Task<Result<Person>> GetByIdAsync(int id, CancellationToken cancellationToken)
+    public async Task<Result<Person>> GetByIdAsync(int id, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var person = await _repository.GetByIdAsync(id, cancellationToken);
+
+        if (person is null)
+            return Result.Failure<Person>(PersonErros.NotFound(id));
+
+        return person;
     }
 }
