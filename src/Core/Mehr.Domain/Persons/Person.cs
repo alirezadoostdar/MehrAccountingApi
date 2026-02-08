@@ -1,9 +1,10 @@
 ﻿using Mehr.Domain.Entities.Accounts;
 using Mehr.Domain.Entities.Contacts;
 using Mehr.Domain.Entities.Costs;
+using Mehr.Domain.Entities.Persons;
 using System.Data;
 
-namespace Mehr.Domain.Entities.Persons;
+namespace Mehr.Domain.Persons;
 
 public class Person : DetailedAccount
 {
@@ -63,7 +64,7 @@ public enum PersonTaxType
     Business = 2,
     Participate = 3,
     Foreigner = 4,
-    EndUser =5
+    EndUser = 5
 }
 
 public enum PersonType

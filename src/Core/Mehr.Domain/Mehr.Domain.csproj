@@ -15,4 +15,8 @@
     <ProjectReference Include="..\Mehr.SharedKernel\Mehr.SharedKernel.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Persons\Contracts\Dtos\" />
+  </ItemGroup>
+
 </Project>

@@ -1,4 +1,4 @@
-﻿namespace Mehr.Domain.Entities.Persons;
+﻿namespace Mehr.Domain.Persons;
 
 public class PersonSecondGroup
 {
