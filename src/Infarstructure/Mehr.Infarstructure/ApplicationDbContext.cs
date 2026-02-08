@@ -2,7 +2,9 @@
 using Mehr.Domain.Entities.Accounts;
 using Mehr.Domain.Entities.Contacts;
 using Mehr.Domain.Entities.Costs;
+using Mehr.Domain.Entities.Persons;
 using Mehr.Domain.FinancialYears;
+using Mehr.Domain.Persons;
 using Mehr.Domain.Stocks;
 using Mehr.Domain.Users;
 using Mehr.Infarstructure.Costs;
@@ -38,6 +40,11 @@ public class ApplicationDbContext : DbContext
     public DbSet<Cost> Costs { get; set; }
     public DbSet<CostFirstGroup> CostFirstGroups { get; set; }
     public DbSet<CostSecondGroup> CostSecondGroups { get; set; }
+
+    public DbSet<Person> Persons { get; set; }
+    public DbSet<PersonCommercial> PersonCommercials{ get; set; }
+    public DbSet<PersonFirstGroup> PersonFirstGroups { get; set; }
+    public DbSet<PersonSecondGroup> PersonSecondGroups { get; set; }
 
     public DbSet<Product> Products { get; set; }
     public DbSet<ProductCategory> ProductCategories { get; set; }
