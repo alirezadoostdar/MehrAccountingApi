@@ -13,6 +13,8 @@ using Mehr.Application.FinancialYears;
 using Mehr.Application.FinancialYears.Contracts;
 using Mehr.Application.Intrefaces;
 using Mehr.Application.Localizations;
+using Mehr.Application.Persons;
+using Mehr.Application.Persons.Contracts;
 using Mehr.Application.Services;
 using Mehr.Application.Stocks;
 using Mehr.Application.Stocks.Contracts;
@@ -25,6 +27,7 @@ using Mehr.Domain.FinancialYears.Contracts;
 using Mehr.Domain.Interfaces;
 using Mehr.Domain.Interfaces.Costs;
 using Mehr.Domain.Interfaces.DetailedAccounts;
+using Mehr.Domain.Persons.Contracts;
 using Mehr.Domain.Stocks.Contracts;
 using Mehr.Domain.Users.Contracts;
 using Mehr.Infarstructure;
@@ -34,6 +37,7 @@ using Mehr.Infarstructure.DetailedAccounts;
 using Mehr.Infarstructure.Docs;
 using Mehr.Infarstructure.FinancialYears;
 using Mehr.Infarstructure.Identity;
+using Mehr.Infarstructure.Persons;
 using Mehr.Infarstructure.Repositories.Stocks;
 using Mehr.Infarstructure.Stocks;
 using Mehr.Infarstructure.Users;
@@ -129,6 +133,9 @@ builder.Services.AddScoped<IDetailedAccountService, DetailedAccountService>();
 
 builder.Services.AddScoped<ICostRepository, EfCostRepository>();
 builder.Services.AddScoped<ICostService, CostService>();
+
+builder.Services.AddScoped<IPersonRepository, EfPersonRepository>();
+builder.Services.AddScoped<IPersonService, PersonService>();
 
 builder.Services.AddScoped<IProductCategoryRepository, EfProductCategoryRepository>();
 builder.Services.AddScoped<IZoneRepository, EfZoneRepository>();
