@@ -7,7 +7,10 @@ public class BankEntityMap : IEntityTypeConfiguration<Bank>
 {
     public void Configure(EntityTypeBuilder<Bank> builder)
     {
-        builder.ToTable("BanksTbl");
+        builder.ToTable("BanksTbl", tb =>
+        {
+            tb.Property(e => e.Id).HasColumnName("Fk_AccountSyscode");
+        });
 
         //builder.HasKey("Fk_AccountSyscode");
 

@@ -58,11 +58,9 @@ public class DetailedAccountService : IDetailedAccountService
 
     public async Task<Result<GetDetailedAccountDto>> GetByIdAsync(int id, CancellationToken cancellationToken)
     {
-        var xx = await _repository.FindAsync(id, cancellationToken);
         var account = await _repository.GetByIdAsync(id, cancellationToken);
         if (account is null)
             return Result.Failure<GetDetailedAccountDto>(DetailedAccountError.NotFound(id));
-        xx.Title = account.Title;
         return account;
     }
 
