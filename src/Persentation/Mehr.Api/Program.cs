@@ -134,8 +134,8 @@ builder.Services.AddScoped<IDetailedAccountService, DetailedAccountService>();
 builder.Services.AddScoped<ICostRepository, EfCostRepository>();
 builder.Services.AddScoped<ICostService, CostService>();
 
-//builder.Services.AddScoped<IPersonRepository, EfPersonRepository>();
-//builder.Services.AddScoped<IPersonService, PersonService>();
+builder.Services.AddScoped<IPersonRepository, EfPersonRepository>();
+builder.Services.AddScoped<IPersonService, PersonService>();
 
 builder.Services.AddScoped<IProductCategoryRepository, EfProductCategoryRepository>();
 builder.Services.AddScoped<IZoneRepository, EfZoneRepository>();

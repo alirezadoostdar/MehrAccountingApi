@@ -41,7 +41,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<CostFirstGroup> CostFirstGroups { get; set; }
     public DbSet<CostSecondGroup> CostSecondGroups { get; set; }
 
-    //public DbSet<Person> Persons { get; set; }
+    public DbSet<Person> Persons { get; set; }
     public DbSet<PersonCommercial> PersonCommercials{ get; set; }
     public DbSet<PersonFirstGroup> PersonFirstGroups { get; set; }
     public DbSet<PersonSecondGroup> PersonSecondGroups { get; set; }
