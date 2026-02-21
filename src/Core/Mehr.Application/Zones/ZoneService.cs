@@ -90,8 +90,14 @@ public class ZoneService : IZoneService
         return true;
     }
 
-    public Task<Result<bool>> DeleteAsync(int id, CancellationToken cancellationToken)
+    public async Task<Result<bool>> DeleteAsync(int id, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var zone = await _zoneRepository.GetByIdAsync(id, cancellationToken);
+        if (zone is null)
+            return Result.Failure<bool>(ZoneErrors.NotFound(id));
+
+        _zoneRepository.Delete(zone);
+        await _uow.SaveChangesAsync(cancellationToken);
+        return true;
     }
 }

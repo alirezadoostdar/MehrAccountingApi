@@ -42,4 +42,10 @@ public class ZoneController : Controller
     {
         return await _zoneService.UpdateAsync(id,dto, cancellationToken);
     }
+
+    [HttpDelete("{id:int}")]
+    public async Task<ActionResult<Result>> DeleteAsync(int id, CancellationToken cancellationToken)
+    {
+        return await _zoneService.DeleteAsync(id,cancellationToken);
+    }
 }
