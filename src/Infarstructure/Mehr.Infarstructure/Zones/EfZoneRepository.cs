@@ -13,10 +13,9 @@ public class EfZoneRepository : IZoneRepository
         _context = context;
     }
 
-    public async Task<int> AddAsync(Zone zone)
+    public async Task AddAsync(Zone zone, CancellationToken cancellationToken)
     {
-        await _context.Zones.AddAsync(zone);
-        return zone.Id;
+        await _context.Zones.AddAsync(zone,cancellationToken);
     }
 
     public void Delete(Zone zone)
@@ -39,7 +38,7 @@ public class EfZoneRepository : IZoneRepository
         return await _context.Zones.Where(x => x.Title == title).FirstOrDefaultAsync();
     }
 
-    public void UpdateAsync(Zone zone)
+    public void Update(Zone zone)
     {
          _context.Update(zone);
     }

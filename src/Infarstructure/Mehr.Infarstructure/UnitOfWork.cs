@@ -16,9 +16,9 @@ public class UnitOfWork : IUnitOfWork
         _context.Database.BeginTransaction();
     }
 
-    public async Task BeginAsync()
+    public async Task BeginAsync(CancellationToken cancellationToken)
     {
-       await _context.Database.BeginTransactionAsync();
+       await _context.Database.BeginTransactionAsync(cancellationToken);
     }
 
     public void Commit()
@@ -26,9 +26,9 @@ public class UnitOfWork : IUnitOfWork
         _context.Database.CommitTransaction();
     }
 
-    public async Task CommitAsync()
+    public async Task CommitAsync(CancellationToken cancellationToken)
     {
-        await _context.Database.CommitTransactionAsync();
+        await _context.Database.CommitTransactionAsync(cancellationToken);
     }
 
     public void Rollback()
@@ -36,9 +36,9 @@ public class UnitOfWork : IUnitOfWork
         _context.Database.RollbackTransaction();
     }
 
-    public async Task RollbackAsync()
+    public async Task RollbackAsync(CancellationToken cancellationToken)
     {
-        await _context.Database.RollbackTransactionAsync();
+        await _context.Database.RollbackTransactionAsync(cancellationToken);
     }
 
     public void SaveChange()
@@ -46,7 +46,7 @@ public class UnitOfWork : IUnitOfWork
         _context.SaveChanges();
     }
 
-    public async Task SaveChangesAsync()
+    public async Task SaveChangesAsync(CancellationToken cancellationToken)
     {
         await _context.SaveChangesAsync();
     }

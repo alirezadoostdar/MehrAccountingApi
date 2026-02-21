@@ -38,7 +38,7 @@ public class CostService : ICostService
             SecondGroupId = dto.SecondGroupId,
         };
         await _repository.AddAsync(cost, cancellation);
-        await _unitOfWork.SaveChangesAsync();
+        await _unitOfWork.SaveChangesAsync(cancellation);
         return cost.Id;
     }
 
@@ -51,7 +51,7 @@ public class CostService : ICostService
         };
 
         await _repository.AddFirstGroupAsync(firstGroup, cancellationToken);
-        await _unitOfWork.SaveChangesAsync();
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
         return firstGroup.Id;
     }
 
@@ -63,7 +63,7 @@ public class CostService : ICostService
         };
 
         await _repository.AddSecondGroupAsync(secondGroup, cancellationToken);
-        await _unitOfWork.SaveChangesAsync();
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
         return secondGroup.Id;
     }
 
@@ -78,7 +78,7 @@ public class CostService : ICostService
             return Result.Failure<bool>(CostErrors.FirstGroupIsUsed(id));
 
         _repository.DeleteFirstGroup(group);
-        await _unitOfWork.SaveChangesAsync();
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
 
         return true;
     }
@@ -94,7 +94,7 @@ public class CostService : ICostService
             return Result.Failure<bool>(CostErrors.SecondGroupIsUsed(id));
 
         _repository.DeleteSecondGroup(group);
-        await _unitOfWork.SaveChangesAsync();
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
 
         return true;
     }
@@ -156,7 +156,7 @@ public class CostService : ICostService
 
         group.Title = dto.Title;
 
-        await _unitOfWork.SaveChangesAsync();
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
         return true;
     }
 
@@ -168,7 +168,7 @@ public class CostService : ICostService
 
         group.Title = dto.Title;
 
-        await _unitOfWork.SaveChangesAsync();
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
         return true;
     }
 }

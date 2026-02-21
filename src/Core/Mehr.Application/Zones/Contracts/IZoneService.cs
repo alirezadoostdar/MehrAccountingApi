@@ -9,6 +9,6 @@ public interface IZoneService
     Task<Result<GetZoneDto>> GetByCodeAsync(int id, CancellationToken cancellationToken);
     Task<List<GetZoneDto>> GetAllAsync(CancellationToken cancellationToken);
     Task<Result<int>> AddAsync(AddZoneDto dto, CancellationToken cancellationToken);
-    void UpdateAsync(UpdateZoneDto dto);
-    void DeleteAsync(int id);
+    Task<Result<bool>> UpdateAsync(int id, UpdateZoneDto dto, CancellationToken cancellationToken);
+    Task<Result<bool>> DeleteAsync(int id, CancellationToken cancellationToken);
 }

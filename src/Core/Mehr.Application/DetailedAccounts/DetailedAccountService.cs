@@ -34,7 +34,7 @@ public class DetailedAccountService : IDetailedAccountService
         };
 
         await _repository.AddAsync(detailedAccount, cancellationToken);
-        await _unitOfWork.SaveChangesAsync();
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
         return detailedAccount.Id;
     }
 
@@ -45,7 +45,7 @@ public class DetailedAccountService : IDetailedAccountService
             return Result.Failure(DetailedAccountError.NotFound(id));
 
         _repository.Delete(account);
-        await _unitOfWork.SaveChangesAsync();
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
 
         return Result.Success();
     }
@@ -75,7 +75,7 @@ public class DetailedAccountService : IDetailedAccountService
         account.CreditLimit = dto.CreditLimit;
         account.IsDebtor = dto.IsDebtor;
 
-        await _unitOfWork.SaveChangesAsync();
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
         return Result.Success();
     }
 }

@@ -61,7 +61,7 @@ public class DocService : IDocService
             }).ToList()
         };
         await _repository.AddAsync(doc, cancellationToken);
-        await _unitOfWork.SaveChangesAsync();
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
         return doc.Id;
     }
 
@@ -72,7 +72,7 @@ public class DocService : IDocService
             return Result.Failure(DocErros.NotFound(id));
 
         _repository.Delete(doc);
-        await _unitOfWork.SaveChangesAsync();
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
         return Result.Success();
     }
 
@@ -120,7 +120,7 @@ public class DocService : IDocService
             Comment = "Test",
         });
         
-        await _unitOfWork.SaveChangesAsync();
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
         return true;
     }
 }

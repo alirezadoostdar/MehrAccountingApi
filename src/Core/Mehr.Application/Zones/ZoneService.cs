@@ -24,13 +24,10 @@ public class ZoneService : IZoneService
         if (zone is not null)
             return Result.Failure<int>(ZoneErrors.DuplicateTitle(dto.Title));
 
-        var id = await _zoneRepository.AddAsync(new Zone { Title = dto.Title });
-        return id;
-    }
-
-    public void DeleteAsync(int id)
-    {
-        throw new NotImplementedException();
+        var newZone = new Zone { Title = dto.Title };
+        await _zoneRepository.AddAsync(newZone, cancellationToken);
+        await _uow.SaveChangesAsync(cancellationToken);
+        return newZone.Id;
     }
 
     public async Task<List<GetZoneDto>> GetAllAsync(CancellationToken cancellationToken)
@@ -77,7 +74,23 @@ public class ZoneService : IZoneService
         };
     }
 
-    public void UpdateAsync(UpdateZoneDto dto)
+    public async Task<Result<bool>> UpdateAsync(int id, UpdateZoneDto dto, CancellationToken cancellationToken)
+    {
+        var zone = await _zoneRepository.GetByIdAsync(id, cancellationToken);
+        if (zone is null)
+            return Result.Failure<bool>(ZoneErrors.NotFound(id));
+
+        var zoneByTitle = await _zoneRepository.GetByTitleAsync(dto.Title, cancellationToken);
+        if (zoneByTitle is not null && zoneByTitle.Id != id)
+            return Result.Failure<bool>(ZoneErrors.DuplicateTitle(dto.Title));
+
+        zone.Title = dto.Title;
+        _zoneRepository.Update(zone);
+        await _uow.SaveChangesAsync(cancellationToken);
+        return true;
+    }
+
+    public Task<Result<bool>> DeleteAsync(int id, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }

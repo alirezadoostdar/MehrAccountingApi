@@ -3,11 +3,11 @@
 public interface IUnitOfWork
 {
     void SaveChange();
-    Task SaveChangesAsync();
+    Task SaveChangesAsync(CancellationToken cancellationToken);
     void Begin();
-    Task BeginAsync();
+    Task BeginAsync(CancellationToken cancellationToken);
     void Commit();
-    Task CommitAsync();
+    Task CommitAsync(CancellationToken cancellationToken);
     void Rollback();
-    Task RollbackAsync();
+    Task RollbackAsync(CancellationToken cancellationToken);
 }

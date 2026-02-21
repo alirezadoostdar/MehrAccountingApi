@@ -32,10 +32,14 @@ public class ZoneController : Controller
     }
 
     [HttpPost]
-    public async Task<ActionResult<Result>> AddAsync(CancellationToken cancellationToken)
+    public async Task<ActionResult<Result>> AddAsync(AddZoneDto dto, CancellationToken cancellationToken)
     {
-        Result<GetZoneDto> result = await _zoneService.GetByCodeAsync(id, cancellationToken);
+        return await _zoneService.AddAsync(dto, cancellationToken);
+    }
 
-        return result;
+    [HttpPut("{id:int}")]
+    public async Task<ActionResult<Result>> UpdateAsync(int id, UpdateZoneDto dto, CancellationToken cancellationToken)
+    {
+        return await _zoneService.UpdateAsync(id,dto, cancellationToken);
     }
 }
