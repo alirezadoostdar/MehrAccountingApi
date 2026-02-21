@@ -31,8 +31,8 @@ public class ZoneController : Controller
         return Ok(zone);
     }
 
-    [HttpGet("GetByCode/{id:int}")]
-    public async Task<ActionResult<Result>> GetByCode(int id, CancellationToken cancellationToken)
+    [HttpPost]
+    public async Task<ActionResult<Result>> AddAsync(CancellationToken cancellationToken)
     {
         Result<GetZoneDto> result = await _zoneService.GetByCodeAsync(id, cancellationToken);
 

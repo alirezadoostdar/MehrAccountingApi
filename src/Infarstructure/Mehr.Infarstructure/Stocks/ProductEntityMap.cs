@@ -103,7 +103,7 @@ public class ProductEntityMap : IEntityTypeConfiguration<Product>
             .IsRequired();
 
         builder.Property(x => x.HasDateExpire)
-            .HasColumnName("DateExpite")
+            .HasColumnName("DateExpire")
             .IsRequired();
 
         builder.Property(x => x.Tax2)

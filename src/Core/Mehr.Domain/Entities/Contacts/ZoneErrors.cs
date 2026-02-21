@@ -5,6 +5,10 @@ namespace Mehr.Domain.Entities.Contacts;
 public static class ZoneErrors
 {
     public static Error NotFound(int id) => Error.NotFound(
-    "Users.NotFound",
-    $"The user with the Id = '{id}' was not found");
+    "Zones.NotFound",
+    $"The zone with the Id = '{id}' was not found");
+
+    public static Error DuplicateTitle(string title) => Error.Failure(
+           "Zones.DuplicateTitle",
+           $"The title of zone ({title}) is duplicate");
 }
