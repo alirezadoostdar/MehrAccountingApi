@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Mehr.Application.Contacts.Contracts;
+using Mehr.SharedKernel;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Mehr.Api.Controllers;
 
@@ -6,9 +8,16 @@ namespace Mehr.Api.Controllers;
 [Route("api/contact")]
 public class ContactController : Controller
 {
+    private readonly IContactService _service;
 
-    public IActionResult Index()
+    public ContactController(IContactService service)
     {
-        return View();
+        _service = service;
+    }
+
+    [HttpGet("{id:int}")]
+    public async Task<ActionResult<Result>> GetByIdAsync(int id, CancellationToken cancellationToken)
+    {
+        return await _service.GetByIdAsync(id, cancellationToken);
     }
 }

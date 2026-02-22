@@ -1,4 +1,5 @@
-﻿using Mehr.Domain.Docs;
+﻿using Mehr.Domain.Contacts;
+using Mehr.Domain.Docs;
 using Mehr.Domain.Entities.Accounts;
 using Mehr.Domain.Entities.Costs;
 using Mehr.Domain.Entities.Persons;
@@ -56,4 +57,6 @@ public class ApplicationDbContext : DbContext
     public DbSet<User> Users { get; set; }
     public DbSet<Role> Roles { get; set; }
     public DbSet<RolePolicy_QueryModel> RolePloicies_QueryModel { get; set; }
+
+    public DbSet<ContactInfo> Contacts{ get; set; }
 }
