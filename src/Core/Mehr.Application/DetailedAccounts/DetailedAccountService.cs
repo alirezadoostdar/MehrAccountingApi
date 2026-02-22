@@ -4,7 +4,6 @@ using Mehr.Application.DetailedAccounts.Contracts.Exceptions;
 using Mehr.Application.Zones.Contracts.Dtos;
 using Mehr.Domain.Entities.Accounts;
 using Mehr.Domain.Entities.Accounts.Dtos;
-using Mehr.Domain.Entities.Contacts;
 using Mehr.Domain.Interfaces.DetailedAccounts;
 using Mehr.SharedKernel;
 

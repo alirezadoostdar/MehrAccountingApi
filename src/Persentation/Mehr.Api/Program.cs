@@ -3,6 +3,8 @@ using Mehr.Application;
 using Mehr.Application.ApiValidate;
 using Mehr.Application.ApiValidate.Contracts;
 using Mehr.Application.Common.Contracts;
+using Mehr.Application.Contacts;
+using Mehr.Application.Contacts.Contracts;
 using Mehr.Application.Costs;
 using Mehr.Application.Costs.Contracts;
 using Mehr.Application.DetailedAccounts;
@@ -22,6 +24,7 @@ using Mehr.Application.Users;
 using Mehr.Application.Users.Contracts;
 using Mehr.Application.Zones;
 using Mehr.Application.Zones.Contracts;
+using Mehr.Domain.Contacts.Contracts;
 using Mehr.Domain.Docs.Contracts;
 using Mehr.Domain.FinancialYears.Contracts;
 using Mehr.Domain.Interfaces;
@@ -32,6 +35,7 @@ using Mehr.Domain.Stocks.Contracts;
 using Mehr.Domain.Users.Contracts;
 using Mehr.Infarstructure;
 using Mehr.Infarstructure.Chaching;
+using Mehr.Infarstructure.Contacts;
 using Mehr.Infarstructure.Costs;
 using Mehr.Infarstructure.DetailedAccounts;
 using Mehr.Infarstructure.Docs;
@@ -145,6 +149,9 @@ builder.Services.AddScoped<IZoneService, ZoneService>();
 
 builder.Services.AddScoped<IDocRepository, EfDocRepository>();
 builder.Services.AddScoped<IDocService, DocService>();
+
+builder.Services.AddScoped<IContractRepository, EfContactRepository>();
+builder.Services.AddScoped<IContactService, ContactService>();
 
 builder.Services.AddScoped<IFinancialYearRepositrory, EfFinancialYearRepository>();
 builder.Services.AddScoped<IFinancialYearService, FinancialYearsService>();

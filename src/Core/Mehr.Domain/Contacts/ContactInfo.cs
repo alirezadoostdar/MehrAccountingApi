@@ -1,4 +1,5 @@
 ﻿using Mehr.Domain.Zones;
+using NetTopologySuite.Geometries;
 
 namespace Mehr.Domain.Contacts;
 
@@ -9,21 +10,21 @@ public class ContactInfo
     public string Address { get; set; }
     public string Comment { get; set; }
     public ContactSecurityType SecurityType { get; set; }
-    public int CityId { get; set; }
-    public City City { get; set; }
+    public int? CityId { get; set; }
+    public City? City { get; set; }
 
-    public int StateId { get; set; }
-    public int State { get; set; }
+    public int? StateId { get; set; }
+    public State? State { get; set; }
 
-    public int ZoneId { get; set; }
-    public Zone Zone { get; set; }
+    public int? ZoneId { get; set; }
+    public Zone? Zone { get; set; }
 
-    public string ShopName { get; set; }
-    public string TelegramId { get; set; }
-    public string TelegramMobileNumber { get; set; }
+    public string? ShopName { get; set; }
+    public string? TelegramId { get; set; }
+    public string? TelegramMobileNumber { get; set; }
     public decimal Latitude { get; set; }
     public decimal Longitude { get; set; }
-    public string Location { get; set; }
+    public Geometry? Location { get; set; }
 
     public ICollection<ContactNumber> Numbers { get; set; }
 }
@@ -31,6 +32,6 @@ public class ContactInfo
 
 public enum ContactSecurityType
 {
-    Public = 1,
-    Private = 2
+    Public = 0,
+    Private = 1
 }

@@ -54,5 +54,10 @@ public class ContactInfoEntityMap : IEntityTypeConfiguration<ContactInfo>
             .HasColumnName("TelegramMobileNo")
             .HasMaxLength(50);
 
+        builder.Property(z => z.Location)
+       .HasColumnName("Point")
+       .HasColumnType("geometry")
+       .IsRequired(false);
+
     }
 }
