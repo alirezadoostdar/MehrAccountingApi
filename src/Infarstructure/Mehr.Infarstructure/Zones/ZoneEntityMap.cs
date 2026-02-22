@@ -1,8 +1,8 @@
-﻿using Mehr.Domain.Entities.Contacts;
+﻿using Mehr.Domain.Zones;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Mehr.Infarstructure.Contacts;
+namespace Mehr.Infarstructure.Zones;
 
 public class ZoneEntityMap : IEntityTypeConfiguration<Zone>
 {

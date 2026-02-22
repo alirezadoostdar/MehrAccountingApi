@@ -1,4 +1,4 @@
-﻿namespace Mehr.Domain.Entities.Contacts;
+﻿namespace Mehr.Domain.Contacts;
 
 public class ContactType
 {

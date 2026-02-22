@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Contacts\Contracts\NewFolder\" />
     <Folder Include="Persons\Contracts\Dtos\" />
   </ItemGroup>
 

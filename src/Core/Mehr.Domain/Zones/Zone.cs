@@ -1,5 +1,5 @@
 ﻿using NetTopologySuite.Geometries;
-namespace Mehr.Domain.Entities.Contacts;
+namespace Mehr.Domain.Zones;
 
 public class Zone
 {

@@ -1,4 +1,4 @@
-﻿using Mehr.Domain.Entities.Contacts;
+﻿using Mehr.Domain.Contacts;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;

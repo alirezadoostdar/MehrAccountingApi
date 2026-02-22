@@ -1,6 +1,6 @@
 ﻿using Mehr.SharedKernel;
 
-namespace Mehr.Domain.Entities.Contacts;
+namespace Mehr.Domain.Zones;
 
 public static class ZoneErrors
 {

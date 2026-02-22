@@ -1,4 +1,4 @@
-﻿using Mehr.Domain.Entities.Contacts;
+﻿using Mehr.Domain.Zones;
 
 namespace Mehr.Domain.Interfaces;
 

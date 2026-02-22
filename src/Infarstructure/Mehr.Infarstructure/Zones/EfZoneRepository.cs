@@ -1,5 +1,5 @@
-﻿using Mehr.Domain.Entities.Contacts;
-using Mehr.Domain.Interfaces;
+﻿using Mehr.Domain.Interfaces;
+using Mehr.Domain.Zones;
 using Microsoft.EntityFrameworkCore;
 
 namespace Mehr.Infarstructure.Zones;

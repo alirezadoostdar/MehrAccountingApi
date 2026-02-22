@@ -1,8 +1,8 @@
 ﻿using Mehr.Application.Zones.Contracts;
 using Mehr.Application.Zones.Contracts.Dtos;
 using Mehr.Domain;
-using Mehr.Domain.Entities.Contacts;
 using Mehr.Domain.Interfaces;
+using Mehr.Domain.Zones;
 using Mehr.SharedKernel;
 
 namespace Mehr.Application.Zones;
