@@ -36,11 +36,23 @@ public class ContactInfoEntityMap : IEntityTypeConfiguration<ContactInfo>
         builder.Property(x => x.CityId)
             .HasColumnName("FK_IDCity");
 
+        builder.HasOne(x => x.City)
+            .WithMany()
+            .HasForeignKey(x => x.CityId);
+
         builder.Property(x => x.StateId)
             .HasColumnName("FK_IDOstan");
 
+        builder.HasOne(x => x.State)
+            .WithMany()
+            .HasForeignKey(x => x.StateId);
+
         builder.Property(x => x.ZoneId)
             .HasColumnName("FK_Zone");
+
+        builder.HasOne(x => x.Zone)
+            .WithMany()
+            .HasForeignKey(x => x.ZoneId);
 
         builder.Property(x => x.ShopName)
             .HasColumnName("Company")

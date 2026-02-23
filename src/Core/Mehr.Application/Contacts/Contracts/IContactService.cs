@@ -1,4 +1,5 @@
 ﻿using Mehr.Application.Contacts.Contracts.Dtos;
+using Mehr.Domain.Contacts.Dtos;
 using Mehr.SharedKernel;
 
 namespace Mehr.Application.Contacts.Contracts;
@@ -6,4 +7,5 @@ namespace Mehr.Application.Contacts.Contracts;
 public interface IContactService
 {
     Task<Result<GetContactDto>> GetByIdAsync(int id, CancellationToken cancellationToken);
+    Task<Result<GetStateDto>> GetAllStateAsync(CancellationToken cancellationToken);
 }

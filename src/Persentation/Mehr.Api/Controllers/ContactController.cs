@@ -20,4 +20,10 @@ public class ContactController : Controller
     {
         return await _service.GetByIdAsync(id, cancellationToken);
     }
+
+    [HttpGet("state")]
+    public async Task<ActionResult<Result>> GetAllStateAsync(CancellationToken cancellationToken)
+    {
+        return await _service.GetAllStateAsync(cancellationToken);
+    }
 }
