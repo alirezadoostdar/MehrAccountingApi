@@ -1,6 +1,8 @@
-﻿namespace Mehr.Domain.Contacts.Contracts;
+﻿using Mehr.Domain.Contacts.Dtos;
+
+namespace Mehr.Domain.Contacts.Contracts;
 
 public interface IStateRepository
 {
-    Task<List<State>> GetAll();
+    Task<List<GetStateDto>> GetAllAsync(CancellationToken cancellation);
 }

@@ -59,4 +59,5 @@ public class ApplicationDbContext : DbContext
     public DbSet<RolePolicy_QueryModel> RolePloicies_QueryModel { get; set; }
 
     public DbSet<ContactInfo> Contacts{ get; set; }
+    public DbSet<State> States { get; set; }
 }
