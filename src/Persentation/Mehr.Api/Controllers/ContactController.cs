@@ -26,4 +26,10 @@ public class ContactController : Controller
     {
         return await _service.GetAllStateAsync(cancellationToken);
     }
+
+    [HttpGet("city/{stateId:int}")]
+    public async Task<ActionResult<Result>> GetAllCitiesAsync(int stateId, CancellationToken cancellationToken)
+    {
+        return await _service.GetAllCityAsync(stateId, cancellationToken);
+    }
 }
