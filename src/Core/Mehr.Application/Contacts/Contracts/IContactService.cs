@@ -8,4 +8,5 @@ public interface IContactService
 {
     Task<Result<GetContactDto>> GetByIdAsync(int id, CancellationToken cancellationToken);
     Task<Result<List<GetStateDto>>> GetAllStateAsync(CancellationToken cancellationToken);
+    Task<Result<List<GetCityDto>>> GetAllCityAsync(int stateId, CancellationToken cancellationToken);
 }
