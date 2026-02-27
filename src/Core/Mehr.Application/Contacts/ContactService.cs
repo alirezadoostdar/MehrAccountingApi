@@ -11,15 +11,23 @@ public class ContactService : IContactService
     private readonly IContractRepository _repository;
     private readonly IUnitOfWork _uow;
     private readonly IStateRepository _stateRepository;
+    public readonly ICityRepository _cityRepository;
 
     public ContactService(
         IContractRepository repository,
         IUnitOfWork uow,
-        IStateRepository stateRepository)
+        IStateRepository stateRepository,
+        ICityRepository cityRepository)
     {
         _repository = repository;
         _uow = uow;
         _stateRepository = stateRepository;
+        _cityRepository = cityRepository;
+    }
+
+    public async Task<Result<List<GetCityDto>>> GetAllCityAsync(int stateId, CancellationToken cancellationToken)
+    {
+        return await _cityRepository.GetAllAsync(stateId, cancellationToken);
     }
 
     public async Task<Result<List<GetStateDto>>> GetAllStateAsync(CancellationToken cancellationToken)
