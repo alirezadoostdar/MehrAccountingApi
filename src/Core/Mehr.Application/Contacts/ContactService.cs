@@ -3,6 +3,7 @@ using Mehr.Application.Contacts.Contracts;
 using Mehr.Application.Contacts.Contracts.Dtos;
 using Mehr.Domain.Contacts;
 using Mehr.Domain.Contacts.Contracts;
+using Mehr.Domain.Contacts.Dto;
 using Mehr.Domain.Contacts.Dtos;
 using Mehr.Domain.Users;
 using Mehr.SharedKernel;
@@ -17,19 +18,22 @@ public class ContactService : IContactService
     private readonly IStateRepository _stateRepository;
     private readonly ICityRepository _cityRepository;
     private readonly ICacheService _cacheService;
+    private readonly IContactTypeRepository _contactTypeRepository;
 
     public ContactService(
         IContractRepository repository,
         IUnitOfWork uow,
         IStateRepository stateRepository,
         ICityRepository cityRepository,
-        ICacheService cacheService)
+        ICacheService cacheService,
+        IContactTypeRepository contactTypeRepository)
     {
         _repository = repository;
         _uow = uow;
         _stateRepository = stateRepository;
         _cityRepository = cityRepository;
         _cacheService = cacheService;
+        _contactTypeRepository = contactTypeRepository;
     }
 
     public async Task<Result<List<GetCityDto>>> GetAllCityAsync(int stateId, CancellationToken cancellationToken)
@@ -51,6 +55,27 @@ public class ContactService : IContactService
            cancellationToken);
 
         return cityList;
+    }
+
+    public async Task<Result<List<GetContactTypeDto>>> GetAllContactTypeAsync(CancellationToken cancellationToken)
+    {
+        var cacheKey = $"contactTypes";
+
+        var cached = await _cacheService.GetAsync<List<GetContactTypeDto>>(cacheKey, cancellationToken);
+
+        if (cached is not null)
+            return cached;
+
+        var contactTypeList = await _contactTypeRepository.GetAllAsync(cancellationToken);
+
+        await _cacheService.SetAsync<List<GetContactTypeDto>>(
+           cacheKey,
+           contactTypeList,
+           TimeSpan.FromMinutes(20),
+           TimeSpan.FromMinutes(5),
+           cancellationToken);
+
+        return contactTypeList;
     }
 
     public async Task<Result<List<GetStateDto>>> GetAllStateAsync(CancellationToken cancellationToken)
