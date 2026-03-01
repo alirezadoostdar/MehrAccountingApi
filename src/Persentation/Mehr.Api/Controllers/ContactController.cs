@@ -32,4 +32,10 @@ public class ContactController : Controller
     {
         return await _service.GetAllCityAsync(stateId, cancellationToken);
     }
+
+    [HttpGet("contact-type")]
+    public async Task<ActionResult<Result>> GetAllContactTypeAsync(CancellationToken cancellationToken)
+    {
+        return await _service.GetAllContactTypeAsync(cancellationToken);
+    }
 }
