@@ -12,6 +12,9 @@ public class ContactTypeEntityMap : IEntityTypeConfiguration<ContactType>
 
         builder.HasKey(x => x.Id);
 
+        builder.Property(x => x.Id)
+            .HasColumnName("FK");
+
         builder.Property(x => x.Title)
             .HasColumnName("TelTypes")
             .HasMaxLength(50)
