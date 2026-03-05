@@ -15,11 +15,10 @@ public class EfContactRepository : IContractRepository
 
     public async Task<ContactInfo?> GetByIdAsync(int id, CancellationToken cancellationToken)
     {
-        var numbers = await _context.ContactNumbers
-            .Include(x => x.ContactType).ToListAsync(cancellationToken);
         return await _context.Contacts
             .Where(x => x.Id == id)
             .Include(x => x.Numbers)
+            .ThenInclude(t => t.ContactType)
             .AsNoTracking()
             .FirstOrDefaultAsync(cancellationToken);
     }
