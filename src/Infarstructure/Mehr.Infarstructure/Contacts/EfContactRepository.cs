@@ -15,7 +15,8 @@ public class EfContactRepository : IContractRepository
 
     public async Task<ContactInfo?> GetByIdAsync(int id, CancellationToken cancellationToken)
     {
-        var numbers = await _context.ContactNumbers.ToListAsync(cancellationToken);
+        var numbers = await _context.ContactNumbers
+            .Include(x => x.).ToListAsync(cancellationToken);
         return await _context.Contacts
             .Where(x => x.Id == id)
             .Include(x => x.Numbers)

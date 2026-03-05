@@ -28,19 +28,9 @@ public class ContactNumberEntityMap : IEntityTypeConfiguration<ContactNumber>
             .HasColumnName("TelNoType")
             .IsRequired();
 
-        builder.HasOne(x => x.ContactType)
-            .WithMany()
-            .HasForeignKey(x => x.ContactTypeId);
-
         builder.Property(x => x.Title)
             .HasColumnName("Title")
             .HasMaxLength(50);
-
-        //builder.HasOne(x => x.ContactType)
-        //    .WithMany()
-        //    .HasForeignKey(x => x.ContactInfoId)
-        //    .IsRequired();
-
 
     }
 }
