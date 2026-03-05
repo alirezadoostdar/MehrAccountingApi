@@ -25,22 +25,22 @@ public class ContactNumberEntityMap : IEntityTypeConfiguration<ContactNumber>
             .IsRequired();
 
         builder.Property(x => x.ContactTypeId)
+            .HasColumnName("TelNoType")
             .IsRequired();
+
+        builder.HasOne(x => x.ContactType)
+            .WithMany()
+            .HasForeignKey(x => x.ContactTypeId);
 
         builder.Property(x => x.Title)
             .HasColumnName("Title")
             .HasMaxLength(50);
 
-        builder.HasOne(x => x.ContactType)
-            .WithMany()
-            .HasForeignKey(x => x.ContactInfoId)
-            .IsRequired();
+        //builder.HasOne(x => x.ContactType)
+        //    .WithMany()
+        //    .HasForeignKey(x => x.ContactInfoId)
+        //    .IsRequired();
 
-        builder.HasOne(x => x.ContactInfo)
-            .WithMany(x => x.Numbers)
-            .HasForeignKey(x => x.ContactInfoId)
-            .OnDelete(DeleteBehavior.Cascade)
-            .IsRequired();
 
     }
 }

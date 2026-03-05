@@ -1,5 +1,6 @@
 ﻿using Mehr.Domain.Contacts;
 using Mehr.Domain.Contacts.Contracts;
+using Microsoft.EntityFrameworkCore;
 
 namespace Mehr.Infarstructure.Contacts;
 
@@ -14,6 +15,11 @@ public class EfContactRepository : IContractRepository
 
     public async Task<ContactInfo?> GetByIdAsync(int id, CancellationToken cancellationToken)
     {
-        return await _context.Contacts.FindAsync(id, cancellationToken);
+        var numbers = await _context.ContactNumbers.ToListAsync(cancellationToken);
+        return await _context.Contacts
+            .Where(x => x.Id == id)
+            .Include(x => x.Numbers)
+            .AsNoTracking()
+            .FirstOrDefaultAsync(cancellationToken);
     }
 }

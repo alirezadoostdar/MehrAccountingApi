@@ -71,5 +71,9 @@ public class ContactInfoEntityMap : IEntityTypeConfiguration<ContactInfo>
        .HasColumnType("geometry")
        .IsRequired(false);
 
+        builder.HasMany(x => x.Numbers)
+            .WithOne(x => x.ContactInfo)
+            .HasForeignKey(x => x.ContactInfoId)
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }
