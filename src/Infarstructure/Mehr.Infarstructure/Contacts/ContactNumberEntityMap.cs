@@ -26,7 +26,12 @@ public class ContactNumberEntityMap : IEntityTypeConfiguration<ContactNumber>
 
         builder.Property(x => x.ContactTypeId)
             .HasColumnName("TelNoType")
+            .HasColumnType("tinyint")
             .IsRequired();
+
+        builder.HasOne(x => x.ContactType)
+            .WithMany()
+            .HasForeignKey(x => x.ContactInfoId);
 
         builder.Property(x => x.Title)
             .HasColumnName("Title")
