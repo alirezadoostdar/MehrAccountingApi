@@ -2,5 +2,5 @@
 
 public interface IContactImageRepository
 {
-    Task<List<ContactImage>> GetAllAsync();
+    Task<List<ContactImage>> GetAllAsync(CancellationToken cancellationToken);
 }

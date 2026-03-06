@@ -63,4 +63,5 @@ public class ApplicationDbContext : DbContext
     public DbSet<City> Cities { get; set; }
     public DbSet<ContactType> ContactTypes { get; set; }
     public DbSet<ContactNumber> ContactNumbers { get; set; }
+    public DbSet<ContactImage> ContactImages { get; set; }
 }

@@ -155,6 +155,7 @@ builder.Services.AddScoped<IContactService, ContactService>();
 builder.Services.AddScoped<IStateRepository, EfStateRepository>();
 builder.Services.AddScoped<ICityRepository, EfCityRepository>();
 builder.Services.AddScoped<IContactTypeRepository, EfContactTypeRepository>();
+builder.Services.AddScoped<IContactImageRepository, EfContactImageRepository>();
 
 builder.Services.AddScoped<IFinancialYearRepositrory, EfFinancialYearRepository>();
 builder.Services.AddScoped<IFinancialYearService, FinancialYearsService>();
