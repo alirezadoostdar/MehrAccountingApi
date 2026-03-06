@@ -111,6 +111,15 @@ public class ContactService : IContactService
             Comment = contact.Comment,
             Longitude = contact.Longitude,
             Latitude = contact.Latitude,
+            Numbers = contact.Numbers
+            .Select(x => new GetContactNumbersDto
+            {
+                Id = x.Id,
+                Number = x.Number,
+                Title = x.Title,
+                Type = x.ContactType.Title,
+                TypeId = x.ContactTypeId
+            }).ToList()
         };
         return dto;
     }

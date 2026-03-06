@@ -24,5 +24,14 @@ public class GetContactDto
     public decimal Latitude { get; set; }
     public decimal Longitude { get; set; }
 
-    //public ICollection<ContactNumber> Numbers { get; set; }
+    public List<GetContactNumbersDto> Numbers { get; set; } = new List<GetContactNumbersDto> { };
+}
+
+public class GetContactNumbersDto
+{
+    public int Id { get; set; }
+    public string Number { get; set; }
+    public int TypeId { get; set; }
+    public string Type { get; set; }
+    public string Title { get; set; }
 }
