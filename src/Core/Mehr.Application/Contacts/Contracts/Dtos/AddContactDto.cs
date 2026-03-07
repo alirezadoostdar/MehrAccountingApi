@@ -2,7 +2,6 @@
 
 public class AddContactDto
 {
-    public int Id { get; set; }
     public string Name { get; set; }
     public string Address { get; set; }
     public string Comment { get; set; }
@@ -20,9 +19,7 @@ public class AddContactDto
 
 public class AddContactNumbersDto
 {
-    public int Id { get; set; }
     public string Number { get; set; }
     public int TypeId { get; set; }
-    public string Type { get; set; }
     public string Title { get; set; }
 }

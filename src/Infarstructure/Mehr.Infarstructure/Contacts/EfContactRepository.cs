@@ -13,6 +13,11 @@ public class EfContactRepository : IContractRepository
         _context = context;
     }
 
+    public async Task AddAsync(ContactInfo contactInfo, CancellationToken cancellationToken)
+    {
+        await _context.Contacts.AddAsync(contactInfo, cancellationToken);
+    }
+
     public async Task<ContactInfo?> GetByIdAsync(int id, CancellationToken cancellationToken)
     {
         return await _context.Contacts

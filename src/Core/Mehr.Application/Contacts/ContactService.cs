@@ -36,6 +36,11 @@ public class ContactService : IContactService
         _contactTypeRepository = contactTypeRepository;
     }
 
+    public Task<Result<int>> AddContactAsync(AddContactDto dto, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
+
     public async Task<Result<List<GetCityDto>>> GetAllCityAsync(int stateId, CancellationToken cancellationToken)
     {
         var cacheKey = $"cities:{stateId}";

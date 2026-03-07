@@ -1,4 +1,5 @@
 ﻿using Mehr.Application.Contacts.Contracts;
+using Mehr.Application.Contacts.Contracts.Dtos;
 using Mehr.SharedKernel;
 using Microsoft.AspNetCore.Mvc;
 
@@ -38,5 +39,11 @@ public class ContactController : Controller
     public async Task<ActionResult<Result>> GetAllContactTypeAsync(CancellationToken cancellationToken)
     {
         return await _service.GetAllContactTypeAsync(cancellationToken);
+    }
+
+    [HttpPost]
+    public async Task<ActionResult<Result>> AddContactAsync(AddContactDto dto, CancellationToken cancellationToken)
+    {
+
     }
 }
