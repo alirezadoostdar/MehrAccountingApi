@@ -36,9 +36,35 @@ public class ContactService : IContactService
         _contactTypeRepository = contactTypeRepository;
     }
 
-    public Task<Result<int>> AddContactAsync(AddContactDto dto, CancellationToken cancellationToken)
+    public async Task<Result<int>> AddContactAsync(AddContactDto dto, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var contact = new ContactInfo
+        {
+            Name = dto.Name,
+            ShopName = dto.ShopName,
+            Address = dto.Address,
+            CityId = dto.CityId,
+            StateId = dto.StateId,
+            ZoneId = dto.ZoneId,
+            Comment = dto.Comment,
+            TelegramId = dto.TelegramId,
+            Latitude = dto.Latitude,
+            Longitude = dto.Longitude,
+            TelegramMobileNumber = dto.TelegramMobileNumber,
+            SecurityType = 0,
+            Numbers = dto.Numbers
+            .Select(x => new ContactNumber
+            {
+                Number = x.Number,
+                Title = x.Title,
+                ContactTypeId = x.TypeId
+            }).ToList()
+        };
+
+        await _repository.AddAsync(contact, cancellationToken);
+        await _uow.SaveChangesAsync(cancellationToken);
+        return contact.Id;
+
     }
 
     public async Task<Result<List<GetCityDto>>> GetAllCityAsync(int stateId, CancellationToken cancellationToken)
