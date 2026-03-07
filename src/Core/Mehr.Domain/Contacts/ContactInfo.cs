@@ -6,9 +6,9 @@ namespace Mehr.Domain.Contacts;
 public class ContactInfo
 {
     public int Id { get; set; }
-    public string Name { get; set; }
-    public string Address { get; set; }
-    public string Comment { get; set; }
+    public string Name { get; set; } = null!;
+    public string Address { get; set; } = null!;
+    public string Comment { get; set; } = null!;
     public ContactSecurityType SecurityType { get; set; }
     public int? CityId { get; set; }
     public City? City { get; set; }
@@ -22,8 +22,8 @@ public class ContactInfo
     public string? ShopName { get; set; }
     public string? TelegramId { get; set; }
     public string? TelegramMobileNumber { get; set; }
-    public decimal Latitude { get; set; }
-    public decimal Longitude { get; set; }
+    public decimal? Latitude { get; set; }
+    public decimal? Longitude { get; set; }
     public Geometry? Location { get; set; }
 
     public ICollection<ContactNumber> Numbers { get; set; } = new List<ContactNumber>();

@@ -44,6 +44,6 @@ public class ContactController : Controller
     [HttpPost]
     public async Task<ActionResult<Result>> AddContactAsync(AddContactDto dto, CancellationToken cancellationToken)
     {
-
+        return await _service.AddContactAsync(dto, cancellationToken);
     }
 }
