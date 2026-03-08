@@ -61,6 +61,16 @@ public class ContactService : IContactService
             }).ToList()
         };
 
+        if (dto.ImageBase64 is not null)
+        {
+            var imageBytes = Convert.FromBase64String(dto.ImageBase64);
+            contact.Image = new ContactImage
+            {
+                Image = imageBytes,
+                Name = "image"
+            };
+        }
+
         await _repository.AddAsync(contact, cancellationToken);
         await _uow.SaveChangesAsync(cancellationToken);
         return contact.Id;

@@ -26,6 +26,8 @@ public class ContactInfo
     public decimal? Longitude { get; set; }
     public Geometry? Location { get; set; }
 
+    public ContactImage? Image { get; set; }
+
     public ICollection<ContactNumber> Numbers { get; set; } = new List<ContactNumber>();
 }
 

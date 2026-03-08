@@ -75,5 +75,9 @@ public class ContactInfoEntityMap : IEntityTypeConfiguration<ContactInfo>
             .WithOne(x => x.ContactInfo)
             .HasForeignKey(x => x.ContactInfoId)
             .OnDelete(DeleteBehavior.Cascade);
+
+        builder.HasOne(x => x.Image)
+            .WithOne(x => x.ContactInfo)
+            .HasForeignKey<ContactImage>(x => x.ContactInfoId);
     }
 }

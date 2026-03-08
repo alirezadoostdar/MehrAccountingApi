@@ -14,6 +14,8 @@ public class AddContactDto
     public decimal? Latitude { get; set; }
     public decimal? Longitude { get; set; }
 
+    public string? ImageBase64 { get; set; }
+
     public List<AddContactNumbersDto> Numbers { get; set; } = new List<AddContactNumbersDto> { };
 }
 
