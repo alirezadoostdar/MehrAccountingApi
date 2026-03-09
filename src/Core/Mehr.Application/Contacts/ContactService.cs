@@ -198,7 +198,7 @@ public class ContactService : IContactService
     public async Task<Result<bool>> UpdateContactAsync(int id, UpdateContactDto dto, CancellationToken cancellation)
     {
 
-        var contact = await _repository.GetByIdNoTrackAsync(id, cancellation);
+        var contact = await _repository.GetByIdAsync(id, cancellation);
         if (contact is null)
             return Result.Failure<bool>(ContactErrors.NotFound(id));
 
