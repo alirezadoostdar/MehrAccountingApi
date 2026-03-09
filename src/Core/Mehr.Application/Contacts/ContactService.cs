@@ -217,7 +217,6 @@ public class ContactService : IContactService
             contact.Image = null;
         }
 
-        //_repository.Update(contact);
         await _uow.SaveChangesAsync(cancellation);
         return true;
     }
