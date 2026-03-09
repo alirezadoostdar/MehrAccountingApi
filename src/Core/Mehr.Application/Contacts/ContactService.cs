@@ -44,7 +44,9 @@ public class ContactService : IContactService
     {
         var geometryFactory = NtsGeometryServices.Instance.CreateGeometryFactory(srid: 4326);
 
-        var point = geometryFactory.CreatePoint(new Coordinate(Convert.ToDouble( dto.Longitude), Convert.ToDouble(dto.Latitude)));
+        var point = geometryFactory.CreatePoint(
+            new Coordinate(Convert.ToDouble( dto.Longitude), Convert.ToDouble(dto.Latitude)));
+
         var contact = new ContactInfo
         {
             Name = dto.Name,
@@ -195,9 +197,15 @@ public class ContactService : IContactService
 
     public async Task<Result<bool>> UpdateContactAsync(int id, UpdateContactDto dto, CancellationToken cancellation)
     {
-        var contact = await _repository.GetByIdAsync(id, cancellation);
+
+        var contact = await _repository.GetByIdNoTrackAsync(id, cancellation);
         if (contact is null)
             return Result.Failure<bool>(ContactErrors.NotFound(id));
+
+        var geometryFactory = NtsGeometryServices.Instance.CreateGeometryFactory(srid: 4326);
+
+        var point = geometryFactory.CreatePoint(
+            new Coordinate(Convert.ToDouble(dto.Longitude), Convert.ToDouble(dto.Latitude)));
 
         contact.Name = dto.Name;
         contact.Address = dto.Address;
@@ -210,6 +218,7 @@ public class ContactService : IContactService
         contact.CityId = dto.CityId;
         contact.StateId = dto.StateId;
         contact.ZoneId = dto.ZoneId;
+        contact.Location = point;
         contact.Numbers = dto.Numbers.Select(x => new ContactNumber
         {
             Id = x.Id,
