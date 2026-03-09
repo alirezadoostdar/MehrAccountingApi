@@ -9,6 +9,8 @@ using Mehr.Domain.Contacts.Dtos;
 using Mehr.Domain.Users;
 using Mehr.SharedKernel;
 using Microsoft.Extensions.Caching.Memory;
+using NetTopologySuite;
+using NetTopologySuite.Geometries;
 using System.Threading;
 
 namespace Mehr.Application.Contacts;
@@ -40,6 +42,9 @@ public class ContactService : IContactService
 
     public async Task<Result<int>> AddContactAsync(AddContactDto dto, CancellationToken cancellationToken)
     {
+        var geometryFactory = NtsGeometryServices.Instance.CreateGeometryFactory(srid: 4326);
+
+        var point = geometryFactory.CreatePoint(new Coordinate(Convert.ToDouble( dto.Longitude), Convert.ToDouble(dto.Latitude)));
         var contact = new ContactInfo
         {
             Name = dto.Name,
@@ -54,6 +59,7 @@ public class ContactService : IContactService
             Longitude = dto.Longitude,
             TelegramMobileNumber = dto.TelegramMobileNumber,
             SecurityType = 0,
+            Location = point,
             Numbers = dto.Numbers
             .Select(x => new ContactNumber
             {
