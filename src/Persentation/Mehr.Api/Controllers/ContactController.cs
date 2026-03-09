@@ -46,4 +46,17 @@ public class ContactController : Controller
     {
         return await _service.AddContactAsync(dto, cancellationToken);
     }
+
+    [HttpPut("{id:int}")]
+    public async Task<ActionResult<Result>> UpdateContactAsync(int id, UpdateContactDto dto,
+        CancellationToken cancellationToken)
+    {
+        return await _service.UpdateContactAsync(id, dto, cancellationToken);
+    }
+
+    [HttpDelete("{id:int}")]
+    public async Task<ActionResult<Result>> DeleteContactAsync(int id, CancellationToken cancellation)
+    {
+        return await _service.DeleteContactAsync(id, cancellation);
+    }
 }

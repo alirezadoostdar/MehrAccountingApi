@@ -3,12 +3,12 @@
 public class ContactNumber
 {
     public int Id { get; set; }
-    public string Number { get; set; }
-    public string Title { get; set; }
+    public string Number { get; set; } = null!;
+    public string Title { get; set; } = null!;
 
     public int ContactTypeId { get; set; }
-    public ContactType ContactType { get; set; }
+    public ContactType ContactType { get; set; } = null!;
 
     public int ContactInfoId { get; set; }
-    public ContactInfo ContactInfo { get; set; }
+    public ContactInfo ContactInfo { get; set; } = null!;
 }

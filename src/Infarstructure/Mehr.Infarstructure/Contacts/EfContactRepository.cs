@@ -18,13 +18,27 @@ public class EfContactRepository : IContractRepository
         await _context.Contacts.AddAsync(contactInfo, cancellationToken);
     }
 
+    public void Delete(ContactInfo contactInfo)
+    {
+         _context.Contacts.Remove(contactInfo);
+    }
+
     public async Task<ContactInfo?> GetByIdAsync(int id, CancellationToken cancellationToken)
     {
         return await _context.Contacts
             .Where(x => x.Id == id)
             .Include(x => x.Numbers)
             .ThenInclude(t => t.ContactType)
-            .AsNoTracking()
+            .Include(i => i.Image)
+            .Include(z => z.Zone)
+            .Include(s => s.State)
+            .Include(c => c.City)
+            //.AsNoTracking()
             .FirstOrDefaultAsync(cancellationToken);
+    }
+
+    public void Update(ContactInfo contactInfo)
+    {
+        _context.Contacts.Update(contactInfo);
     }
 }

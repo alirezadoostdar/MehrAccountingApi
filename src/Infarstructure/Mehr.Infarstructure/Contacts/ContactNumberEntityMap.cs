@@ -31,7 +31,7 @@ public class ContactNumberEntityMap : IEntityTypeConfiguration<ContactNumber>
 
         builder.HasOne(x => x.ContactType)
             .WithMany()
-            .HasForeignKey(x => x.ContactInfoId);
+            .HasForeignKey(x => x.ContactTypeId);
 
         builder.Property(x => x.Title)
             .HasColumnName("Title")

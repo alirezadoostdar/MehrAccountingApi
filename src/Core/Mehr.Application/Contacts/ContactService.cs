@@ -1,6 +1,7 @@
 ﻿using Mehr.Application.Common.Contracts;
 using Mehr.Application.Contacts.Contracts;
 using Mehr.Application.Contacts.Contracts.Dtos;
+using Mehr.Application.Contacts.Contracts.Exceprions;
 using Mehr.Domain.Contacts;
 using Mehr.Domain.Contacts.Contracts;
 using Mehr.Domain.Contacts.Dto;
@@ -8,6 +9,7 @@ using Mehr.Domain.Contacts.Dtos;
 using Mehr.Domain.Users;
 using Mehr.SharedKernel;
 using Microsoft.Extensions.Caching.Memory;
+using System.Threading;
 
 namespace Mehr.Application.Contacts;
 
@@ -75,6 +77,17 @@ public class ContactService : IContactService
         await _uow.SaveChangesAsync(cancellationToken);
         return contact.Id;
 
+    }
+
+    public async Task<Result<bool>> DeleteContactAsync(int id, CancellationToken cancellationToken)
+    {
+        var contact = await _repository.GetByIdAsync(id, cancellationToken);
+        if(contact is null)
+            return Result.Failure<bool>(ContactErrors.NotFound(id));
+
+        _repository.Delete(contact);
+        await _uow.SaveChangesAsync(cancellationToken);
+        return true;
     }
 
     public async Task<Result<List<GetCityDto>>> GetAllCityAsync(int stateId, CancellationToken cancellationToken)
@@ -163,5 +176,49 @@ public class ContactService : IContactService
             }).ToList()
         };
         return dto;
+    }
+
+    public async Task<Result<bool>> UpdateContactAsync(int id, UpdateContactDto dto, CancellationToken cancellation)
+    {
+        var contact = await _repository.GetByIdAsync(id, cancellation);
+        if (contact is null)
+            return Result.Failure<bool>(ContactErrors.NotFound(id));
+
+        contact.Name = dto.Name;
+        contact.Address = dto.Address;
+        contact.Comment = dto.Comment;
+        contact.Longitude = dto.Longitude;
+        contact.Latitude = dto.Latitude;
+        contact.TelegramId = dto.TelegramId;
+        contact.TelegramMobileNumber = dto.TelegramMobileNumber;
+        contact.ShopName = dto.ShopName;
+        contact.CityId = dto.CityId;
+        contact.StateId = dto.StateId;
+        contact.ZoneId = dto.ZoneId;
+        contact.Numbers = dto.Numbers.Select(x => new ContactNumber
+        {
+            Id = x.Id,
+            Number = x.Number,
+            ContactTypeId = x.TypeId,
+            Title = x.Title
+        }).ToList();
+
+        if (dto.ImageBase64 is not null)
+        {
+            var imageBytes = Convert.FromBase64String(dto.ImageBase64);
+            contact.Image = new ContactImage
+            {
+                Image = imageBytes,
+                Name = "image"
+            };
+        }
+        else
+        {
+            contact.Image = null;
+        }
+
+        //_repository.Update(contact);
+        await _uow.SaveChangesAsync(cancellation);
+        return true;
     }
 }

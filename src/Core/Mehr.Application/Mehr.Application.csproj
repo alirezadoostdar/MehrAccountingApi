@@ -13,7 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Contacts\Contracts\Exceprions\" />
     <Folder Include="Costs\Contracts\Exceptions\" />
     <Folder Include="Docs\Contracts\Dtos\" />
     <Folder Include="Persons\Contracts\Dtos\" />
