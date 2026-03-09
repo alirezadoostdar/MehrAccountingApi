@@ -33,7 +33,6 @@ public class EfContactRepository : IContractRepository
             .Include(z => z.Zone)
             .Include(s => s.State)
             .Include(c => c.City)
-            //.AsNoTracking()
             .FirstOrDefaultAsync(cancellationToken);
     }
 

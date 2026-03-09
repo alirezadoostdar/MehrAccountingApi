@@ -155,7 +155,7 @@ public class ContactService : IContactService
 
     public async Task<Result<GetContactDto>> GetByIdAsync(int id, CancellationToken cancellationToken)
     {
-        var contact = await _repository.GetByIdAsync(id, cancellationToken);
+        var contact = await _repository.GetByIdNoTrackAsync(id, cancellationToken);
 
         var dto = new GetContactDto
         {
@@ -165,6 +165,15 @@ public class ContactService : IContactService
             Comment = contact.Comment,
             Longitude = contact.Longitude,
             Latitude = contact.Latitude,
+            ShopName = contact.ShopName,
+            StateId = contact.StateId,
+            State = contact.State.Title,
+            CityId = contact.CityId,
+            City = contact.City.Title,
+            ZoneId = contact.ZoneId,
+            Zone = contact.Zone.Title,
+            TelegramId = contact.TelegramId,
+            TelegramMobileNumber = contact.TelegramMobileNumber,
             Numbers = contact.Numbers
             .Select(x => new GetContactNumbersDto
             {
