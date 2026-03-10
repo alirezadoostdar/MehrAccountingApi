@@ -165,6 +165,9 @@ public class ContactService : IContactService
     {
         var contact = await _repository.GetByIdNoTrackAsync(id, cancellationToken);
 
+        if (contact is null)
+            return Result.Failure<GetContactDto>(ContactErrors.NotFound(id));
+
         var dto = new GetContactDto
         {
             Id = contact.Id,
