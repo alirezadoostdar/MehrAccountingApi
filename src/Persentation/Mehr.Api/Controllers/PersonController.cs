@@ -20,4 +20,12 @@ public class PersonController : Controller
     {
         return await _service.GetByIdAsync(id, cancellationToken);
     }
+    #region first-group
+
+    [HttpGet("first-group")]
+    public async Task<ActionResult<Result>> GetAllFirstGroupAsync(CancellationToken cancellationToken)
+    {
+        return await _service.GetAllFirtGroupAsync(cancellationToken);
+    }
+    #endregion
 }
