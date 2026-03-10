@@ -1,8 +1,10 @@
 ﻿using Mehr.Application.Persons.Contracts;
+using Mehr.Application.Persons.Contracts.Dtos;
 using Mehr.Application.Persons.Contracts.Exceptions;
 using Mehr.Domain.Persons;
 using Mehr.Domain.Persons.Contracts;
 using Mehr.SharedKernel;
+using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 
 namespace Mehr.Application.Persons;
@@ -11,11 +13,34 @@ public class PersonService : IPersonService
 {
     private readonly IPersonRepository _repository;
     private readonly IUnitOfWork _unitOfWork;
+    private readonly IPersonFirstGroupRepository _firstGroupRepository;
 
-    public PersonService(IPersonRepository repository, IUnitOfWork unitOfWork)
+    public PersonService(
+        IPersonRepository repository,
+        IUnitOfWork unitOfWork,
+        IPersonFirstGroupRepository firstGroupRepository)
     {
         _repository = repository;
         _unitOfWork = unitOfWork;
+        _firstGroupRepository = firstGroupRepository;
+    }
+
+    public Task<Result<bool>> DeleteFirstGroupAsync(int id, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
+
+    public async Task<Result<List<GetPersonFirstGroupDto>>> GetAllFirtGroupAsync(CancellationToken cancellationToken)
+    {
+        var list = await _firstGroupRepository
+            .GetAllAsync(cancellationToken);
+
+        return list.Select(x => new GetPersonFirstGroupDto
+        {
+            Id = x.Id,
+            title = x.Title,
+        }).ToList();
+            
     }
 
     public async Task<Result<Person>> GetByIdAsync(int id, CancellationToken cancellationToken)
@@ -26,5 +51,15 @@ public class PersonService : IPersonService
             return Result.Failure<Person>(PersonErros.NotFound(id));
 
         return person;
+    }
+
+    public Task<Result<GetPersonFirstGroupDto>> GetFirstGroupByIdAsync(int id, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<Result<bool>> UpdateFirstGroupAsync(int id, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
     }
 }

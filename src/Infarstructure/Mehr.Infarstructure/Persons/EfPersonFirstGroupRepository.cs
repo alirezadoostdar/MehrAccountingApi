@@ -32,6 +32,7 @@ public class EfPersonFirstGroupRepository : IPersonFirstGroupRepository
     {
         return await _context.PersonFirstGroups
             .Where(x => x.Id == id)
+            .AsNoTracking()
             .FirstOrDefaultAsync(cancellationToken);
     }
 
