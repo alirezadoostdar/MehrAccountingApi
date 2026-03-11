@@ -10,6 +10,7 @@ public interface IPersonService
 
     Task<Result<GetPersonFirstGroupDto>> GetFirstGroupByIdAsync(int id, CancellationToken cancellationToken);
     Task<Result<List<GetPersonFirstGroupDto>>> GetAllFirtGroupAsync(CancellationToken cancellationToken);
+    Task<Result<int>> AddFirstGroupAsync(AddPersonFirstGroupDto dto, CancellationToken cancellationToken);
     Task<Result<bool>> DeleteFirstGroupAsync(int id, CancellationToken cancellationToken);
     Task<Result<bool>> UpdateFirstGroupAsync(int id, CancellationToken cancellationToken);
 }

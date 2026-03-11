@@ -13,6 +13,11 @@ public class EfPersonFirstGroupRepository : IPersonFirstGroupRepository
         _context = context;
     }
 
+    public async Task AddFirsGroupAsync(PersonFirstGroup firsGroup, CancellationToken cancellationToken)
+    {
+        await _context.PersonFirstGroups.AddAsync(firsGroup, cancellationToken);
+    }
+
     public void Delete(PersonFirstGroup personFirstGroup)
     {
         _context.Remove(personFirstGroup);

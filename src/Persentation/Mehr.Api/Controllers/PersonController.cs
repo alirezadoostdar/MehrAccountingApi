@@ -1,4 +1,5 @@
 ﻿using Mehr.Application.Persons.Contracts;
+using Mehr.Application.Persons.Contracts.Dtos;
 using Mehr.SharedKernel;
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,6 +27,14 @@ public class PersonController : Controller
     public async Task<ActionResult<Result>> GetAllFirstGroupAsync(CancellationToken cancellationToken)
     {
         return await _service.GetAllFirtGroupAsync(cancellationToken);
+    }
+
+    [HttpPost("first-group")]
+    public async Task<ActionResult<Result>> AddFirstGroupAsync( 
+        AddPersonFirstGroupDto dto ,
+        CancellationToken cancellationToken)
+    {
+        return await _service.AddFirstGroupAsync(dto, cancellationToken);
     }
     #endregion
 }

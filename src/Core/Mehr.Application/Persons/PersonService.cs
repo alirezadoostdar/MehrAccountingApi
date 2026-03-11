@@ -1,6 +1,7 @@
 ﻿using Mehr.Application.Persons.Contracts;
 using Mehr.Application.Persons.Contracts.Dtos;
 using Mehr.Application.Persons.Contracts.Exceptions;
+using Mehr.Domain.Entities.Persons;
 using Mehr.Domain.Persons;
 using Mehr.Domain.Persons.Contracts;
 using Mehr.SharedKernel;
@@ -23,6 +24,18 @@ public class PersonService : IPersonService
         _repository = repository;
         _unitOfWork = unitOfWork;
         _firstGroupRepository = firstGroupRepository;
+    }
+
+    public async Task<Result<int>> AddFirstGroupAsync(AddPersonFirstGroupDto dto, CancellationToken cancellationToken)
+    {
+        var firstGroup = new PersonFirstGroup
+        {
+            Title = dto.Title,
+        };
+
+        await _firstGroupRepository.AddFirstGroupAsync(firstGroup, cancellationToken);
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
+        return firstGroup.Id;
     }
 
     public Task<Result<bool>> DeleteFirstGroupAsync(int id, CancellationToken cancellationToken)
