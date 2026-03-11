@@ -13,7 +13,7 @@ public class EfPersonFirstGroupRepository : IPersonFirstGroupRepository
         _context = context;
     }
 
-    public async Task AddFirsGroupAsync(PersonFirstGroup firsGroup, CancellationToken cancellationToken)
+    public async Task AddFirstGroupAsync(PersonFirstGroup firsGroup, CancellationToken cancellationToken)
     {
         await _context.PersonFirstGroups.AddAsync(firsGroup, cancellationToken);
     }
@@ -39,6 +39,14 @@ public class EfPersonFirstGroupRepository : IPersonFirstGroupRepository
             .Where(x => x.Id == id)
             .AsNoTracking()
             .FirstOrDefaultAsync(cancellationToken);
+    }
+
+    public async Task<PersonFirstGroup?> GetByTitleAsync(string title, CancellationToken cancellationToken)
+    {
+        return await _context.PersonFirstGroups
+            .Where(x => x.Title == title)
+            .AsNoTracking()
+            .FirstOrDefaultAsync (cancellationToken);
     }
 
     public void Update(PersonFirstGroup personFirstGroup)

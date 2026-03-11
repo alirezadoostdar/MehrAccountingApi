@@ -28,6 +28,10 @@ public class PersonService : IPersonService
 
     public async Task<Result<int>> AddFirstGroupAsync(AddPersonFirstGroupDto dto, CancellationToken cancellationToken)
     {
+        var group = await _firstGroupRepository.GetByTitleAsync(dto.Title, cancellationToken);
+        if (group is not null)
+            return Result.Failure<int>(PersonGroupErrors.IsDuplicate(dto.Title));
+
         var firstGroup = new PersonFirstGroup
         {
             Title = dto.Title,
