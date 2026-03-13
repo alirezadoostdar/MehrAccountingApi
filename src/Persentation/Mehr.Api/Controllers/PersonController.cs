@@ -36,5 +36,13 @@ public class PersonController : Controller
     {
         return await _service.AddFirstGroupAsync(dto, cancellationToken);
     }
+
+    [HttpPut("first-group/{id:int}")]
+    public async Task<ActionResult<Result>> UpdateFirstGroupAsync(
+        UpdatePersonFirstGroupDto dto,
+        CancellationToken cancellationToken)
+    {
+        return await _service.UpdateFirstGroupAsync(dto, cancellationToken);
+    }
     #endregion
 }

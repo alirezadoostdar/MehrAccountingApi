@@ -75,7 +75,9 @@ public class PersonService : IPersonService
         throw new NotImplementedException();
     }
 
-    public Task<Result<bool>> UpdateFirstGroupAsync(int id, CancellationToken cancellationToken)
+    public Task<Result<bool>> UpdateFirstGroupAsync(int id,
+        UpdatePersonFirstGroupDto dto,
+        CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }
