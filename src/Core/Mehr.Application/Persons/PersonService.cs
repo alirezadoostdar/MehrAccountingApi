@@ -75,10 +75,18 @@ public class PersonService : IPersonService
         throw new NotImplementedException();
     }
 
-    public Task<Result<bool>> UpdateFirstGroupAsync(int id,
+    public async Task<Result<bool>> UpdateFirstGroupAsync(int id,
         UpdatePersonFirstGroupDto dto,
         CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var personGroup = await _firstGroupRepository.GetByIdAsync(id, cancellationToken);
+
+        if (personGroup is null)
+            return Result.Failure<bool>(PersonGroupErrors.NotFound(id));
+
+        personGroup.Title = dto.Title;
+
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
+
     }
 }
