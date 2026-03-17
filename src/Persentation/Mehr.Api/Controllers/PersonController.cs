@@ -38,11 +38,11 @@ public class PersonController : Controller
     }
 
     [HttpPut("first-group/{id:int}")]
-    public async Task<ActionResult<Result>> UpdateFirstGroupAsync(
+    public async Task<ActionResult<Result>> UpdateFirstGroupAsync(int id,
         UpdatePersonFirstGroupDto dto,
         CancellationToken cancellationToken)
     {
-        return await _service.UpdateFirstGroupAsync(dto, cancellationToken);
+        return await _service.UpdateFirstGroupAsync(id, dto, cancellationToken);
     }
     #endregion
 }

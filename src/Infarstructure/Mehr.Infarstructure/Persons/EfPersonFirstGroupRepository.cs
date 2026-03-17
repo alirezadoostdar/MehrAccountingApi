@@ -49,6 +49,12 @@ public class EfPersonFirstGroupRepository : IPersonFirstGroupRepository
             .FirstOrDefaultAsync (cancellationToken);
     }
 
+    public async Task<bool> IsUsed(int id, CancellationToken cancellationToken)
+    {
+        return await _context.Persons
+            .AnyAsync(x => x.FirstGroupId == id, cancellationToken);
+    }
+
     public void Update(PersonFirstGroup personFirstGroup)
     {
         _context.Update(personFirstGroup);

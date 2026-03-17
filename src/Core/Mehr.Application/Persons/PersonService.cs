@@ -34,7 +34,7 @@ public class PersonService : IPersonService
 
         var firstGroup = new PersonFirstGroup
         {
-            Title = dto.Title,
+            Title = dto.Title.Trim(),
         };
 
         await _firstGroupRepository.AddFirstGroupAsync(firstGroup, cancellationToken);
@@ -42,9 +42,16 @@ public class PersonService : IPersonService
         return firstGroup.Id;
     }
 
-    public Task<Result<bool>> DeleteFirstGroupAsync(int id, CancellationToken cancellationToken)
+    public async Task<Result<bool>> DeleteFirstGroupAsync(int id, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var personGroup = await _firstGroupRepository.GetByIdAsync(id, cancellationToken);
+
+        if (personGroup is null)
+            return Result.Failure<bool>(PersonGroupErrors.NotFound(id));
+
+        _firstGroupRepository.Delete(personGroup);
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
+        return true;
     }
 
     public async Task<Result<List<GetPersonFirstGroupDto>>> GetAllFirtGroupAsync(CancellationToken cancellationToken)
@@ -84,9 +91,10 @@ public class PersonService : IPersonService
         if (personGroup is null)
             return Result.Failure<bool>(PersonGroupErrors.NotFound(id));
 
-        personGroup.Title = dto.Title;
+        personGroup.Title = dto.Title.Trim();
 
         await _unitOfWork.SaveChangesAsync(cancellationToken);
+        return true;
 
     }
 }

@@ -8,6 +8,7 @@ public interface IPersonFirstGroupRepository
     Task<PersonFirstGroup?> GetByTitleAsync(string title, CancellationToken cancellationToken);
     Task<PersonFirstGroup?> GetByIdNoTarackAsync(int id, CancellationToken cancellationToken);
     Task<List<PersonFirstGroup>> GetAllAsync(CancellationToken cancellationToken);
+    Task<bool> IsUsed(int id, CancellationToken cancellationToken);
     Task AddFirstGroupAsync(PersonFirstGroup firsGroup, CancellationToken cancellationToken);
     void Delete(PersonFirstGroup personFirstGroup);
     void Update(PersonFirstGroup personFirstGroup);
