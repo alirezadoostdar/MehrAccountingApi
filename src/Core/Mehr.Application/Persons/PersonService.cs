@@ -15,15 +15,18 @@ public class PersonService : IPersonService
     private readonly IPersonRepository _repository;
     private readonly IUnitOfWork _unitOfWork;
     private readonly IPersonFirstGroupRepository _firstGroupRepository;
+    private readonly IPersonSecondGroupRepository _secondGroupRepository;
 
     public PersonService(
         IPersonRepository repository,
         IUnitOfWork unitOfWork,
-        IPersonFirstGroupRepository firstGroupRepository)
+        IPersonFirstGroupRepository firstGroupRepository,
+        IPersonSecondGroupRepository secondGroupRepository)
     {
         _repository = repository;
         _unitOfWork = unitOfWork;
         _firstGroupRepository = firstGroupRepository;
+        _secondGroupRepository = secondGroupRepository;
     }
 
     public async Task<Result<int>> AddFirstGroupAsync(AddPersonFirstGroupDto dto, CancellationToken cancellationToken)
@@ -42,6 +45,11 @@ public class PersonService : IPersonService
         return firstGroup.Id;
     }
 
+    public Task<Result<int>> AddSecondGroupAsync(AddPersonSecondGroupDto dto, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
+
     public async Task<Result<bool>> DeleteFirstGroupAsync(int id, CancellationToken cancellationToken)
     {
         var personGroup = await _firstGroupRepository.GetByIdAsync(id, cancellationToken);
@@ -58,6 +66,11 @@ public class PersonService : IPersonService
         return true;
     }
 
+    public Task<Result<bool>> DeleteSecondGroupAsync(int id, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
+
     public async Task<Result<List<GetPersonFirstGroupDto>>> GetAllFirtGroupAsync(CancellationToken cancellationToken)
     {
         var list = await _firstGroupRepository
@@ -67,6 +80,18 @@ public class PersonService : IPersonService
         {
             Id = x.Id,
             title = x.Title,
+        }).ToList();
+            
+    }
+
+    public async Task<Result<List<GetPersonSecondGroupDto>>> GetAllSecondGroupAsync(CancellationToken cancellationToken)
+    {
+        var list = await _secondGroupRepository
+            .GetAllAsync (cancellationToken);
+        return list.Select(x => new GetPersonSecondGroupDto
+        {
+            Id = x.Id,
+            title = x.Title
         }).ToList();
             
     }
@@ -86,6 +111,11 @@ public class PersonService : IPersonService
         throw new NotImplementedException();
     }
 
+    public async Task<Result<GetPersonSecondGroupDto>> GetSecondGroupByIdAsync(int id, CancellationToken cancellationToken)
+    {
+        return await _secondGroupRepository.GetAllAsync(cancellationToken);
+    }
+
     public async Task<Result<bool>> UpdateFirstGroupAsync(int id,
         UpdatePersonFirstGroupDto dto,
         CancellationToken cancellationToken)
@@ -100,5 +130,10 @@ public class PersonService : IPersonService
         await _unitOfWork.SaveChangesAsync(cancellationToken);
         return true;
 
+    }
+
+    public Task<Result<bool>> UpdateSecondGroupAsync(int id, UpdatePersonSecondGroupDto dto, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
     }
 }

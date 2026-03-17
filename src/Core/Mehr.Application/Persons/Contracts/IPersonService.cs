@@ -14,9 +14,10 @@ public interface IPersonService
     Task<Result<bool>> DeleteFirstGroupAsync(int id, CancellationToken cancellationToken);
     Task<Result<bool>> UpdateFirstGroupAsync(int id, UpdatePersonFirstGroupDto dto, CancellationToken cancellationToken);
 
-    Task<Result<GetPersonFirstGroupDto>> GetSecondGroupByIdAsync(int id, CancellationToken cancellationToken);
-    Task<Result<List<GetPersonFirstGroupDto>>> GetAllSecondGroupAsync(CancellationToken cancellationToken);
-    Task<Result<int>> AddSecondGroupAsync(AddPersonFirstGroupDto dto, CancellationToken cancellationToken);
+
+    Task<Result<GetPersonSecondGroupDto>> GetSecondGroupByIdAsync(int id, CancellationToken cancellationToken);
+    Task<Result<List<GetPersonSecondGroupDto>>> GetAllSecondGroupAsync(CancellationToken cancellationToken);
+    Task<Result<int>> AddSecondGroupAsync(AddPersonSecondGroupDto dto, CancellationToken cancellationToken);
     Task<Result<bool>> DeleteSecondGroupAsync(int id, CancellationToken cancellationToken);
-    Task<Result<bool>> UpdateSecondGroupAsync(int id, UpdatePersonFirstGroupDto dto, CancellationToken cancellationToken);
+    Task<Result<bool>> UpdateSecondGroupAsync(int id, UpdatePersonSecondGroupDto dto, CancellationToken cancellationToken);
 }

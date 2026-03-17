@@ -1,6 +1,6 @@
 ﻿namespace Mehr.Application.Persons.Contracts.Dtos;
 
-public class UpdatePersonFirstGroupDto
+public class UpdatePersonSecondGroupDto
 {
     public string Title { get; set; } = null!;
 }
