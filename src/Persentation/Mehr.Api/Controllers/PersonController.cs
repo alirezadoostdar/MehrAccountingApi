@@ -51,4 +51,35 @@ public class PersonController : Controller
         return await _service.DeleteFirstGroupAsync(id, cancellationToken);
     }
     #endregion
+
+    #region second-group
+
+    [HttpGet("second-group")]
+    public async Task<ActionResult<Result>> GetAllSecondGroupAsync(CancellationToken cancellationToken)
+    {
+        return await _service.GetAllSecondGroupAsync(cancellationToken);
+    }
+
+    [HttpPost("second-group")]
+    public async Task<ActionResult<Result>> AddSecondGroupAsync(
+        AddPersonSecondGroupDto dto,
+        CancellationToken cancellationToken)
+    {
+        return await _service.AddSecondGroupAsync(dto, cancellationToken);
+    }
+
+    [HttpPut("second-group/{id:int}")]
+    public async Task<ActionResult<Result>> UpdateSecondGroupAsync(int id,
+        UpdatePersonSecondGroupDto dto,
+        CancellationToken cancellationToken)
+    {
+        return await _service.UpdateSecondGroupAsync(id, dto, cancellationToken);
+    }
+
+    [HttpDelete("second-group/{id:int")]
+    public async Task<ActionResult<Result>> DeleteSecondGroupAsync(int id, CancellationToken cancellationToken)
+    {
+        return await _service.DeleteFirstGroupAsync(id, cancellationToken);
+    }
+    #endregion
 }

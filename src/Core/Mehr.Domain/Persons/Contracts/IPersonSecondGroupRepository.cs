@@ -7,7 +7,7 @@ public interface IPersonSecondGroupRepository
     Task<PersonSecondGroup?> GetByIdNoTarackAsync(int id, CancellationToken cancellationToken);
     Task<List<PersonSecondGroup>> GetAllAsync(CancellationToken cancellationToken);
     Task<bool> IsUsed(int id, CancellationToken cancellationToken);
-    Task AddFirstGroupAsync(PersonSecondGroup secondGroup, CancellationToken cancellationToken);
+    Task AddAsync(PersonSecondGroup secondGroup, CancellationToken cancellationToken);
     void Delete(PersonSecondGroup personSecondGroup);
     void Update(PersonSecondGroup personSecondGroup);
 }

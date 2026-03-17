@@ -45,9 +45,20 @@ public class PersonService : IPersonService
         return firstGroup.Id;
     }
 
-    public Task<Result<int>> AddSecondGroupAsync(AddPersonSecondGroupDto dto, CancellationToken cancellationToken)
+    public async Task<Result<int>> AddSecondGroupAsync(AddPersonSecondGroupDto dto, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var group = await _secondGroupRepository.GetByTitleAsync(dto.Title, cancellationToken);
+        if (group is not null)
+            return Result.Failure<int>(PersonGroupErrors.IsDuplicate(dto.Title));
+
+        var secondGroup = new PersonSecondGroup
+        {
+            Title = dto.Title.Trim(),
+        };
+
+        await _secondGroupRepository.AddAsync(secondGroup, cancellationToken);
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
+        return secondGroup.Id;
     }
 
     public async Task<Result<bool>> DeleteFirstGroupAsync(int id, CancellationToken cancellationToken)
@@ -111,9 +122,9 @@ public class PersonService : IPersonService
         throw new NotImplementedException();
     }
 
-    public async Task<Result<GetPersonSecondGroupDto>> GetSecondGroupByIdAsync(int id, CancellationToken cancellationToken)
+    public  Task<Result<GetPersonSecondGroupDto>> GetSecondGroupByIdAsync(int id, CancellationToken cancellationToken)
     {
-        return await _secondGroupRepository.GetAllAsync(cancellationToken);
+        throw new NotImplementedException();
     }
 
     public async Task<Result<bool>> UpdateFirstGroupAsync(int id,
