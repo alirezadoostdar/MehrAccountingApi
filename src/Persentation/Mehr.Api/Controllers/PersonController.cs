@@ -44,5 +44,11 @@ public class PersonController : Controller
     {
         return await _service.UpdateFirstGroupAsync(id, dto, cancellationToken);
     }
+
+    [HttpDelete("first-group/{id:int")]
+    public async Task<ActionResult<Result>> DeleteFirstGroupAsync(int id, CancellationToken cancellationToken)
+    {
+        return await _service.DeleteFirstGroupAsync(id, cancellationToken);
+    }
     #endregion
 }

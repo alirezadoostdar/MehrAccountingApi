@@ -49,6 +49,10 @@ public class PersonService : IPersonService
         if (personGroup is null)
             return Result.Failure<bool>(PersonGroupErrors.NotFound(id));
 
+        var isUsed = await _firstGroupRepository.IsUsed(id, cancellationToken);
+        if (isUsed)
+            return Result.Failure<bool>(PersonGroupErrors.IsUsed(id));
+
         _firstGroupRepository.Delete(personGroup);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
         return true;
