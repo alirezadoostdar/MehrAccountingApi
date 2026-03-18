@@ -77,9 +77,20 @@ public class PersonService : IPersonService
         return true;
     }
 
-    public Task<Result<bool>> DeleteSecondGroupAsync(int id, CancellationToken cancellationToken)
+    public async Task<Result<bool>> DeleteSecondGroupAsync(int id, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var personGroup = await _secondGroupRepository.GetByIdAsync(id, cancellationToken);
+
+        if (personGroup is null)
+            return Result.Failure<bool>(PersonGroupErrors.NotFound(id));
+
+        var isUsed = await _secondGroupRepository.IsUsed(id, cancellationToken);
+        if (isUsed)
+            return Result.Failure<bool>(PersonGroupErrors.IsUsed(id));
+
+        _secondGroupRepository.Delete(personGroup);
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
+        return true;
     }
 
     public async Task<Result<List<GetPersonFirstGroupDto>>> GetAllFirtGroupAsync(CancellationToken cancellationToken)
@@ -143,8 +154,16 @@ public class PersonService : IPersonService
 
     }
 
-    public Task<Result<bool>> UpdateSecondGroupAsync(int id, UpdatePersonSecondGroupDto dto, CancellationToken cancellationToken)
+    public async Task<Result<bool>> UpdateSecondGroupAsync(int id, UpdatePersonSecondGroupDto dto, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var personGroup = await _secondGroupRepository.GetByIdAsync(id, cancellationToken);
+
+        if (personGroup is null)
+            return Result.Failure<bool>(PersonGroupErrors.NotFound(id));
+
+        personGroup.Title = dto.Title.Trim();
+
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
+        return true;
     }
 }

@@ -20,7 +20,7 @@ public class EfPersonSecondGroupRepository : IPersonSecondGroupRepository
 
     public void Delete(PersonSecondGroup personSecondGroup)
     {
-        _context.Remove(personSecondGroup);
+        _context.PersonSecondGroups.Remove(personSecondGroup);
     }
 
     public async Task<List<PersonSecondGroup>> GetAllAsync(CancellationToken cancellationToken)
@@ -52,7 +52,7 @@ public class EfPersonSecondGroupRepository : IPersonSecondGroupRepository
     public async Task<bool> IsUsed(int id, CancellationToken cancellationToken)
     {
         return await _context.Persons
-            .AnyAsync(x => x.FirstGroupId == id, cancellationToken);
+            .AnyAsync(x => x.SecondGroupId == id, cancellationToken);
     }
 
     public void Update(PersonSecondGroup personSecondGroup)
