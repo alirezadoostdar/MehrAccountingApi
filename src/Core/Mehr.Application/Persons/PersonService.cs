@@ -1,6 +1,8 @@
-﻿using Mehr.Application.Persons.Contracts;
+﻿using Mehr.Application.Common.Contracts;
+using Mehr.Application.Persons.Contracts;
 using Mehr.Application.Persons.Contracts.Dtos;
 using Mehr.Application.Persons.Contracts.Exceptions;
+using Mehr.Domain.Contacts.Dtos;
 using Mehr.Domain.Entities.Persons;
 using Mehr.Domain.Persons;
 using Mehr.Domain.Persons.Contracts;
@@ -16,17 +18,20 @@ public class PersonService : IPersonService
     private readonly IUnitOfWork _unitOfWork;
     private readonly IPersonFirstGroupRepository _firstGroupRepository;
     private readonly IPersonSecondGroupRepository _secondGroupRepository;
+    private readonly ICacheService _cacheService;
 
     public PersonService(
         IPersonRepository repository,
         IUnitOfWork unitOfWork,
         IPersonFirstGroupRepository firstGroupRepository,
-        IPersonSecondGroupRepository secondGroupRepository)
+        IPersonSecondGroupRepository secondGroupRepository,
+        ICacheService cacheService)
     {
         _repository = repository;
         _unitOfWork = unitOfWork;
         _firstGroupRepository = firstGroupRepository;
         _secondGroupRepository = secondGroupRepository;
+        _cacheService = cacheService;
     }
 
     public async Task<Result<int>> AddFirstGroupAsync(AddPersonFirstGroupDto dto, CancellationToken cancellationToken)
@@ -95,27 +100,42 @@ public class PersonService : IPersonService
 
     public async Task<Result<List<GetPersonFirstGroupDto>>> GetAllFirtGroupAsync(CancellationToken cancellationToken)
     {
+        string key = "personFirstGroup";
+        var cacheList = await _cacheService.GetAsync<List<GetPersonFirstGroupDto>>(key, cancellationToken);
+        if (cacheList is not null)
+            return cacheList;
+
         var list = await _firstGroupRepository
             .GetAllAsync(cancellationToken);
 
-        return list.Select(x => new GetPersonFirstGroupDto
+
+        var DtoList = list.Select(x => new GetPersonFirstGroupDto
         {
             Id = x.Id,
             title = x.Title,
         }).ToList();
-            
+
+        await _cacheService.SetAsync<List<GetPersonFirstGroupDto>>(
+           key,
+           DtoList,
+           TimeSpan.FromMinutes(20),
+           TimeSpan.FromMinutes(5),
+           cancellationToken);
+
+        return DtoList;
+
     }
 
     public async Task<Result<List<GetPersonSecondGroupDto>>> GetAllSecondGroupAsync(CancellationToken cancellationToken)
     {
         var list = await _secondGroupRepository
-            .GetAllAsync (cancellationToken);
+            .GetAllAsync(cancellationToken);
         return list.Select(x => new GetPersonSecondGroupDto
         {
             Id = x.Id,
             title = x.Title
         }).ToList();
-            
+
     }
 
     public async Task<Result<Person>> GetByIdAsync(int id, CancellationToken cancellationToken)
@@ -133,7 +153,7 @@ public class PersonService : IPersonService
         throw new NotImplementedException();
     }
 
-    public  Task<Result<GetPersonSecondGroupDto>> GetSecondGroupByIdAsync(int id, CancellationToken cancellationToken)
+    public Task<Result<GetPersonSecondGroupDto>> GetSecondGroupByIdAsync(int id, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }
