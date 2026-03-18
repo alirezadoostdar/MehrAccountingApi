@@ -45,7 +45,7 @@ public class PersonController : Controller
         return await _service.UpdateFirstGroupAsync(id, dto, cancellationToken);
     }
 
-    [HttpDelete("first-group/{id:int")]
+    [HttpDelete("first-group/{id:int}")]
     public async Task<ActionResult<Result>> DeleteFirstGroupAsync(int id, CancellationToken cancellationToken)
     {
         return await _service.DeleteFirstGroupAsync(id, cancellationToken);
@@ -76,10 +76,10 @@ public class PersonController : Controller
         return await _service.UpdateSecondGroupAsync(id, dto, cancellationToken);
     }
 
-    [HttpDelete("second-group/{id:int")]
+    [HttpDelete("second-group/{id:int}")]
     public async Task<ActionResult<Result>> DeleteSecondGroupAsync(int id, CancellationToken cancellationToken)
     {
-        return await _service.DeleteFirstGroupAsync(id, cancellationToken);
+        return await _service.DeleteSecondGroupAsync(id, cancellationToken);
     }
     #endregion
 }

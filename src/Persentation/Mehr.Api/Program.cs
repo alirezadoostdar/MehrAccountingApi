@@ -141,6 +141,7 @@ builder.Services.AddScoped<ICostService, CostService>();
 builder.Services.AddScoped<IPersonRepository, EfPersonRepository>();
 builder.Services.AddScoped<IPersonService, PersonService>();
 builder.Services.AddScoped<IPersonFirstGroupRepository, EfPersonFirstGroupRepository>();
+builder.Services.AddScoped<IPersonSecondGroupRepository, EfPersonSecondGroupRepository>();
 
 builder.Services.AddScoped<IProductCategoryRepository, EfProductCategoryRepository>();
 builder.Services.AddScoped<IZoneRepository, EfZoneRepository>();
