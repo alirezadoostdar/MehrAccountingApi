@@ -19,6 +19,8 @@ public class PersonService : IPersonService
     private readonly IPersonFirstGroupRepository _firstGroupRepository;
     private readonly IPersonSecondGroupRepository _secondGroupRepository;
     private readonly ICacheService _cacheService;
+    public const string personFirstGroupCacheKey = "personFirstGroup";
+    public const string personSecondGroupCacheKey = "personSecondGroup";
 
     public PersonService(
         IPersonRepository repository,
@@ -100,8 +102,10 @@ public class PersonService : IPersonService
 
     public async Task<Result<List<GetPersonFirstGroupDto>>> GetAllFirtGroupAsync(CancellationToken cancellationToken)
     {
-        string key = "personFirstGroup";
-        var cacheList = await _cacheService.GetAsync<List<GetPersonFirstGroupDto>>(key, cancellationToken);
+
+        var cacheList = await _cacheService.GetAsync<List<GetPersonFirstGroupDto>>(
+            personFirstGroupCacheKey,
+            cancellationToken);
         if (cacheList is not null)
             return cacheList;
 
@@ -116,7 +120,7 @@ public class PersonService : IPersonService
         }).ToList();
 
         await _cacheService.SetAsync<List<GetPersonFirstGroupDto>>(
-           key,
+           personFirstGroupCacheKey,
            DtoList,
            TimeSpan.FromMinutes(20),
            TimeSpan.FromMinutes(5),
@@ -128,14 +132,31 @@ public class PersonService : IPersonService
 
     public async Task<Result<List<GetPersonSecondGroupDto>>> GetAllSecondGroupAsync(CancellationToken cancellationToken)
     {
+        var cacheList = await _cacheService.GetAsync<List<GetPersonSecondGroupDto>>(
+            personSecondGroupCacheKey,
+            cancellationToken);
+
+        if (cacheList is not null)
+            return cacheList;
+
+
         var list = await _secondGroupRepository
             .GetAllAsync(cancellationToken);
-        return list.Select(x => new GetPersonSecondGroupDto
+
+        var dtoList = list.Select(x => new GetPersonSecondGroupDto
         {
             Id = x.Id,
             title = x.Title
         }).ToList();
 
+        await _cacheService.SetAsync<List<GetPersonSecondGroupDto>>(
+            personSecondGroupCacheKey,
+            dtoList,
+            TimeSpan.FromMinutes(20),
+            TimeSpan.FromMinutes(5),
+            cancellationToken);
+
+        return dtoList;
     }
 
     public async Task<Result<Person>> GetByIdAsync(int id, CancellationToken cancellationToken)
@@ -170,6 +191,8 @@ public class PersonService : IPersonService
         personGroup.Title = dto.Title.Trim();
 
         await _unitOfWork.SaveChangesAsync(cancellationToken);
+
+        await _cacheService.RemoveAsync(personFirstGroupCacheKey, cancellationToken);
         return true;
 
     }
@@ -184,6 +207,7 @@ public class PersonService : IPersonService
         personGroup.Title = dto.Title.Trim();
 
         await _unitOfWork.SaveChangesAsync(cancellationToken);
+        await _cacheService.RemoveAsync(personSecondGroupCacheKey, cancellationToken);
         return true;
     }
 }
