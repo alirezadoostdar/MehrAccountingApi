@@ -49,6 +49,7 @@ public class PersonService : IPersonService
 
         await _firstGroupRepository.AddFirstGroupAsync(firstGroup, cancellationToken);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
+        await _cacheService.RemoveAsync(personFirstGroupCacheKey, cancellationToken);
         return firstGroup.Id;
     }
 
@@ -65,6 +66,7 @@ public class PersonService : IPersonService
 
         await _secondGroupRepository.AddAsync(secondGroup, cancellationToken);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
+        await _cacheService.RemoveAsync(personSecondGroupCacheKey, cancellationToken);
         return secondGroup.Id;
     }
 
