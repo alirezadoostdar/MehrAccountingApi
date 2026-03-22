@@ -81,6 +81,7 @@ public class PersonService : IPersonService
 
         _firstGroupRepository.Delete(personGroup);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
+        await _cacheService.RemoveAsync(personFirstGroupCacheKey, cancellationToken);
         return true;
     }
 
@@ -97,6 +98,7 @@ public class PersonService : IPersonService
 
         _secondGroupRepository.Delete(personGroup);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
+        await _cacheService.RemoveAsync(personSecondGroupCacheKey, cancellationToken);
         return true;
     }
 
