@@ -23,6 +23,12 @@ public class PersonController : Controller
     }
     #region first-group
 
+    [HttpGet("first-group/{id:int}")]
+    public async Task<ActionResult<Result>> GetFirstGroupByIdAsync(int id, CancellationToken cancellationToken)
+    {
+        return await _service.GetFirstGroupByIdAsync(id, cancellationToken);
+    }
+
     [HttpGet("first-group")]
     public async Task<ActionResult<Result>> GetAllFirstGroupAsync(CancellationToken cancellationToken)
     {
@@ -53,6 +59,12 @@ public class PersonController : Controller
     #endregion
 
     #region second-group
+
+    [HttpGet("second-group/{id:int}")]
+    public async Task<ActionResult<Result>> GetSecondGroupByIdAsync(int id, CancellationToken cancellationToken)
+    {
+        return await _service.GetSecondGroupByIdAsync(id, cancellationToken);
+    }
 
     [HttpGet("second-group")]
     public async Task<ActionResult<Result>> GetAllSecondGroupAsync(CancellationToken cancellationToken)

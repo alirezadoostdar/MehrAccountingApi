@@ -186,9 +186,17 @@ public class PersonService : IPersonService
         };
     }
 
-    public Task<Result<GetPersonSecondGroupDto>> GetSecondGroupByIdAsync(int id, CancellationToken cancellationToken)
+    public async Task<Result<GetPersonSecondGroupDto>> GetSecondGroupByIdAsync(int id, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var secondGroup = await _secondGroupRepository.GetByIdNoTarackAsync(id, cancellationToken);
+        if (secondGroup is null)
+            return Result.Failure<GetPersonSecondGroupDto>(PersonErros.NotFound(id));
+
+        return new GetPersonSecondGroupDto
+        {
+            Id = secondGroup.Id,
+            title = secondGroup.Title
+        };
     }
 
     public async Task<Result<bool>> UpdateFirstGroupAsync(int id,
