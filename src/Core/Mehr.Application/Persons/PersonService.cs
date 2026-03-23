@@ -188,7 +188,7 @@ public class PersonService : IPersonService
 
     public async Task<Result<GetPersonSecondGroupDto>> GetSecondGroupByIdAsync(int id, CancellationToken cancellationToken)
     {
-        var secondGroup = await _secondGroupRepository.GetByIdNoTarackAsync(id, cancellationToken);
+        var secondGroup = await _secondGroupRepository.GetByIdNoTrackAsync(id, cancellationToken);
         if (secondGroup is null)
             return Result.Failure<GetPersonSecondGroupDto>(PersonErros.NotFound(id));
 

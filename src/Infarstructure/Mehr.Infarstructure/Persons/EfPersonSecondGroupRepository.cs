@@ -33,7 +33,7 @@ public class EfPersonSecondGroupRepository : IPersonSecondGroupRepository
         return await _context.PersonSecondGroups.FindAsync(id, cancellationToken);
     }
 
-    public async Task<PersonSecondGroup?> GetByIdNoTarackAsync(int id, CancellationToken cancellationToken)
+    public async Task<PersonSecondGroup?> GetByIdNoTrackAsync(int id, CancellationToken cancellationToken)
     {
         return await _context.PersonSecondGroups
             .Where(x => x.Id == id)
