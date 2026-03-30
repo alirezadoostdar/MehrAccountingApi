@@ -7,6 +7,7 @@ namespace Mehr.Application.Persons.Contracts;
 public interface IPersonService
 {
     Task<Result<Person>> GetByIdAsync(int id, CancellationToken cancellationToken);
+    Task<Result<int>> AddPersonAsync(AddPersonDto dto, CancellationToken cancellationToken);
 
     Task<Result<GetPersonFirstGroupDto>> GetFirstGroupByIdAsync(int id, CancellationToken cancellationToken);
     Task<Result<List<GetPersonFirstGroupDto>>> GetAllFirtGroupAsync(CancellationToken cancellationToken);
