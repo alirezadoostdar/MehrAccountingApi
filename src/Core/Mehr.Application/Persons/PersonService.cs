@@ -248,6 +248,8 @@ public class PersonService : IPersonService
             SalePriceId = dto.SalePriceId
         };
         await _repository.AddAsync(person, cancellationToken);
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
+        return person.Id;
 
     }
 }

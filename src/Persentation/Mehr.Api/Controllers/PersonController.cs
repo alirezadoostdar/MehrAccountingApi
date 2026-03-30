@@ -21,6 +21,13 @@ public class PersonController : Controller
     {
         return await _service.GetByIdAsync(id, cancellationToken);
     }
+
+    [HttpPost]
+    public async Task<ActionResult<Result>> AddPersonAsync(AddPersonDto dto, CancellationToken cancellationToken)
+    {
+        return await _service.AddPersonAsync(dto, cancellationToken);
+    }
+
     #region first-group
 
     [HttpGet("first-group/{id:int}")]
