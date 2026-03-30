@@ -14,6 +14,11 @@ public class EfPersonRepository : IPersonRepository
         _context = context;
     }
 
+    public async Task AddAsync(Person person, CancellationToken cancellationToken)
+    {
+        await _context.Persons.AddAsync(person);
+    }
+
     public async Task<Person?> GetByIdAsync(int id, CancellationToken cancellationToken)
     {
         var person = _context.Persons

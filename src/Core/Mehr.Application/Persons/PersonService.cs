@@ -230,4 +230,24 @@ public class PersonService : IPersonService
         await _cacheService.RemoveAsync(personSecondGroupCacheKey, cancellationToken);
         return true;
     }
+
+    public async Task<Result<int>> AddPersonAsync(AddPersonDto dto, CancellationToken cancellationToken)
+    {
+        var person = new Person
+        {
+            Title = dto.Title,
+            FirstGroupId = dto.FirstGroupId,
+            SecondGroupId = dto.SecondGroupId,
+            Comment = dto.Comment,
+            ShopName = dto.ShopName,
+            CreditLimit = dto.CreditLimit,
+            Code = dto.Code,
+            Introducer = dto.Introducer,
+            CreateAt = DateTime.Now,
+            UpdateAt = DateTime.Now,
+            SalePriceId = dto.SalePriceId
+        };
+        await _repository.AddAsync(person, cancellationToken);
+
+    }
 }

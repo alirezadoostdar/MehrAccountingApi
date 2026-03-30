@@ -9,6 +9,7 @@ namespace Mehr.Application.Persons.Contracts.Dtos;
 public class AddPersonDto
 {
     public string Title { get; set; }
+    public decimal CreditLimit { get; set; }
     public int? FirstGroupId { get; set; }
     public int? SecondGroupId { get; set; }
     public string Comment { get; set; }
