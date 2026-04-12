@@ -15,7 +15,7 @@ public class Person : DetailedAccount
     public float VisitorPercent { get; set; }
     public string Comment { get; set; }
     public string Introducer { get; set; }
-    public long Code { get; set; }
+    public long? Code { get; set; }
     public int SalePriceId { get; set; }
     public PersonSalePrice SalePrice { get; set; }
     public int? ContactInfoId { get; set; }

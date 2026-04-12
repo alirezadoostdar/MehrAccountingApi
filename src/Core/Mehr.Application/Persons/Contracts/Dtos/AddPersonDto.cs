@@ -14,7 +14,7 @@ public class AddPersonDto
     public int? SecondGroupId { get; set; }
     public string Comment { get; set; }
     public string Introducer { get; set; }
-    public long Code { get; set; }
+    public long? Code { get; set; }
     public int SalePriceId { get; set; }
     public AddContactDto? ContactInfo { get; set; }
     public int VisitorCostId { get; set; }
@@ -35,6 +35,16 @@ public class AddPersonDto
     public string BirthdayDate { get; set; }
     public string Password { get; set; }
     public decimal Credit { get; set; }
-    public PersonCustomerKind? PersonCustomerKind { get; set; }
-
+    public int? PersonCustomerKindId { get; set; }
+    public int? PersonCommercialId { get; set; }
+    public string Resume { get; set; }
+    public string ShippingComment { get; set; }
+    public int? FirstVisitorId { get; set; }
+    public int? SecondVisitorId { get; set; }
+    public int? VisitorColor { get; set; }
+    public bool IsDriver { get; set; }
+    public bool IsEmployee { get; set; }
+    public bool IsDistributor { get; set; }
+    public bool IsUpdate { get; set; }
+    public byte? TaxKindId { get; set; }
 }
