@@ -15,7 +15,7 @@ public class CostEntityMap : IEntityTypeConfiguration<Cost>
             tb.Property(e => e.Id).HasColumnName("Fk_AccountSyscode");
         });
 
-        builder.Property(x => x.FirstGroupId)
+        builder.Property(x => x.FirstGroupId) 
            .HasColumnName("GroupID1");
 
         builder.Property(x => x.SecondGroupId)

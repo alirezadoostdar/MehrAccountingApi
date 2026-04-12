@@ -11,7 +11,7 @@ public class PersonEntityMap : IEntityTypeConfiguration<Person>
     {
         builder.ToTable("PersonTbl", tb =>
         {
-            tb.Property(e => e.Id).HasColumnName("Fk_AccountSysCode");
+            tb.Property(e => e.Id).HasColumnName("FK_AccountSysCode");
         });
 
         builder.Property(x => x.FirstGroupId)
@@ -128,6 +128,13 @@ public class PersonEntityMap : IEntityTypeConfiguration<Person>
         builder.Property(x => x.EshopId)
             .HasColumnName("eShopId")
             .HasMaxLength(200);
+
+        builder.HasOne(x => x.ContactInfo)
+            .WithMany()
+            .HasForeignKey(x => x.ContactInfoId)
+            .OnDelete(DeleteBehavior.Cascade)
+            .IsRequired(false);
+            
 
     }
 }

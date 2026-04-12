@@ -12,8 +12,6 @@ public class BankEntityMap : IEntityTypeConfiguration<Bank>
             tb.Property(e => e.Id).HasColumnName("Fk_AccountSyscode");
         });
 
-        //builder.HasKey("Fk_AccountSyscode");
-
         builder.Property(x => x.AccountNumber)
             .HasColumnName("AccountNo")
             .HasMaxLength(200)
@@ -49,6 +47,5 @@ public class BankEntityMap : IEntityTypeConfiguration<Bank>
         builder.Property(x => x.TerminalNumber)
             .HasColumnName("TerminalNo")
             .HasMaxLength(20);
-
     }
 }

@@ -2,11 +2,14 @@
 using Mehr.Application.Persons.Contracts;
 using Mehr.Application.Persons.Contracts.Dtos;
 using Mehr.Application.Persons.Contracts.Exceptions;
+using Mehr.Domain.Contacts;
 using Mehr.Domain.Contacts.Dtos;
 using Mehr.Domain.Entities.Persons;
 using Mehr.Domain.Persons;
 using Mehr.Domain.Persons.Contracts;
 using Mehr.SharedKernel;
+using NetTopologySuite.Geometries;
+using NetTopologySuite;
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 
@@ -238,6 +241,7 @@ public class PersonService : IPersonService
             Title = dto.Title,
             FirstGroupId = dto.FirstGroupId,
             SecondGroupId = dto.SecondGroupId,
+            CategoryId = 1,
             Comment = dto.Comment,
             ShopName = dto.ShopName,
             CreditLimit = dto.CreditLimit,
@@ -246,7 +250,50 @@ public class PersonService : IPersonService
             CreateAt = DateTime.Now,
             UpdateAt = DateTime.Now,
             SalePriceId = dto.SalePriceId
+            
         };
+
+        if (dto.ContactInfo is not null)
+        {
+            var geometryFactory = NtsGeometryServices.Instance.CreateGeometryFactory(srid: 4326);
+
+            var point = geometryFactory.CreatePoint(
+                new Coordinate(Convert.ToDouble(dto.ContactInfo.Longitude), Convert.ToDouble(dto.ContactInfo.Latitude)));
+
+            person.ContactInfo = new ContactInfo
+            {
+                Name = dto.ContactInfo.Name,
+                ShopName = dto.ContactInfo.ShopName,
+                Address = dto.ContactInfo.Address,
+                CityId = dto.ContactInfo.CityId,
+                StateId = dto.ContactInfo.StateId,
+                ZoneId = dto.ContactInfo.ZoneId,
+                Comment = dto.ContactInfo.Comment,
+                TelegramId = dto.ContactInfo.TelegramId,
+                Latitude = dto.ContactInfo.Latitude,
+                Longitude = dto.ContactInfo.Longitude,
+                TelegramMobileNumber = dto.ContactInfo.TelegramMobileNumber,
+                SecurityType = 0,
+                Location = point,
+                Numbers = dto.ContactInfo.Numbers
+            .Select(x => new ContactNumber
+            {
+                Number = x.Number,
+                Title = x.Title,
+                ContactTypeId = x.TypeId
+            }).ToList()
+            };
+
+            if (dto.ContactInfo.ImageBase64 is not null)
+            {
+                var imageBytes = Convert.FromBase64String(dto.ContactInfo.ImageBase64);
+                person.ContactInfo.Image = new ContactImage
+                {
+                    Image = imageBytes,
+                    Name = "image"
+                };
+            }
+        }
         await _repository.AddAsync(person, cancellationToken);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
         return person.Id;

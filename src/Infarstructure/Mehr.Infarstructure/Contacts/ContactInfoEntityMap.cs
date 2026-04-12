@@ -67,9 +67,9 @@ public class ContactInfoEntityMap : IEntityTypeConfiguration<ContactInfo>
             .HasMaxLength(50);
 
         builder.Property(z => z.Location)
-       .HasColumnName("Point")
-       .HasColumnType("geometry")
-       .IsRequired(false);
+            .HasColumnName("Point")
+            .HasColumnType("geometry")
+            .IsRequired(false);
 
         builder.HasMany(x => x.Numbers)
             .WithOne(x => x.ContactInfo)
