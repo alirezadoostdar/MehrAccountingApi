@@ -19,7 +19,22 @@ public class AddPersonDto
     public AddContactDto? ContactInfo { get; set; }
     public int VisitorCostId { get; set; }
     public decimal VisitorBaseAmount { get; set; }
+    public decimal VisitorIncreaseAmount { get; set; }
+    public float VisitorIncresePercent { get; set; }
+    public bool VisitorAutoDoc { get; set; }
+    public short VisitorGoodActiveStatus { get; set; }
+    public bool VisitorPercentActiveStatus { get; set; }
+    public int VisitorProductGroupId { get; set; }
+    public int? KindId { get; set; }
+    public bool IsForeign { get; set; }
+    public int VisitorPercentChanging { get; set; }
     public string ShopName { get; set; }
+    public string CardNumber { get; set; }
+    public string CardId1 { get; set; }
+    public string CardId2 { get; set; }
+    public string BirthdayDate { get; set; }
+    public string Password { get; set; }
+    public decimal Credit { get; set; }
     public PersonCustomerKind? PersonCustomerKind { get; set; }
 
 }
