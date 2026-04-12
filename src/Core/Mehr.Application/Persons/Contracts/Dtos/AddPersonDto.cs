@@ -17,6 +17,8 @@ public class AddPersonDto
     public long Code { get; set; }
     public int SalePriceId { get; set; }
     public AddContactDto? ContactInfo { get; set; }
+    public int VisitorCostId { get; set; }
+    public decimal VisitorBaseAmount { get; set; }
     public string ShopName { get; set; }
     public PersonCustomerKind? PersonCustomerKind { get; set; }
 
