@@ -135,6 +135,5 @@ public class PersonEntityMap : IEntityTypeConfiguration<Person>
             .OnDelete(DeleteBehavior.Cascade)
             .IsRequired(false);
             
-
     }
 }
