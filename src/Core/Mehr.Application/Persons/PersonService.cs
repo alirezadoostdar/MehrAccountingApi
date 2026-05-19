@@ -12,6 +12,7 @@ using NetTopologySuite.Geometries;
 using NetTopologySuite;
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Mehr.Application.Persons;
 
@@ -179,7 +180,7 @@ public class PersonService : IPersonService
     public async Task<Result<GetPersonFirstGroupDto>> GetFirstGroupByIdAsync(int id, CancellationToken cancellationToken)
     {
         var firstGroup = await _firstGroupRepository.GetByIdNoTarackAsync(id, cancellationToken);
-        if(firstGroup is null)
+        if (firstGroup is null)
             return Result.Failure<GetPersonFirstGroupDto>(PersonErros.NotFound(id));
 
         return new GetPersonFirstGroupDto
@@ -275,7 +276,7 @@ public class PersonService : IPersonService
             SecondVisitorId = dto.SecondVisitorId,
             VisitorColor = dto.VisitorColor,
             IsDriver = dto.IsDriver,
-            IsEmployee  = dto.IsEmployee,
+            IsEmployee = dto.IsEmployee,
             IsDistributor = dto.IsDistributor,
             IsUpdate = dto.IsUpdate,
             TaxKindId = dto.TaxKindId,
@@ -326,5 +327,99 @@ public class PersonService : IPersonService
         await _unitOfWork.SaveChangesAsync(cancellationToken);
         return person.Id;
 
+    }
+
+    public async Task<Result<bool>> UpdatePersonAsync(int id, UpdatePersonDto dto, CancellationToken cancellationToken)
+    {
+        var person = await _repository.GetByIdAsync(id, cancellationToken);
+        if (person is not null)
+            return Result.Failure<bool>(PersonErros.NotFound(id));
+
+        person.Title = dto.Title;
+        person.FirstGroupId = dto.FirstGroupId;
+        person.SecondGroupId = dto.SecondGroupId;
+        person.CategoryId = 1;
+        person.Comment = dto.Comment;
+        person.ShopName = dto.ShopName;
+        person.CreditLimit = dto.CreditLimit;
+        person.Code = dto.Code;
+        person.Introducer = dto.Introducer;
+        person.CreateAt = DateTime.Now;
+        person.UpdateAt = DateTime.Now;
+        person.SalePriceId = dto.SalePriceId;
+        person.VisitorCostId = dto.VisitorCostId;
+        person.VisitorBaseAmount = dto.VisitorBaseAmount;
+        person.VisitorIncreaseAmount = dto.VisitorIncreaseAmount;
+        person.VisitorIncresePercent = dto.VisitorIncresePercent;
+        person.VisitorAutoDoc = dto.VisitorAutoDoc;
+        person.VisitorGoodActiveStatus = dto.VisitorGoodActiveStatus;
+        person.VisitorPercentActiveStatus = dto.VisitorPercentActiveStatus;
+        person.VisitorProductGroupId = dto.VisitorProductGroupId;
+        person.KindId = dto.KindId;
+        person.IsForeign = dto.IsForeign;
+        person.VisitorPercentChanging = dto.VisitorPercentChanging;
+        person.CardNumber = dto.CardNumber;
+        person.CardId1 = dto.CardId1;
+        person.CardId2 = dto.CardId2;
+        person.BirthdayDate = dto.BirthdayDate;
+        person.Password = dto.Password;
+        person.Credit = dto.Credit;
+        person.PersonCustomerKindId = dto.PersonCustomerKindId;
+        person.PersonCommercialId = dto.PersonCommercialId;
+        person.Resume = dto.Resume;
+        person.ShippingComment = dto.ShippingComment;
+        person.FirstVisitorId = dto.FirstVisitorId;
+        person.SecondVisitorId = dto.SecondVisitorId;
+        person.VisitorColor = dto.VisitorColor;
+        person.IsDriver = dto.IsDriver;
+        person.IsEmployee = dto.IsEmployee;
+        person.IsDistributor = dto.IsDistributor;
+        person.IsUpdate = dto.IsUpdate;
+        person.TaxKindId = dto.TaxKindId;
+
+        if (dto.ContactInfo is not null)
+        {
+            var geometryFactory = NtsGeometryServices.Instance.CreateGeometryFactory(srid: 4326);
+
+            var point = geometryFactory.CreatePoint(
+                new Coordinate(Convert.ToDouble(dto.ContactInfo.Longitude), Convert.ToDouble(dto.ContactInfo.Latitude)));
+
+            person.ContactInfo = new ContactInfo
+            {
+                Name = dto.ContactInfo.Name,
+                ShopName = dto.ContactInfo.ShopName,
+                Address = dto.ContactInfo.Address,
+                CityId = dto.ContactInfo.CityId,
+                StateId = dto.ContactInfo.StateId,
+                ZoneId = dto.ContactInfo.ZoneId,
+                Comment = dto.ContactInfo.Comment,
+                TelegramId = dto.ContactInfo.TelegramId,
+                Latitude = dto.ContactInfo.Latitude,
+                Longitude = dto.ContactInfo.Longitude,
+                TelegramMobileNumber = dto.ContactInfo.TelegramMobileNumber,
+                SecurityType = 0,
+                Location = point,
+                Numbers = dto.ContactInfo.Numbers
+            .Select(x => new ContactNumber
+            {
+                Number = x.Number,
+                Title = x.Title,
+                ContactTypeId = x.TypeId
+            }).ToList()
+            };
+
+            if (dto.ContactInfo.ImageBase64 is not null)
+            {
+                var imageBytes = Convert.FromBase64String(dto.ContactInfo.ImageBase64);
+                person.ContactInfo.Image = new ContactImage
+                {
+                    Image = imageBytes,
+                    Name = "image"
+                };
+            }
+        }
+        await _repository.AddAsync(person, cancellationToken);
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
+        return true;
     }
 }
