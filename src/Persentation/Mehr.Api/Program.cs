@@ -175,20 +175,34 @@ builder.Services.AddScoped<IRoleRepository, EfRoleRepository>();
 
 builder.Services.AddScoped<IApiValidateService, ApiValidateService>();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("DevPolicy", policy =>
+    {
+        policy
+            .WithOrigins("http://localhost:5173")  
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
+
+
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-//if (app.Environment.IsDevelopment())
-//{
-//    app.UseSwagger();
-//    app.UseSwaggerUI();
-//}
+//Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+app.UseSwaggerUI();
+}
 
 app.UseSwagger();
 app.UseSwaggerUI();
 
 app.UseMiddleware<ExceptionHandlingMiddleware>();
-//app.UseHttpsRedirection();
+app.UseHttpsRedirection();
+app.UseCors("DevPolicy");
 
 app.UseAuthentication();
 app.UseAuthorization();
