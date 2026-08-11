@@ -59,4 +59,10 @@ public class ContactController : Controller
     {
         return await _service.DeleteContactAsync(id, cancellation);
     }
+
+    [HttpGet]
+    public async Task<ActionResult<Result>> GetAllContactsAsync(CancellationToken cancellationToken)
+    {
+        return await _service.GetAllContactListAsync(cancellationToken);
+    }
 }
