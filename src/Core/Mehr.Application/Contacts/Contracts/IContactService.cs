@@ -14,4 +14,5 @@ public interface IContactService
     Task<Result<int>> AddContactAsync(AddContactDto dto , CancellationToken cancellationToken);
     Task<Result<bool>> DeleteContactAsync(int id, CancellationToken cancellationToken);
     Task<Result<bool>> UpdateContactAsync(int id, UpdateContactDto dto, CancellationToken cancellation);
+    Task<Result<List<ContactListItemDto>>> GetAllContactListAsync(CancellationToken cancellationToken);
 }
