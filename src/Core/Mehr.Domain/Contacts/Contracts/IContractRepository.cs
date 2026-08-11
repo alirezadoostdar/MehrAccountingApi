@@ -1,4 +1,6 @@
-﻿namespace Mehr.Domain.Contacts.Contracts;
+﻿using Mehr.Domain.Contacts.Dtos;
+
+namespace Mehr.Domain.Contacts.Contracts;
 
 public interface IContractRepository
 {
@@ -7,4 +9,5 @@ public interface IContractRepository
     Task AddAsync(ContactInfo contactInfo, CancellationToken cancellationToken);
     void Delete(ContactInfo contactInfo);
     void Update(ContactInfo contactInfo);
+    Task<List<ContactListItemDto>> GetAllAsync(CancellationToken cancellationToken);
 }
