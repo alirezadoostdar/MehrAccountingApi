@@ -349,6 +349,8 @@ public enum MehrPolicy
 
 
     GridLists = 100000,
+    Grid_Contact_List = 100001,
+
     LayoutsLists = 20000,
     PrintLayoutsLists = 24000,
     WareHouses = 30000,

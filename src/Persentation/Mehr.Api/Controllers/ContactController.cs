@@ -1,12 +1,16 @@
 ﻿using Mehr.Application.Contacts.Contracts;
 using Mehr.Application.Contacts.Contracts.Dtos;
+using Mehr.Application.Users;
+using Mehr.Infarstructure.Identity;
 using Mehr.SharedKernel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Mehr.Api.Controllers;
 
 [ApiController]
 [Route("api/contact")]
+[Authorize]
 public class ContactController : Controller
 {
     private readonly IContactService _service;
@@ -61,6 +65,7 @@ public class ContactController : Controller
     }
 
     [HttpGet]
+    [HasPermission(MehrPolicy.Grid_Contact_List)]
     public async Task<ActionResult<Result>> GetAllContactsAsync(CancellationToken cancellationToken)
     {
         return await _service.GetAllContactListAsync(cancellationToken);
