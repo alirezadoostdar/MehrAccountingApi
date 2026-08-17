@@ -64,7 +64,7 @@ public class ContactController : Controller
         return await _service.DeleteContactAsync(id, cancellation);
     }
 
-    [HttpGet]
+    [HttpGet("page:{int},pageSize:{int},search:{string},sortBy:{string},sortDesc:{bool}")]
     [HasPermission(MehrPolicy.Grid_Contact_List)]
     public async Task<ActionResult<Result>> GetAllContactsAsync(CancellationToken cancellationToken)
     {
