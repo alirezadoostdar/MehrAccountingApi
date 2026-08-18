@@ -84,3 +84,9 @@ public record GetContactsQuery(
     int PageSize = 20,
     string? Search = null
 );
+public record PagedResult<T>(
+    List<T> Items,
+    int TotalCount,
+    int Page,
+    int PageSize
+);
