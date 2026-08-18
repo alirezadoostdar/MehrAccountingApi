@@ -66,8 +66,15 @@ public class ContactController : Controller
 
     [HttpGet("page:{int},pageSize:{int},search:{string},sortBy:{string},sortDesc:{bool}")]
     [HasPermission(MehrPolicy.Grid_Contact_List)]
-    public async Task<ActionResult<Result>> GetAllContactsAsync(CancellationToken cancellationToken)
+    public async Task<ActionResult<Result>> GetAllContactsAsync(
+        int page,
+        int pageSize,
+        string search,
+        string sortBy,
+        bool sortDesc,
+        CancellationToken cancellationToken)
     {
+        var x = page + pageSize;
         return await _service.GetAllContactListAsync(cancellationToken);
     }
 }
