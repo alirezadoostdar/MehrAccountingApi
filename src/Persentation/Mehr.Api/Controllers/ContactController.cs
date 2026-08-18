@@ -78,3 +78,9 @@ public class ContactController : Controller
         return await _service.GetAllContactListAsync(cancellationToken);
     }
 }
+
+public record GetContactsQuery(
+    int Page = 1,
+    int PageSize = 20,
+    string? Search = null
+);
