@@ -10,5 +10,5 @@ public interface IContractRepository
     Task AddAsync(ContactInfo contactInfo, CancellationToken cancellationToken);
     void Delete(ContactInfo contactInfo);
     void Update(ContactInfo contactInfo);
-    Task<PageResult<List<ContactListItemDto>>> GetAllAsync(PaginationRequestQuery query, CancellationToken cancellationToken);
+    Task<PageResult<ContactListItemDto>> GetAllAsync(PaginationRequestQuery query, CancellationToken cancellationToken);
 }
