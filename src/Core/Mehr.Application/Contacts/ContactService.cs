@@ -120,15 +120,15 @@ public class ContactService : IContactService
         return cityList;
     }
 
-    public async Task<Result<List<ContactListItemDto>>> GetAllContactListAsync(
+    public async Task<Result<PageResult<ContactListItemDto>>> GetAllContactListAsync(
         PaginationRequestQuery query,
         CancellationToken cancellationToken)
     {
-        var cachKey = $"contactList";
+        var cachKey = $"contactList{query.Search}";
         var cached = await _cacheService.GetAsync<List<ContactListItemDto>>(cachKey, cancellationToken);
         if (cached is not null) return cached;
 
-        var contactList = await _repository.GetAllAsync(cancellationToken);
+        var contactList = await _repository.GetAllAsync(query, cancellationToken);
 
         await _cacheService.SetAsync<List<ContactListItemDto>>(
             cachKey,
