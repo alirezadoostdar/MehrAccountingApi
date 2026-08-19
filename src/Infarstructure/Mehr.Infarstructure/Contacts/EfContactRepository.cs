@@ -25,7 +25,7 @@ public class EfContactRepository : IContractRepository
         _context.Contacts.Remove(contactInfo);
     }
 
-    public async Task<PageResult<ContactListItemDto> GetAllAsync(
+    public async Task<PageResult<ContactListItemDto>> GetAllAsync(
         PaginationRequestQuery query,
         CancellationToken cancellationToken)
     {
