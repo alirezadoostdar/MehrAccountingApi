@@ -2,7 +2,7 @@
 
 public class PageResult<T>
 {
-    public List<T> Date { get; set; } = new();
+    public List<T> Data { get; set; } = new();
     public PaginationMeta Meta { get; set; } = new();
 
 }

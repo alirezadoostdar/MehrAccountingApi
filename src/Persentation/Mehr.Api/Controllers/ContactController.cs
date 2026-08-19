@@ -1,6 +1,7 @@
 ﻿using Mehr.Application.Contacts.Contracts;
 using Mehr.Application.Contacts.Contracts.Dtos;
 using Mehr.Application.Users;
+using Mehr.Domain.Paginations;
 using Mehr.Infarstructure.Identity;
 using Mehr.SharedKernel;
 using Microsoft.AspNetCore.Authorization;
@@ -67,21 +68,11 @@ public class ContactController : Controller
     [HttpGet]
     [HasPermission(MehrPolicy.Grid_Contact_List)]
     public async Task<ActionResult<Result>> GetAllContactsAsync(
-        [FromQuery] GetContactsQuery query,
+        [FromQuery] PaginationRequestQuery query,
         CancellationToken cancellationToken)
     {
         return await _service.GetAllContactListAsync(cancellationToken);
     }
 }
 
-public record GetContactsQuery(
-    int Page = 1,
-    int PageSize = 20,
-    string? Search = null
-);
-public record PagedResult<T>(
-    List<T> Items,
-    int TotalCount,
-    int Page,
-    int PageSize
-);
+

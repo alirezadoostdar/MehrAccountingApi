@@ -1,6 +1,7 @@
 ﻿using Mehr.Domain.Contacts;
 using Mehr.Domain.Contacts.Contracts;
 using Mehr.Domain.Contacts.Dtos;
+using Mehr.Domain.Paginations;
 using Microsoft.EntityFrameworkCore;
 
 namespace Mehr.Infarstructure.Contacts;
@@ -24,9 +25,15 @@ public class EfContactRepository : IContractRepository
         _context.Contacts.Remove(contactInfo);
     }
 
-    public async Task<List<ContactListItemDto>> GetAllAsync(CancellationToken cancellationToken)
+    public async Task<PageResult<ContactListItemDto> GetAllAsync(
+        PaginationRequestQuery query,
+        CancellationToken cancellationToken)
     {
-      return await  _context.Contacts
+      var list = await  _context.Contacts
+            .Where(c => query.Search == null || c.Name.Contains(query.Search))
+            .OrderBy(c => c.Name)
+            .Skip((query.Page - 1) * query.PageSize)
+            .Take(query.PageSize)
             .Include(s => s.State)
             .Include(c => c.City)
             .Include(z => z.Zone)
@@ -44,6 +51,21 @@ public class EfContactRepository : IContractRepository
                 Phone = x.Numbers.Where(y => y.ContactTypeId == 1).FirstOrDefault().Number,
                 ZipCode = x.Numbers.Where(y => y.ContactTypeId == 3).FirstOrDefault().Number
             }).ToListAsync(cancellationToken);
+
+        var total = await _context.Contacts.CountAsync(cancellationToken);
+        var result = new PageResult<ContactListItemDto>
+        {
+            Data = list,
+            Meta = new PaginationMeta
+            {
+                CurrentPage = query.Page,
+                PageSize = query.PageSize,
+                TotalItems = total,
+                TotalPages = total,
+            }
+        };
+
+        return result;
     }
 
     public async Task<ContactInfo?> GetByIdAsync(int id, CancellationToken cancellationToken)

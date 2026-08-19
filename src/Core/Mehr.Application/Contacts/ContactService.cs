@@ -6,6 +6,7 @@ using Mehr.Domain.Contacts;
 using Mehr.Domain.Contacts.Contracts;
 using Mehr.Domain.Contacts.Dto;
 using Mehr.Domain.Contacts.Dtos;
+using Mehr.Domain.Paginations;
 using Mehr.Domain.Users;
 using Mehr.SharedKernel;
 using Microsoft.Extensions.Caching.Memory;
@@ -119,7 +120,9 @@ public class ContactService : IContactService
         return cityList;
     }
 
-    public async Task<Result<List<ContactListItemDto>>> GetAllContactListAsync(CancellationToken cancellationToken)
+    public async Task<Result<List<ContactListItemDto>>> GetAllContactListAsync(
+        PaginationRequestQuery query,
+        CancellationToken cancellationToken)
     {
         var cachKey = $"contactList";
         var cached = await _cacheService.GetAsync<List<ContactListItemDto>>(cachKey, cancellationToken);

@@ -1,4 +1,5 @@
 ﻿using Mehr.Domain.Contacts.Dtos;
+using Mehr.Domain.Paginations;
 
 namespace Mehr.Domain.Contacts.Contracts;
 
@@ -9,5 +10,5 @@ public interface IContractRepository
     Task AddAsync(ContactInfo contactInfo, CancellationToken cancellationToken);
     void Delete(ContactInfo contactInfo);
     void Update(ContactInfo contactInfo);
-    Task<List<ContactListItemDto>> GetAllAsync(CancellationToken cancellationToken);
+    Task<PageResult<List<ContactListItemDto>>> GetAllAsync(PaginationRequestQuery query, CancellationToken cancellationToken);
 }
