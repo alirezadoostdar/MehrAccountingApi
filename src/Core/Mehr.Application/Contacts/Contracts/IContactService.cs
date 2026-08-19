@@ -1,6 +1,7 @@
 ﻿using Mehr.Application.Contacts.Contracts.Dtos;
 using Mehr.Domain.Contacts.Dto;
 using Mehr.Domain.Contacts.Dtos;
+using Mehr.Domain.Paginations;
 using Mehr.SharedKernel;
 
 namespace Mehr.Application.Contacts.Contracts;
@@ -14,5 +15,5 @@ public interface IContactService
     Task<Result<int>> AddContactAsync(AddContactDto dto , CancellationToken cancellationToken);
     Task<Result<bool>> DeleteContactAsync(int id, CancellationToken cancellationToken);
     Task<Result<bool>> UpdateContactAsync(int id, UpdateContactDto dto, CancellationToken cancellation);
-    Task<Result<List<ContactListItemDto>>> GetAllContactListAsync(CancellationToken cancellationToken);
+    Task<Result<PageResult<ContactListItemDto>>> GetAllContactListAsync(CancellationToken cancellationToken);
 }
