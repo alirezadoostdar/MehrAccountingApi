@@ -71,7 +71,7 @@ public class ContactController : Controller
         [FromQuery] PaginationRequestQuery query,
         CancellationToken cancellationToken)
     {
-        return await _service.GetAllContactListAsync(cancellationToken);
+        return await _service.GetAllContactListAsync(query, cancellationToken);
     }
 }
 
