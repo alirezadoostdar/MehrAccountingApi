@@ -125,12 +125,12 @@ public class ContactService : IContactService
         CancellationToken cancellationToken)
     {
         var cachKey = $"contactList{query.Search}";
-        var cached = await _cacheService.GetAsync<List<ContactListItemDto>>(cachKey, cancellationToken);
+        var cached = await _cacheService.GetAsync<PageResult<ContactListItemDto>>(cachKey, cancellationToken);
         if (cached is not null) return cached;
 
         var contactList = await _repository.GetAllAsync(query, cancellationToken);
 
-        await _cacheService.SetAsync<List<ContactListItemDto>>(
+        await _cacheService.SetAsync<PageResult<ContactListItemDto>>(
             cachKey,
             contactList,
             TimeSpan.FromMinutes(20),
