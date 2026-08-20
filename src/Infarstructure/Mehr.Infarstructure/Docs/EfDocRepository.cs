@@ -72,7 +72,7 @@ public class EfDocRepository : IDocRepository
 
         var pageResult = new PageResult<GetDocItemAccountDetailDto>
         {
-            Date = list,
+            Data = list,
             Meta = new PaginationMeta
             {
                 CurrentPage = page,
