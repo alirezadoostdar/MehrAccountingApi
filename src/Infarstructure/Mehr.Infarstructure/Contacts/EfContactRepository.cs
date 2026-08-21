@@ -61,7 +61,7 @@ public class EfContactRepository : IContractRepository
                 CurrentPage = query.Page,
                 PageSize = query.PageSize,
                 TotalItems = total,
-                TotalPages = total,
+                TotalPages = total/query.PageSize,
             }
         };
 
