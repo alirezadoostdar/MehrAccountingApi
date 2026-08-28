@@ -124,7 +124,7 @@ public class ContactService : IContactService
         PaginationRequestQuery query,
         CancellationToken cancellationToken)
     {
-        var cachKey = $"contactList{query.Search}";
+        var cachKey = $"contactList:{query.Page}:{query.PageSize}:{query.Search}";
         var cached = await _cacheService.GetAsync<PageResult<ContactListItemDto>>(cachKey, cancellationToken);
         if (cached is not null) return cached;
 
