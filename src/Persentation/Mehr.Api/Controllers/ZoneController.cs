@@ -1,6 +1,7 @@
 ﻿using Mehr.Application.Zones.Contracts;
 using Mehr.Application.Zones.Contracts.Dtos;
 using Mehr.SharedKernel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading;
 
@@ -8,6 +9,7 @@ namespace Mehr.Api.Controllers;
 
 [ApiController]
 [Route("api/zone")]
+[Authorize]
 public class ZoneController : Controller
 {
     private readonly IZoneService _zoneService;
